@@ -16,7 +16,7 @@
 - ✅ 已确认：公职人员；原生微信小程序；粤政易等程序搭建完再接；数据来源 Excel/接口/手工；DeepSeek API；11.12 前 demo+文档+成本
 - ✅ 已建立 agent 工程文档体系与批次开发记录机制
 - ✅ 已完成双线工程：费用调研、三类工作流、目录骨架、18 页低保真页面结构地图
-- ✅ 文档内链检查通过；本地 git 已初始化并关联 origin（尚未提交）
+- ✅ 文档内链检查通过；已推送 `origin/main @ 01e22ec`
 - ⬜ 尚未创建可运行代码；下一步是 **B-002 11.12 demo 冲刺**
 - 📅 11.12 计划：[docs/agent/15-demo-plan-1112.md](docs/agent/15-demo-plan-1112.md)
 - 🗺️ 页面地图：[docs/product/ue/page-map.html](docs/product/ue/page-map.html)（可缩放/点击/导出 PNG）
