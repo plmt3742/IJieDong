@@ -1,0 +1,211 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>i揭东 · 低保真页面线框</title><style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#202020}
+body{font:13px/1.5 "Microsoft YaHei","PingFang SC",Arial,sans-serif}
+.phone{width:375px;height:812px;display:flex;flex-direction:column;background:#fff;border:1px solid #cfcfcf;overflow:hidden}
+.status{height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:10px;color:#666;border-bottom:1px solid #eee;flex:none}
+.nav{height:48px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid #e6e6e6;font-weight:600;flex:none}
+.nav .back{font-size:18px;color:#555;font-weight:400}
+.nav .grow{flex:1}
+.content{flex:1;padding:13px;display:flex;flex-direction:column;gap:11px;overflow:hidden;min-height:0}
+.bottom{height:54px;border-top:1px solid #e6e6e6;display:flex;align-items:center;justify-content:space-around;font-size:10px;color:#777;flex:none}
+.bottom span{display:flex;flex-direction:column;align-items:center;gap:3px}
+.bottom .active{color:#111;font-weight:700}
+.bottom i{display:block;width:16px;height:16px;border:1px solid #aaa;border-radius:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{border:1px solid #d8d8d8;background:#fafafa;padding:9px;display:flex;flex-direction:column;gap:3px;min-height:58px}
+.metric span{font-size:10px;color:#666}
+.metric b{font-size:18px;font-weight:650}
+.wire{border:1px dashed #bbb;background:#f7f7f7;display:flex;align-items:center;justify-content:center;color:#777;text-align:center;padding:8px;font-size:11px}
+.card{border:1px solid #d8d8d8;background:#fff;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.card-title{font-size:11px;font-weight:700;color:#444;display:flex;justify-content:space-between;align-items:center}
+.section-title{font-size:12px;font-weight:700;color:#333;display:flex;justify-content:space-between;align-items:center}
+.tiny{font-size:10px;color:#777}
+.muted{color:#777}
+.list{display:flex;flex-direction:column;gap:0;border:1px solid #ddd}
+.list .item{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #eee;font-size:12px;background:#fff}
+.list .item:last-child{border-bottom:0}
+.tabs{display:flex;border:1px solid #ddd;background:#fafafa}
+.tab{flex:1;text-align:center;padding:7px 0;font-size:11px;color:#666;border-right:1px solid #eee}
+.tab:last-child{border-right:0}
+.tab.active{background:#fff;color:#111;font-weight:700}
+.input{border:1px solid #ccc;background:#fff;padding:9px 10px;font-size:11px;color:#888;min-height:36px;display:flex;align-items:center}
+.input-bar{display:flex;gap:6px;margin-top:auto}
+.input-bar .input{flex:1}
+.btn{border:1px solid #999;background:#fff;padding:7px 10px;font-size:11px;text-align:center;display:inline-flex;align-items:center;justify-content:center;color:#222}
+.btn.primary{background:#f0f0f0;border-color:#666;font-weight:700}
+.btn.block{width:100%}
+.chart{border:1px solid #ddd;background:#fafafa;padding:10px;display:flex;align-items:flex-end;gap:8px;height:150px}
+.chart .bar{flex:1;background:#d9d9d9;border:1px solid #bbb;display:flex;align-items:flex-start;justify-content:center;font-size:9px;color:#555;padding-top:3px}
+.chart .bar:nth-child(2){height:45%}.chart .bar:nth-child(3){height:70%}.chart .bar:nth-child(4){height:55%}.chart .bar:nth-child(5){height:85%}.chart .bar:nth-child(6){height:35%}
+.table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+.table th,.table td{border:1px solid #e2e2e2;padding:7px 8px;text-align:left;vertical-align:top}
+.table th{background:#f5f5f5;font-weight:700;color:#444}
+.table td{color:#555}
+.pill{display:inline-block;border:1px solid #ccc;background:#f7f7f7;padding:1px 6px;font-size:9px;color:#555}
+.bubble{max-width:88%;border:1px solid #d8d8d8;background:#fafafa;padding:9px 10px;font-size:11px;line-height:1.6}
+.bubble.user{align-self:flex-end;background:#f0f0f0}
+.bubble.bot{align-self:flex-start}
+.cite{border:1px dashed #bbb;background:#fafafa;padding:7px 8px;font-size:10px;color:#666}
+.chip{display:inline-block;border:1px solid #ccc;background:#fff;padding:4px 7px;font-size:10px;color:#555;margin:2px 2px 0 0}
+.empty{border:1px dashed #bbb;background:#fafafa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:22px;text-align:center;color:#666;font-size:11px}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px}
+.logo-wire{width:66px;height:66px;border:1px dashed #999;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:10px;color:#777}
+.admin{width:1440px;height:900px;display:grid;grid-template-columns:210px 1fr;grid-template-rows:52px 1fr;border:1px solid #cfcfcf;background:#fff;overflow:hidden}
+.admin .top{grid-column:1/3;display:flex;align-items:center;gap:14px;padding:0 18px;border-bottom:1px solid #ddd;font-size:12px}
+.admin .side{grid-row:2;border-right:1px solid #ddd;background:#fafafa;padding:12px 10px;display:flex;flex-direction:column;gap:3px}
+.admin .side .s{padding:9px 10px;font-size:12px;color:#555;border:1px solid transparent}
+.admin .side .s.active{background:#fff;border-color:#ddd;font-weight:700;color:#111}
+.admin .main{grid-row:2;padding:16px 18px;display:flex;flex-direction:column;gap:12px;overflow:hidden;min-height:0}
+.page-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.page-head h2{font-size:16px;margin:0}
+.row{display:flex;gap:8px;align-items:center}
+.between{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.grow{flex:1}
+.col{display:flex;flex-direction:column;gap:8px}
+.filter{border:1px solid #ddd;background:#fafafa;padding:8px;display:flex;gap:6px;flex-wrap:wrap}
+.filter .input{min-width:120px;flex:1}
+.drawer{position:absolute;right:0;top:0;bottom:0;width:380px;background:#fff;border-left:1px solid #bbb;padding:14px;display:flex;flex-direction:column;gap:10px}
+.overlay{position:absolute;inset:0;background:#f2f2f2cc}
+.admin-main-wrap{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}
+.login-page{display:flex;align-items:center;justify-content:center;background:#fafafa;grid-template-columns:1fr;grid-template-rows:1fr}
+.login-card{width:360px;border:1px solid #ccc;background:#fff;padding:26px;display:flex;flex-direction:column;gap:12px}
+.login-card h2{margin:0;font-size:18px;text-align:center}
+.login-card p{margin:0;text-align:center}
+.pager{display:flex;justify-content:flex-end;gap:4px;align-items:center;font-size:10px;color:#666}
+.pager span{border:1px solid #ccc;padding:3px 6px;background:#fff}
+.note{border-left:3px solid #bbb;padding:6px 8px;background:#fafafa;font-size:10px;color:#666}
+
+html,body{margin:0;background:#f2f2f2;color:#222}
+body{font:13px/1.5 "Microsoft YaHei","PingFang SC",Arial,sans-serif}
+.wf-wrap{max-width:1500px;margin:0 auto;padding:28px}
+.wf-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-bottom:1px solid #d0d0d0;padding-bottom:14px}
+.wf-head h1{font-size:22px;margin:0 0 4px}
+.wf-head p{margin:0;color:#666;font-size:12px}
+.wf-nav{display:flex;gap:8px;flex-wrap:wrap}
+.wf-nav a{border:1px solid #bbb;background:#fff;color:#333;text-decoration:none;padding:7px 10px;font-size:12px}
+.wf-section{margin-top:26px}
+.wf-section h2{font-size:15px;margin:0 0 10px;color:#444}
+.wf-grid{display:grid;gap:16px}
+.wf-grid.mobile{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.wf-grid.admin{grid-template-columns:repeat(auto-fill,minmax(460px,1fr))}
+.wf-card{border:1px solid #d0d0d0;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.wf-card-head{display:flex;align-items:center;gap:8px}
+.wf-id{font:11px/1 ui-monospace,Consolas,monospace;background:#eee;border:1px solid #d5d5d5;padding:4px 6px;color:#555}
+.wf-title{font-weight:700;font-size:13px;flex:1}
+.wf-pill{font-size:9px;border:1px solid #ccc;background:#fafafa;padding:1px 5px;color:#666}
+.wf-purpose{font-size:11px;color:#666;margin:0;min-height:32px}
+.wf-preview{border:1px solid #ddd;overflow:hidden;background:#fff;align-self:center;flex:none}
+.wf-scaled{transform-origin:top left}
+.wf-open{font-size:11px;color:#333;text-decoration:none;border-top:1px solid #eee;padding-top:7px;margin-top:auto}
+.wf-open:hover{text-decoration:underline}
+.wf-note{font-size:11px;color:#777;margin:8px 0 0}
+@media(max-width:700px){.wf-wrap{padding:14px}.wf-head{display:block}.wf-nav{margin-top:10px}.wf-grid.admin{grid-template-columns:1fr}}
+</style></head><body><div class="wf-wrap"><header class="wf-head"><div><h1>i揭东 · 低保真页面线框</h1><p>灰度、无品牌风格；只表达结构、入口与交互。P1 页面为占位线框。</p></div><nav class="wf-nav"><a href="page-map.html">打开页面结构地图</a><a href="../05-page-structure.md">页面结构说明</a><a href="README.md">本目录说明</a></nav></header><section class="wf-section"><h2>小程序 · 入口</h2><div class="wf-grid mobile"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP00</span><span class="wf-title">启动/登录</span><span class="wf-pill">P0</span></div><p class="wf-purpose">完成登录或进入帮助；不登录也能看帮助/说明。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="content" style="justify-content:center;align-items:center;text-align:center">
+      <div class="logo-wire">LOGO</div>
+      <h1 style="margin:6px 0 0;font-size:22px">i揭东</h1>
+      <p class="muted" style="margin:0">公职人员数据门户</p>
+      <div class="wire" style="height:42px;width:100%">微信登录（测试号）</div>
+      <p class="tiny" style="margin:2px 0 0">登录即表示同意使用说明 · 无权限？查看帮助</p>
+    </div></div></div></div><a class="wf-open" href="page-map.html#MP00">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP08</span><span class="wf-title">无权限/帮助</span><span class="wf-pill">P0</span></div><p class="wf-purpose">解释无权限、提供申请/联系入口与应用说明。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span class="back">←</span><span>帮助</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="empty"><div class="logo-wire" style="width:48px;height:48px">!</div><b>暂无访问权限</b><span class="tiny">请联系本单位管理员开通，或从粤政易工作台进入。</span><div class="btn">联系管理员</div></div>
+      <div class="card"><div class="card-title">应用简介</div><div class="tiny">i揭东用于揭东区数据查询、图表与智能问答。</div></div>
+      <div class="card"><div class="card-title">使用指南</div><div class="tiny">首页 → 区域 → 指标 → 图表；问答可直接输入问题。</div></div>
+      <div class="tiny">维护电话：XXXX-XXXXXXX · 技术支持：XXX</div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class=""><i></i>区域</span><span class=""><i></i>问答</span><span class="active"><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP08">在结构地图中查看 →</a></article></div></section><section class="wf-section"><h2>小程序 · 浏览</h2><div class="wf-grid mobile"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP01</span><span class="wf-title">首页</span><span class="wf-pill">P0</span></div><p class="wf-purpose">一眼看到揭东区核心指标，快速进入镇街或 AI 问答。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span>i揭东 · 2025</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="grid2"><div class="metric"><span>区域面积</span><b>—</b></div><div class="metric"><span>常住人口</span><b>—</b></div><div class="metric"><span>地区生产总值</span><b>—</b></div><div class="metric"><span>镇街数量</span><b>15</b></div></div>
+      <div class="section-title">镇街入口 <span class="tiny">查看全部</span></div>
+      <div class="list"><div class="item"><span>曲溪街道</span><span class="tiny">查看 ›</span></div><div class="item"><span>云路镇</span><span class="tiny">查看 ›</span></div><div class="item"><span>玉湖镇</span><span class="tiny">查看 ›</span></div></div>
+      <div class="ai-entry" style="border:1px solid #ccc;background:#fafafa;padding:9px;display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tiny">问一句：哪个镇 GDP 最高？</span><span class="btn">提问</span></div>
+    </div><div class="bottom"><span class="active"><i></i>首页</span><span class=""><i></i>区域</span><span class=""><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP01">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP02</span><span class="wf-title">区域列表</span><span class="wf-pill">P0</span></div><p class="wf-purpose">按区/镇街/村居浏览与搜索区域。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span class="back">←</span><span>区域</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="tabs"><span class="tab active">镇街</span><span class="tab">村居</span><span class="tab">区</span></div>
+      <div class="input">搜索区域名称</div>
+      <div class="list"><div class="item"><span>曲溪街道</span><span class="tiny">21 个村居 ›</span></div><div class="item"><span>云路镇</span><span class="tiny">21 个村居 ›</span></div><div class="item"><span>玉滘镇</span><span class="tiny">11 个村居 ›</span></div><div class="item"><span>玉湖镇</span><span class="tiny">21 个村居 ›</span></div><div class="item"><span>新亨镇</span><span class="tiny">14 个村居 ›</span></div></div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class="active"><i></i>区域</span><span class=""><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP02">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP03</span><span class="wf-title">区域详情</span><span class="wf-pill">P0</span></div><p class="wf-purpose">看区域简介、特色与适用指标。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span class="back">←</span><span>曲溪街道</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="wire" style="height:66px;align-items:flex-start;justify-content:flex-start">地区简介（文本占位，≤150 字）</div>
+      <div class="wire" style="height:56px;align-items:flex-start;justify-content:flex-start">地区特色（文本占位，≤300 字）</div>
+      <div class="section-title">适用指标</div>
+      <div class="grid2"><div class="metric"><span>区域面积</span><b>—</b></div><div class="metric"><span>常住人口</span><b>—</b></div><div class="metric"><span>耕地面积</span><b>—</b></div><div class="metric"><span>林地面积</span><b>—</b></div></div>
+      <div class="btn block">查看全部指标</div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class="active"><i></i>区域</span><span class=""><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP03">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP04</span><span class="wf-title">指标详情</span><span class="wf-pill">P0</span></div><p class="wf-purpose">看指标值、单位、年份、来源与图表。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span class="back">←</span><span>常住人口</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="card"><div class="between"><span class="tiny">2025 年 · 单位：人</span><span class="pill">来源：导入</span></div><b style="font-size:28px">—</b><span class="tiny">演示数据 / 待导入</span></div>
+      <div class="chart"><div class="bar">曲溪</div><div class="bar">云路</div><div class="bar">玉滘</div><div class="bar">玉湖</div><div class="bar">新亨</div><div class="bar">锡场</div></div>
+      <table class="table"><thead><tr><th>区域</th><th>值</th></tr></thead><tbody><tr><td>曲溪街道</td><td>—</td></tr><tr><td>云路镇</td><td>—</td></tr><tr><td>玉滘镇</td><td>—</td></tr></tbody></table>
+      <div class="btn block">对比其他区域</div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class="active"><i></i>区域</span><span class=""><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP04">在结构地图中查看 →</a></article></div></section><section class="wf-section"><h2>小程序 · AI</h2><div class="wf-grid mobile"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP05</span><span class="wf-title">AI 问答（空）</span><span class="wf-pill">P0</span></div><p class="wf-purpose">输入问题或从示例开始。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span>AI 问答</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="empty" style="flex:1"><div class="logo-wire" style="width:48px;height:48px">AI</div><b>问我揭东数据</b><span class="tiny">例如：2025 年哪个镇 GDP 最高？</span><div><span class="chip">常住人口</span><span class="chip">镇街排名</span><span class="chip">区域对比</span></div></div>
+      <div class="input-bar"><div class="input">输入问题…</div><div class="btn primary">发送</div></div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class=""><i></i>区域</span><span class="active"><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP05">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP06</span><span class="wf-title">AI 问答（答案）</span><span class="wf-pill">P0</span></div><p class="wf-purpose">看答案、图表、引用并追问。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span>AI 问答</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="bubble user">2025 年揭东区各镇街地区生产总值排名前 5 是哪些？</div>
+      <div class="bubble bot"><b>结论</b><br>按 2025 年地区生产总值排序，前 5 为……（演示）。<br><span class="tiny">数据：演示数据</span></div>
+      <div class="chart"><div class="bar">经开区</div><div class="bar">生态城</div><div class="bar">曲溪</div><div class="bar">云路</div><div class="bar">玉湖</div></div>
+      <div class="cite">引用：地区生产总值 · 2025 · 镇街 · data_values</div>
+      <div><span class="chip">换成常住人口</span><span class="chip">看完整排名</span></div>
+      <div class="input-bar"><div class="input">继续问…</div><div class="btn primary">发送</div></div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class=""><i></i>区域</span><span class="active"><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP06">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">MP07</span><span class="wf-title">会话列表</span><span class="wf-pill">P1</span></div><p class="wf-purpose">查看历史问答。</p><div class="wf-preview" style="width:165px;height:357px"><div class="wf-scaled" style="width:375px;height:812px;transform:scale(0.44)"><div class="phone"><div class="status"><span>9:41</span><span>●●●</span></div><div class="nav"><span class="back">←</span><span>会话</span><span class="grow"></span><span class="tiny">⋯</span></div><div class="content">
+      <div class="btn block">＋ 新建对话</div>
+      <div class="list"><div class="item"><span>镇街 GDP 排名</span><span class="tiny">今天</span></div><div class="item"><span>曲溪街道人口</span><span class="tiny">昨天</span></div><div class="item"><span>玉湖镇介绍</span><span class="tiny">昨天</span></div></div>
+    </div><div class="bottom"><span class=""><i></i>首页</span><span class=""><i></i>区域</span><span class="active"><i></i>问答</span><span class=""><i></i>我的</span></div></div></div></div><a class="wf-open" href="page-map.html#MP07">在结构地图中查看 →</a></article></div></section><section class="wf-section"><h2>后台 · 登录</h2><div class="wf-grid admin"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD01</span><span class="wf-title">登录</span><span class="wf-pill">P0</span></div><p class="wf-purpose">管理员登录后台。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin login-page"><div class="login-card"><div class="logo-wire" style="margin:0 auto">LOGO</div><h2>i揭东 · 管理后台</h2><p class="muted">公职人员数据门户</p><div class="input">用户名</div><div class="input">密码</div><div class="btn primary block">登录</div><p class="tiny">演示环境 · 请联系管理员开通账号</p></div></div></div></div><a class="wf-open" href="page-map.html#AD01">在结构地图中查看 →</a></article></div></section><section class="wf-section"><h2>后台 · 数据</h2><div class="wf-grid admin"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD02</span><span class="wf-title">总览</span><span class="wf-pill">P0</span></div><p class="wf-purpose">看数据覆盖率、最近导入与问答量。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s active">总览</div><div class="s ">数据</div><div class="s ">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>总览</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="grid4"><div class="metric"><span>区域数</span><b>227</b></div><div class="metric"><span>指标数</span><b>15</b></div><div class="metric"><span>数据行</span><b>1608</b></div><div class="metric"><span>本月导入</span><b>0</b></div></div>
+      <div class="card"><div class="card-title">数据覆盖率 <span class="tiny">区 / 镇街 / 村居</span></div><table class="table"><thead><tr><th>层级</th><th>区域数</th><th>应有数据</th><th>已填</th><th>覆盖率</th></tr></thead><tbody><tr><td>揭东区</td><td>1</td><td>15</td><td>—</td><td>—</td></tr><tr><td>镇街</td><td>15</td><td>116</td><td>—</td><td>—</td></tr><tr><td>村居</td><td>211</td><td>1477</td><td>—</td><td>—</td></tr></tbody></table></div>
+      <div class="row" style="align-items:stretch"><div class="card grow"><div class="card-title">最近导入</div><table class="table"><thead><tr><th>文件</th><th>状态</th><th>时间</th></tr></thead><tbody><tr><td>模板.xlsx</td><td>成功</td><td>今天</td></tr><tr><td>补录.csv</td><td>部分</td><td>昨天</td></tr></tbody></table></div><div class="card" style="width:380px"><div class="card-title">问答量</div><div class="chart"><div class="bar">周一</div><div class="bar">周二</div><div class="bar">周三</div><div class="bar">周四</div><div class="bar">周五</div></div></div></div>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD02">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD03</span><span class="wf-title">数据列表</span><span class="wf-pill">P0</span></div><p class="wf-purpose">筛选、查看、编辑数据值。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s active">数据</div><div class="s ">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>数据管理</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="filter"><div class="input">区域：全部</div><div class="input">指标：全部</div><div class="input">年份：2025</div><div class="btn">查询</div><div class="btn">重置</div><div class="grow"></div><div class="btn primary">导入</div></div>
+      <table class="table"><thead><tr><th>区域</th><th>指标</th><th>年份</th><th>值</th><th>单位</th><th>状态</th><th>操作</th></tr></thead><tbody><tr><td>曲溪街道</td><td>常住人口</td><td>2025</td><td>—</td><td>人</td><td>已发布</td><td>编辑</td></tr><tr><td>云路镇</td><td>常住人口</td><td>2025</td><td>—</td><td>人</td><td>已发布</td><td>编辑</td></tr><tr><td>玉滘镇</td><td>区域面积</td><td>2025</td><td>—</td><td>平方公里</td><td>已发布</td><td>编辑</td></tr><tr><td>玉湖镇</td><td>耕地面积</td><td>2025</td><td>—</td><td>亩</td><td>已发布</td><td>编辑</td></tr><tr><td>经开区</td><td>地区生产总值</td><td>2025</td><td>—</td><td>亿元</td><td>已发布</td><td>编辑</td></tr></tbody></table>
+      <div class="pager"><span>‹</span><span>1</span><span>2</span><span>3</span><span>›</span><span class="tiny">共 1608 条</span></div>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD03">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD04</span><span class="wf-title">数据编辑（抽屉）</span><span class="wf-pill">P0</span></div><p class="wf-purpose">修订单条数据并写入审计。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s active">数据</div><div class="s ">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>数据管理</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="admin-main-wrap">
+        <div class="filter"><div class="input">区域：曲溪街道</div><div class="input">指标：常住人口</div><div class="input">年份：2025</div><div class="btn">查询</div></div>
+        <table class="table"><thead><tr><th>区域</th><th>指标</th><th>年份</th><th>值</th><th>单位</th><th>状态</th></tr></thead><tbody><tr><td>曲溪街道</td><td>常住人口</td><td>2025</td><td>—</td><td>人</td><td>已发布</td></tr><tr><td>云路镇</td><td>常住人口</td><td>2025</td><td>—</td><td>人</td><td>已发布</td></tr></tbody></table>
+        <div class="overlay"></div>
+        <aside class="drawer"><div class="between"><b>编辑数据值</b><span class="tiny">×</span></div><div class="tiny">区域</div><div class="input">曲溪街道（只读）</div><div class="tiny">指标</div><div class="input">常住人口（只读）</div><div class="tiny">年份</div><div class="input">2025（只读）</div><div class="tiny">值</div><div class="input">请输入数值</div><div class="note">单位：人；空值表示无数据，不写 0。</div><div class="row"><div class="btn primary grow">保存</div><div class="btn grow">取消</div></div><div class="tiny">保存后写入审计日志（before/after）。</div></aside>
+      </div>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD04">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD05</span><span class="wf-title">导入</span><span class="wf-pill">P0</span></div><p class="wf-purpose">上传 Excel、校验、查看错误报告。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s ">数据</div><div class="s active">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>导入</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="row" style="align-items:stretch"><div class="card grow"><div class="card-title">上传文件</div><div class="wire" style="height:120px">拖拽 .xls/.xlsx 到这里，或点击选择</div><div class="row"><div class="btn">下载模板</div><span class="tiny">≤10MB · ≤5000 行</span></div></div><div class="card" style="width:380px"><div class="card-title">导入模式</div><div class="input">● 整批校验（atomic）</div><div class="input">○ 允许部分写入（partial）</div><div class="btn primary block">开始导入</div></div></div>
+      <div class="card"><div class="card-title">校验结果 <span class="pill">演示</span></div><div class="grid4"><div class="metric"><span>总行数</span><b>1608</b></div><div class="metric"><span>成功</span><b>—</b></div><div class="metric"><span>失败</span><b>—</b></div><div class="metric"><span>警告</span><b>—</b></div></div><table class="table"><thead><tr><th>行</th><th>区域</th><th>指标</th><th>列</th><th>错误</th><th>建议</th></tr></thead><tbody><tr><td>18</td><td>玉窖镇-饶美村</td><td>区域面积</td><td>单位</td><td>UNIT_MISMATCH</td><td>检查模板列</td></tr><tr><td>22</td><td>玉滘镇</td><td>耕地面积</td><td>值</td><td>VALUE_TYPE_INVALID</td><td>填写数字</td></tr></tbody></table></div>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD05">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD06</span><span class="wf-title">导入记录</span><span class="wf-pill">P0</span></div><p class="wf-purpose">查看历史导入与错误报告。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s ">数据</div><div class="s active">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>导入记录</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="filter"><div class="input">状态：全部</div><div class="input">时间：本月</div><div class="btn">查询</div></div>
+      <table class="table"><thead><tr><th>文件</th><th>来源</th><th>时间</th><th>操作者</th><th>状态</th><th>成功/失败</th><th>错误报告</th></tr></thead><tbody><tr><td>模板_2025.xlsx</td><td>Excel</td><td>今天 10:20</td><td>admin</td><td>成功</td><td>1608 / 0</td><td>下载</td></tr><tr><td>补录_曲溪.xlsx</td><td>Excel</td><td>昨天 16:05</td><td>admin</td><td>部分</td><td>120 / 3</td><td>下载</td></tr></tbody></table>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD06">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD07</span><span class="wf-title">审计日志</span><span class="wf-pill">P0</span></div><p class="wf-purpose">追查谁在什么时候改了什么。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s ">数据</div><div class="s ">导入</div><div class="s active">审计</div><div class="s ">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>审计日志</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="filter"><div class="input">用户：全部</div><div class="input">动作：全部</div><div class="input">资源：全部</div><div class="input">时间：本月</div><div class="btn">查询</div></div>
+      <table class="table"><thead><tr><th>时间</th><th>用户</th><th>动作</th><th>资源</th><th>详情</th></tr></thead><tbody><tr><td>今天 10:21</td><td>admin</td><td>import</td><td>import_jobs#12</td><td>成功 1608 行</td></tr><tr><td>今天 10:25</td><td>admin</td><td>update</td><td>data_values#88</td><td>before/after</td></tr><tr><td>昨天 16:06</td><td>admin</td><td>login</td><td>user#1</td><td>成功</td></tr></tbody></table>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD07">在结构地图中查看 →</a></article></div></section><section class="wf-section"><h2>后台 · 管理</h2><div class="wf-grid admin"><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD08</span><span class="wf-title">用户与权限</span><span class="wf-pill">P1</span></div><p class="wf-purpose">管理 admin/editor/viewer。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s ">数据</div><div class="s ">导入</div><div class="s ">审计</div><div class="s active">用户</div><div class="s ">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>用户与权限</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="between"><span class="tiny">角色：admin / editor / viewer</span><div class="btn primary">新增用户</div></div>
+      <table class="table"><thead><tr><th>用户名</th><th>显示名</th><th>角色</th><th>状态</th><th>最后登录</th><th>操作</th></tr></thead><tbody><tr><td>admin</td><td>管理员</td><td>admin</td><td>启用</td><td>今天</td><td>编辑</td></tr><tr><td>editor01</td><td>数据员</td><td>editor</td><td>启用</td><td>昨天</td><td>编辑</td></tr><tr><td>viewer01</td><td>查看员</td><td>viewer</td><td>禁用</td><td>—</td><td>编辑</td></tr></tbody></table>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD08">在结构地图中查看 →</a></article><article class="wf-card"><div class="wf-card-head"><span class="wf-id">AD09</span><span class="wf-title">问答记录</span><span class="wf-pill">P1</span></div><p class="wf-purpose">查看问题、答案摘要、工具调用与反馈。</p><div class="wf-preview" style="width:418px;height:261px"><div class="wf-scaled" style="width:1440px;height:900px;transform:scale(0.29)"><div class="admin">
+  <div class="top"><b>i揭东 · 管理后台</b><span class="tiny">演示环境</span><span class="grow"></span><span class="tiny">admin</span><span class="tiny">退出</span></div>
+  <aside class="side"><div class="s ">总览</div><div class="s ">数据</div><div class="s ">导入</div><div class="s ">审计</div><div class="s ">用户</div><div class="s active">问答</div></aside>
+  <main class="main"><div class="page-head"><h2>问答记录</h2><span class="tiny">2025 年 · 演示数据</span></div>
+      <div class="filter"><div class="input">用户：全部</div><div class="input">时间：本月</div><div class="input">是否有反馈：全部</div><div class="btn">查询</div></div>
+      <table class="table"><thead><tr><th>时间</th><th>用户</th><th>问题</th><th>答案摘要</th><th>工具</th><th>耗时</th><th>反馈</th></tr></thead><tbody><tr><td>今天 10:30</td><td>viewer01</td><td>哪个镇 GDP 最高？</td><td>前 5 名…</td><td>rank_regions</td><td>3.2s</td><td>—</td></tr><tr><td>昨天 15:10</td><td>admin</td><td>曲溪街道人口</td><td>常住人口…</td><td>get_indicator_values</td><td>2.1s</td><td>有帮助</td></tr></tbody></table>
+    </main>
+</div></div></div><a class="wf-open" href="page-map.html#AD09">在结构地图中查看 →</a></article></div></section><p class="wf-note">提示：点击每张卡片底部“在结构地图中查看”可跳到对应页面详情；地图支持缩放/搜索/导出 PNG。</p></div></body></html>

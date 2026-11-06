@@ -1,0 +1,66 @@
+# ---- 本地专用目录：不进 Git ----
+Resource/
+learning/
+tools/
+.obsidian/
+.omo/
+
+# ---- 环境与密钥 ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+*.secret
+
+# ---- Node / 前端 ----
+node_modules/
+dist/
+build/
+.output/
+.turbo/
+.next/
+.nuxt/
+.unpackage/
+uni_modules/
+miniprogram_npm/
+project.private.config.json
+*.tsbuildinfo
+.pnpm-store/
+
+# ---- Python ----
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+coverage.xml
+.coverage
+htmlcov/
+
+# ---- 数据库 / 上传 / 导出 ----
+data/
+uploads/
+exports/
+*.db
+*.sqlite
+*.sqlite3
+
+# ---- 日志 / 临时 ----
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# ---- IDE / OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp

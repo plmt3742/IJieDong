@@ -1,0 +1,1456 @@
+{
+  "schemaVersion": "1.1",
+  "source": {
+    "label": "低保真结构线框（设计稿，不是运行截图）",
+    "runtime": "static-wireframe"
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "screens": [
+    {
+      "id": "MP00",
+      "module": "小程序 · 入口",
+      "title": "启动/登录",
+      "kind": "page",
+      "state": "default",
+      "entry": "小程序启动/粤政易工作台（后期）",
+      "purpose": "完成登录或进入帮助；不登录也能看帮助/说明。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "user",
+        "token"
+      ],
+      "writes": [
+        "login_audit"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "品牌占位区居中，下方说明与登录按钮；无底部导航。",
+          "登录按钮是全宽主操作；帮助入口是弱操作。"
+        ],
+        "rules": [
+          "未登录只能看帮助；登录成功后才进入首页。",
+          "不收集无关个人信息。"
+        ]
+      },
+      "capture": "screens/MP00.png",
+      "view": "screens/MP00.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 0,
+        "y": 0,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP01",
+      "module": "小程序 · 浏览",
+      "title": "首页",
+      "kind": "page",
+      "state": "default",
+      "entry": "登录成功/底部“首页”",
+      "purpose": "一眼看到揭东区核心指标，快速进入镇街或 AI 问答。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "dashboard.overview",
+        "regions"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部标题/年份；4 个指标卡 2×2；镇街入口列表；AI 提问框；底部 4 项导航。",
+          "内容区纵向滚动；指标卡与列表不固定。"
+        ],
+        "rules": [
+          "无数据时显示“数据准备中”，不显示 0。",
+          "首页到指标详情 ≤3 次点击。"
+        ]
+      },
+      "capture": "screens/MP01.png",
+      "view": "screens/MP01.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 0,
+        "y": 1100,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP02",
+      "module": "小程序 · 浏览",
+      "title": "区域列表",
+      "kind": "page",
+      "state": "default",
+      "entry": "首页“镇街”/底部“区域”",
+      "purpose": "按区/镇街/村居浏览与搜索区域。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "regions"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部返回/标题；层级 tabs；搜索框；列表；底部导航。",
+          "列表区域独立滚动；底部导航固定。"
+        ],
+        "rules": [
+          "经开区/生态城没有村居时，村居入口隐藏或提示“无村居”。",
+          "搜索无结果时显示关键词与清空入口。"
+        ]
+      },
+      "capture": "screens/MP02.png",
+      "view": "screens/MP02.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 500,
+        "y": 1100,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP03",
+      "module": "小程序 · 浏览",
+      "title": "区域详情",
+      "kind": "page",
+      "state": "default",
+      "entry": "区域列表/首页",
+      "purpose": "看区域简介、特色与适用指标。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "region",
+        "region_intro",
+        "region_feature",
+        "data_values"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部返回/区域名；简介与特色文本块；指标卡列表；底部导航。",
+          "文本块内容自适应；指标列表可滚动。"
+        ],
+        "rules": [
+          "只显示该区域适用指标；无值显示“暂无数据”。",
+          "文本超长时截断并提示，不破坏布局。"
+        ]
+      },
+      "capture": "screens/MP03.png",
+      "view": "screens/MP03.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 1000,
+        "y": 1100,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP04",
+      "module": "小程序 · 浏览",
+      "title": "指标详情",
+      "kind": "page",
+      "state": "default",
+      "entry": "区域详情/首页指标卡/AI 引用",
+      "purpose": "看指标值、单位、年份、来源与图表。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "indicator",
+        "data_values",
+        "source"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部返回/指标名；值卡片；图表区；表格；对比按钮；底部导航。",
+          "图表与表格可切换；内容区滚动。"
+        ],
+        "rules": [
+          "空值显示“暂无数据”，不画 0。",
+          "图表失败时降级为表格；来源必须显示。"
+        ]
+      },
+      "capture": "screens/MP04.png",
+      "view": "screens/MP04.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 1500,
+        "y": 1100,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP05",
+      "module": "小程序 · AI",
+      "title": "AI 问答（空）",
+      "kind": "page",
+      "state": "default",
+      "entry": "首页 AI 入口/底部“问答”",
+      "purpose": "输入问题或从示例开始。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "session(optional)"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部标题；空状态说明 + 示例 chips；底部输入条；底部导航。",
+          "输入条固定在内容底部，不遮挡最后一条消息。"
+        ],
+        "rules": [
+          "提交后先显示 thinking/tool_calling，不立即清空问题。",
+          "问题为空时禁用发送。"
+        ]
+      },
+      "capture": "screens/MP05.png",
+      "view": "screens/MP05.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 0,
+        "y": 2200,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP06",
+      "module": "小程序 · AI",
+      "title": "AI 问答（答案）",
+      "kind": "page",
+      "state": "default",
+      "entry": "MP05 提交后/会话列表",
+      "purpose": "看答案、图表、引用并追问。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "answer_markdown",
+        "chart_spec",
+        "citations",
+        "follow_up_questions"
+      ],
+      "writes": [
+        "chat_messages"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "消息流：用户气泡 → 助手气泡（结论/图表/引用/追问）；底部输入条。",
+          "消息区独立滚动；输入条固定。"
+        ],
+        "rules": [
+          "答案必须带引用；无数据明确说明。",
+          "图表只渲染 ChartSpec；失败降级表格。"
+        ]
+      },
+      "capture": "screens/MP06.png",
+      "view": "screens/MP06.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 500,
+        "y": 2200,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "MP07",
+      "module": "小程序 · AI",
+      "title": "会话列表",
+      "kind": "page",
+      "state": "default",
+      "entry": "首页“历史”/底部“问答”",
+      "purpose": "查看历史问答。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "chat_sessions"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部返回/标题；新建对话按钮；会话列表。",
+          "列表可滚动。"
+        ],
+        "rules": [
+          "空列表显示“还没有问答”。",
+          "删除/重命名 P1。"
+        ]
+      },
+      "capture": "screens/MP07.png",
+      "view": "screens/MP07.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 1000,
+        "y": 2200,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P1"
+    },
+    {
+      "id": "MP08",
+      "module": "小程序 · 入口",
+      "title": "无权限/帮助",
+      "kind": "page",
+      "state": "default",
+      "entry": "无权限跳转/“我的”帮助",
+      "purpose": "解释无权限、提供申请/联系入口与应用说明。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "app_config"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "状态占位 + 标题/说明 + 联系/申请按钮 + 应用简介/指南/维护电话。",
+          "内容可滚动；返回入口清晰。"
+        ],
+        "rules": [
+          "无权限不泄露数据内容。",
+          "维护中显示维护时间/联系人。"
+        ]
+      },
+      "capture": "screens/MP08.png",
+      "view": "screens/MP08.html",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "map": {
+        "x": 500,
+        "y": 0,
+        "w": 375,
+        "h": 812
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD01",
+      "module": "后台 · 登录",
+      "title": "登录",
+      "kind": "page",
+      "state": "default",
+      "entry": "后台地址",
+      "purpose": "管理员登录后台。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "user",
+        "token"
+      ],
+      "writes": [
+        "login_audit"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "居中登录卡：账号/密码/登录；错误提示；无侧栏。",
+          "登录卡宽度固定，页面居中。"
+        ],
+        "rules": [
+          "密码错误不提示账号是否存在。",
+          "连续失败限流。"
+        ]
+      },
+      "capture": "screens/AD01.png",
+      "view": "screens/AD01.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 0,
+        "y": 3400,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD02",
+      "module": "后台 · 数据",
+      "title": "总览",
+      "kind": "page",
+      "state": "default",
+      "entry": "登录成功/侧栏“总览”",
+      "purpose": "看数据覆盖率、最近导入与问答量。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "dashboard.overview",
+        "import_jobs",
+        "chat_stats"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶栏 + 左侧导航 + 4 个统计卡 + 覆盖率表 + 最近导入 + 问答量。",
+          "主区纵向滚动；统计卡不固定。"
+        ],
+        "rules": [
+          "数字与数据库一致；空数据显示 0 或“暂无”。",
+          "导入成功后统计刷新。"
+        ]
+      },
+      "capture": "screens/AD02.png",
+      "view": "screens/AD02.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 0,
+        "y": 4550,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD03",
+      "module": "后台 · 数据",
+      "title": "数据列表",
+      "kind": "page",
+      "state": "default",
+      "entry": "总览/侧栏“数据”",
+      "purpose": "筛选、查看、编辑数据值。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "data_values",
+        "regions",
+        "indicators"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶栏 + 侧栏 + 筛选行 + 表格 + 分页。",
+          "表格区域可滚动；筛选行不固定。"
+        ],
+        "rules": [
+          "筛选组合为空显示“无匹配数据”。",
+          "编辑保存后回到列表并刷新。"
+        ]
+      },
+      "capture": "screens/AD03.png",
+      "view": "screens/AD03.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 1800,
+        "y": 4550,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD04",
+      "module": "后台 · 数据",
+      "title": "数据编辑（抽屉）",
+      "kind": "page",
+      "state": "default",
+      "entry": "AD03 点“编辑”",
+      "purpose": "修订单条数据并写入审计。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "data_value"
+      ],
+      "writes": [
+        "data_values",
+        "audit_logs"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "AD03 列表 + 右侧抽屉；抽屉内字段只读 + 值输入 + 保存/取消。",
+          "抽屉覆盖右侧，列表仍可见；抽屉内部可滚动。"
+        ],
+        "rules": [
+          "保存前校验类型/单位；失败留在抽屉。",
+          "保存后写 audit_logs（before/after）。"
+        ]
+      },
+      "capture": "screens/AD04.png",
+      "view": "screens/AD04.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 3600,
+        "y": 4550,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD05",
+      "module": "后台 · 数据",
+      "title": "导入",
+      "kind": "page",
+      "state": "default",
+      "entry": "总览/AD03/侧栏“导入”",
+      "purpose": "上传 Excel、校验、查看错误报告。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "file",
+        "mode"
+      ],
+      "writes": [
+        "import_jobs",
+        "data_values",
+        "audit_logs"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "上传区 + 模板下载 + 模式选择 + 开始导入 + 结果统计 + 错误表。",
+          "上传区高度固定；错误表可滚动。"
+        ],
+        "rules": [
+          "默认 atomic：有错误整批不写。",
+          "错误报告含行/列/错误码/建议。"
+        ]
+      },
+      "capture": "screens/AD05.png",
+      "view": "screens/AD05.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 0,
+        "y": 5650,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD06",
+      "module": "后台 · 数据",
+      "title": "导入记录",
+      "kind": "page",
+      "state": "default",
+      "entry": "AD05/总览",
+      "purpose": "查看历史导入与错误报告。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "import_jobs"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "顶部标题 + 筛选 + 表格（文件/时间/操作者/状态/成功/失败/错误下载）。",
+          "表格可滚动。"
+        ],
+        "rules": [
+          "状态与统计准确；错误报告可下载。",
+          "失败/部分成功可回到导入重试。"
+        ]
+      },
+      "capture": "screens/AD06.png",
+      "view": "screens/AD06.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 1800,
+        "y": 5650,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD07",
+      "module": "后台 · 数据",
+      "title": "审计日志",
+      "kind": "page",
+      "state": "default",
+      "entry": "总览/侧栏“审计”",
+      "purpose": "追查谁在什么时候改了什么。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "audit_logs"
+      ],
+      "writes": [],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "筛选（用户/动作/资源/时间）+ 表格（时间/用户/动作/资源/详情）。",
+          "表格可滚动。"
+        ],
+        "rules": [
+          "写操作都有记录；敏感字段脱敏。",
+          "只读，不可编辑/删除。"
+        ]
+      },
+      "capture": "screens/AD07.png",
+      "view": "screens/AD07.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 3600,
+        "y": 5650,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P0"
+    },
+    {
+      "id": "AD08",
+      "module": "后台 · 管理",
+      "title": "用户与权限",
+      "kind": "page",
+      "state": "default",
+      "entry": "总览/侧栏“用户”",
+      "purpose": "管理 admin/editor/viewer。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "users"
+      ],
+      "writes": [
+        "users",
+        "audit_logs"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "用户表（用户名/显示名/角色/状态/最后登录）+ 新增/编辑。",
+          "表格可滚动。"
+        ],
+        "rules": [
+          "不能删除最后一个 admin。",
+          "禁用用户不能登录。"
+        ]
+      },
+      "capture": "screens/AD08.png",
+      "view": "screens/AD08.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 0,
+        "y": 6750,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P1"
+    },
+    {
+      "id": "AD09",
+      "module": "后台 · 管理",
+      "title": "问答记录",
+      "kind": "page",
+      "state": "default",
+      "entry": "总览/侧栏“问答”",
+      "purpose": "查看问题、答案摘要、工具调用与反馈。",
+      "evidence": {
+        "level": "proposed",
+        "anchor": "docs/product/05-page-structure.md"
+      },
+      "preconditions": [],
+      "reads": [
+        "chat_messages"
+      ],
+      "writes": [
+        "feedback"
+      ],
+      "notes": [
+        "低保真结构线框，不代表最终视觉。"
+      ],
+      "annotation": {
+        "layout": [
+          "筛选 + 表格（时间/用户/问题/答案摘要/工具/耗时/反馈）。",
+          "表格可滚动。"
+        ],
+        "rules": [
+          "不展示密钥/系统提示。",
+          "可标记问题（P1）。"
+        ]
+      },
+      "capture": "screens/AD09.png",
+      "view": "screens/AD09.html",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "map": {
+        "x": 1800,
+        "y": 6750,
+        "w": 1440,
+        "h": 900
+      },
+      "priority": "P1"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "TR_MP00_01",
+      "from": "MP00",
+      "to": "MP01",
+      "trigger": "点击“微信登录/测试号”",
+      "preconditions": [],
+      "read": [
+        "user",
+        "token"
+      ],
+      "write": [
+        "login_audit"
+      ],
+      "effect": "登录成功，进入首页；携带 user/token",
+      "feedback": "进入首页",
+      "failure": "登录失败留在登录页",
+      "recovery": "重试/切换测试号",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP00_02",
+      "from": "MP00",
+      "to": "MP08",
+      "trigger": "点击“无权限？查看帮助”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开帮助/无权限页",
+      "feedback": "打开帮助",
+      "failure": "—",
+      "recovery": "返回登录",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP01_02",
+      "from": "MP01",
+      "to": "MP02",
+      "trigger": "点击镇街/区域入口",
+      "preconditions": [],
+      "read": [
+        "level=town"
+      ],
+      "write": [],
+      "effect": "切换区域列表；携带 level=town",
+      "feedback": "打开区域列表",
+      "failure": "加载失败可重试",
+      "recovery": "返回首页",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP01_04",
+      "from": "MP01",
+      "to": "MP04",
+      "trigger": "点击核心指标卡",
+      "preconditions": [],
+      "read": [
+        "region_id",
+        "indicator_id",
+        "period"
+      ],
+      "write": [],
+      "effect": "切换指标详情；携带 region_id/indicator_id/period",
+      "feedback": "打开指标详情",
+      "failure": "无数据展示空状态",
+      "recovery": "返回首页",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP01_05",
+      "from": "MP01",
+      "to": "MP05",
+      "trigger": "点击 AI 提问框",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开 AI 问答；可带 prompt",
+      "feedback": "打开问答",
+      "failure": "—",
+      "recovery": "返回首页",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP01_07",
+      "from": "MP01",
+      "to": "MP07",
+      "trigger": "点击“历史”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开会话列表",
+      "feedback": "打开会话",
+      "failure": "空列表提示",
+      "recovery": "返回首页",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP02_03",
+      "from": "MP02",
+      "to": "MP03",
+      "trigger": "选择区域行",
+      "preconditions": [],
+      "read": [
+        "region_id"
+      ],
+      "write": [],
+      "effect": "切换区域详情；携带 region_id",
+      "feedback": "打开区域详情",
+      "failure": "区域不存在提示",
+      "recovery": "返回列表",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP03_04",
+      "from": "MP03",
+      "to": "MP04",
+      "trigger": "点击指标卡",
+      "preconditions": [],
+      "read": [
+        "region_id",
+        "indicator_id"
+      ],
+      "write": [],
+      "effect": "切换指标详情；携带 region_id/indicator_id",
+      "feedback": "打开指标详情",
+      "failure": "无数据展示空状态",
+      "recovery": "返回区域详情",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP04_03",
+      "from": "MP04",
+      "to": "MP03",
+      "trigger": "点击返回",
+      "preconditions": [],
+      "read": [
+        "region_id"
+      ],
+      "write": [],
+      "effect": "返回区域详情",
+      "feedback": "返回",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": true
+    },
+    {
+      "id": "TR_MP05_06",
+      "from": "MP05",
+      "to": "MP06",
+      "trigger": "提交问题",
+      "preconditions": [],
+      "read": [
+        "question",
+        "session_id"
+      ],
+      "write": [
+        "chat_sessions",
+        "chat_messages",
+        "audit_logs"
+      ],
+      "effect": "调用 /ai/chat；返回 answer/chart_spec/citations",
+      "feedback": "显示 thinking→答案",
+      "failure": "超时/额度/无效输出提示",
+      "recovery": "重试/改写问题",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP06_05",
+      "from": "MP06",
+      "to": "MP05",
+      "trigger": "点击追问/新问题",
+      "preconditions": [],
+      "read": [
+        "session_id"
+      ],
+      "write": [],
+      "effect": "回到输入态，保留会话上下文",
+      "feedback": "回到输入",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP06_04",
+      "from": "MP06",
+      "to": "MP04",
+      "trigger": "点击引用指标",
+      "preconditions": [],
+      "read": [
+        "region_id",
+        "indicator_id",
+        "period"
+      ],
+      "write": [],
+      "effect": "打开引用指标详情",
+      "feedback": "打开指标",
+      "failure": "无数据提示",
+      "recovery": "返回问答",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP07_06",
+      "from": "MP07",
+      "to": "MP06",
+      "trigger": "点击会话",
+      "preconditions": [],
+      "read": [
+        "session_id"
+      ],
+      "write": [],
+      "effect": "打开会话消息",
+      "feedback": "打开会话",
+      "failure": "加载失败重试",
+      "recovery": "返回列表",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_MP08_00",
+      "from": "MP08",
+      "to": "MP00",
+      "trigger": "点击返回/重新登录",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "回到登录页",
+      "feedback": "返回",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": true
+    },
+    {
+      "id": "TR_AD01_02",
+      "from": "AD01",
+      "to": "AD02",
+      "trigger": "点击登录",
+      "preconditions": [],
+      "read": [
+        "user",
+        "token"
+      ],
+      "write": [
+        "login_audit"
+      ],
+      "effect": "登录成功，进入总览",
+      "feedback": "进入总览",
+      "failure": "失败提示，不泄露账号存在性",
+      "recovery": "重试",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD02_03",
+      "from": "AD02",
+      "to": "AD03",
+      "trigger": "点击侧栏“数据”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开数据列表",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD02_05",
+      "from": "AD02",
+      "to": "AD05",
+      "trigger": "点击侧栏“导入”/最近导入",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开导入页",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD02_07",
+      "from": "AD02",
+      "to": "AD07",
+      "trigger": "点击侧栏“审计”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开审计日志",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD02_08",
+      "from": "AD02",
+      "to": "AD08",
+      "trigger": "点击侧栏“用户”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开用户/权限（P1）",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD02_09",
+      "from": "AD02",
+      "to": "AD09",
+      "trigger": "点击侧栏“问答”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开问答记录（P1）",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD03_04",
+      "from": "AD03",
+      "to": "AD04",
+      "trigger": "点击行“编辑”",
+      "preconditions": [],
+      "read": [
+        "data_value_id"
+      ],
+      "write": [],
+      "effect": "打开右侧编辑抽屉；携带 data_value_id",
+      "feedback": "打开抽屉",
+      "failure": "记录不存在提示",
+      "recovery": "关闭抽屉",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD04_03",
+      "from": "AD04",
+      "to": "AD03",
+      "trigger": "点击保存",
+      "preconditions": [],
+      "read": [
+        "data_value"
+      ],
+      "write": [
+        "data_values",
+        "audit_logs"
+      ],
+      "effect": "保存成功，回到列表并刷新；写审计",
+      "feedback": "保存成功",
+      "failure": "校验失败留在抽屉",
+      "recovery": "修正/取消",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD04_03C",
+      "from": "AD04",
+      "to": "AD03",
+      "trigger": "点击取消",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "关闭抽屉，不写入",
+      "feedback": "关闭",
+      "failure": "—",
+      "recovery": "重新打开",
+      "evidence": "proposed",
+      "isReturn": true
+    },
+    {
+      "id": "TR_AD03_05",
+      "from": "AD03",
+      "to": "AD05",
+      "trigger": "点击“导入”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开导入页；可带筛选条件",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD05_06",
+      "from": "AD05",
+      "to": "AD06",
+      "trigger": "点击“查看记录”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "打开导入记录",
+      "feedback": "切换页面",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD06_05",
+      "from": "AD06",
+      "to": "AD05",
+      "trigger": "点击错误/重试",
+      "preconditions": [],
+      "read": [
+        "import_job_id"
+      ],
+      "write": [],
+      "effect": "回到导入页，带 job 上下文",
+      "feedback": "回到导入",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD05_03",
+      "from": "AD05",
+      "to": "AD03",
+      "trigger": "导入成功后点击“查看数据”",
+      "preconditions": [],
+      "read": [],
+      "write": [],
+      "effect": "刷新数据列表",
+      "feedback": "刷新列表",
+      "failure": "—",
+      "recovery": "—",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD05_MP01",
+      "from": "AD05",
+      "to": "MP01",
+      "trigger": "导入/发布成功",
+      "preconditions": [],
+      "read": [],
+      "write": [
+        "data_values"
+      ],
+      "effect": "小程序首页读取最新数据（跨端数据更新）",
+      "feedback": "数据更新",
+      "failure": "—",
+      "recovery": "重新导入",
+      "evidence": "proposed",
+      "isReturn": false
+    },
+    {
+      "id": "TR_AD01_02R",
+      "from": "AD01",
+      "to": "AD02",
+      "trigger": "已登录直接进入",
+      "preconditions": [],
+      "read": [
+        "token"
+      ],
+      "write": [],
+      "effect": "跳过登录进入总览",
+      "feedback": "进入总览",
+      "failure": "token 失效回登录",
+      "recovery": "重新登录",
+      "evidence": "proposed",
+      "isReturn": false
+    }
+  ],
+  "entities": [
+    {
+      "name": "Region",
+      "fields": [
+        "id",
+        "code",
+        "name",
+        "level",
+        "parent_id"
+      ]
+    },
+    {
+      "name": "Indicator",
+      "fields": [
+        "id",
+        "code",
+        "name",
+        "unit",
+        "value_type",
+        "applicable_levels"
+      ]
+    },
+    {
+      "name": "DataValue",
+      "fields": [
+        "region_id",
+        "indicator_id",
+        "period_year",
+        "value_number",
+        "value_text",
+        "source_id"
+      ]
+    },
+    {
+      "name": "ImportJob",
+      "fields": [
+        "job_type",
+        "filename",
+        "status",
+        "stats",
+        "errors"
+      ]
+    },
+    {
+      "name": "ChatMessage",
+      "fields": [
+        "session_id",
+        "role",
+        "content",
+        "chart_spec",
+        "citations"
+      ]
+    },
+    {
+      "name": "AuditLog",
+      "fields": [
+        "user_id",
+        "action",
+        "resource",
+        "detail"
+      ]
+    }
+  ],
+  "dataFlows": [
+    {
+      "from": "AD05",
+      "to": "MP01",
+      "trigger": "导入/发布成功",
+      "fields": [
+        "data_values"
+      ],
+      "note": "跨端数据更新"
+    },
+    {
+      "from": "MP05",
+      "to": "MP06",
+      "trigger": "提交问题",
+      "fields": [
+        "question",
+        "session_id"
+      ],
+      "note": "答案/图表/引用返回"
+    },
+    {
+      "from": "MP06",
+      "to": "MP04",
+      "trigger": "点击引用",
+      "fields": [
+        "region_id",
+        "indicator_id",
+        "period"
+      ],
+      "note": "从答案追溯到指标"
+    }
+  ],
+  "coverage": {
+    "included": [
+      "MP00",
+      "MP01",
+      "MP02",
+      "MP03",
+      "MP04",
+      "MP05",
+      "MP06",
+      "MP07",
+      "MP08",
+      "AD01",
+      "AD02",
+      "AD03",
+      "AD04",
+      "AD05",
+      "AD06",
+      "AD07",
+      "AD08",
+      "AD09"
+    ],
+    "excluded": [
+      "地图/大屏",
+      "导出/多年趋势",
+      "粤政易 SSO 页面",
+      "公众版"
+    ],
+    "note": "P1 页面以占位线框呈现，不表示已实现。"
+  },
+  "limitations": [
+    "低保真结构线框，不含品牌色/视觉风格/高保真 UI。",
+    "页面与接口为设计契约；后端尚未实现。",
+    "数据值为演示占位，不代表真实统计。"
+  ]
+}
