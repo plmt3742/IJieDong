@@ -1,0 +1,2272 @@
+[
+  {
+    "code": "JD",
+    "name": "揭东区",
+    "level": "district",
+    "category": "administrative",
+    "parent_code": null,
+    "sort_order": 0,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-01",
+    "name": "曲溪街道",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-02",
+    "name": "云路镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-03",
+    "name": "玉滘镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-04",
+    "name": "玉湖镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-05",
+    "name": "新亨镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-06",
+    "name": "锡场镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-07",
+    "name": "埔田镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-08",
+    "name": "磐东街道",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-09",
+    "name": "月城镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-10",
+    "name": "霖磐镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-11",
+    "name": "桂岭镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-12",
+    "name": "龙尾镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-13",
+    "name": "白塔镇",
+    "level": "town",
+    "category": "administrative",
+    "parent_code": "JD",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-14",
+    "name": "揭东经济开发区",
+    "level": "town",
+    "category": "development_zone",
+    "parent_code": "JD",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-T-15",
+    "name": "揭东中德金属生态城",
+    "level": "town",
+    "category": "development_zone",
+    "parent_code": "JD",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-001",
+    "name": "玉湖镇-玉湖社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-002",
+    "name": "玉湖镇-浮山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-003",
+    "name": "玉湖镇-汾水村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-004",
+    "name": "玉湖镇-林厝村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-005",
+    "name": "玉湖镇-大坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-006",
+    "name": "玉湖镇-坪上村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-007",
+    "name": "玉湖镇-观音山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-008",
+    "name": "玉湖镇-新寮村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-009",
+    "name": "玉湖镇-玉联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-010",
+    "name": "玉湖镇-吴厝村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-011",
+    "name": "玉湖镇-玉牌村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-012",
+    "name": "玉湖镇-湖岗村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-013",
+    "name": "玉湖镇-北坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-014",
+    "name": "玉湖镇-下坡村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-015",
+    "name": "玉湖镇-郑厝村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-016",
+    "name": "玉湖镇-姑山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-017",
+    "name": "玉湖镇-洋边村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-018",
+    "name": "玉湖镇-东寮村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 18,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-019",
+    "name": "玉湖镇-马料堂村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 19,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-020",
+    "name": "玉湖镇-洪厝埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 20,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-021",
+    "name": "玉湖镇-詹厝村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-04",
+    "sort_order": 21,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-022",
+    "name": "新亨镇-楼下村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-023",
+    "name": "新亨镇-秋江村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-024",
+    "name": "新亨镇-北良村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-025",
+    "name": "新亨镇-白石村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-026",
+    "name": "新亨镇-硕和村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-027",
+    "name": "新亨镇-硕榕村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-028",
+    "name": "新亨镇-硕联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-029",
+    "name": "新亨镇-仙美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-030",
+    "name": "新亨镇-英花村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-031",
+    "name": "新亨镇-坪埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-032",
+    "name": "新亨镇-溢溪村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-033",
+    "name": "新亨镇-下坝村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-034",
+    "name": "新亨镇-五房村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-035",
+    "name": "新亨镇-新亨社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-05",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-036",
+    "name": "锡场镇-江滨村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-037",
+    "name": "锡场镇-潭王村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-038",
+    "name": "锡场镇-潭蔡村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-039",
+    "name": "锡场镇-东仓村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-040",
+    "name": "锡场镇-大寮村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-041",
+    "name": "锡场镇-军埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-042",
+    "name": "锡场镇-石洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-043",
+    "name": "锡场镇-华清村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-044",
+    "name": "锡场镇-锡西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-045",
+    "name": "锡场镇-锡中村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-046",
+    "name": "锡场镇-锡东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-047",
+    "name": "锡场镇-新置寨村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-048",
+    "name": "锡场镇-锡场社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-06",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-049",
+    "name": "埔田镇-金东岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-050",
+    "name": "埔田镇-车田村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-051",
+    "name": "埔田镇-祯祥坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-052",
+    "name": "埔田镇-马硕村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-053",
+    "name": "埔田镇-老洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-054",
+    "name": "埔田镇-刘厝寨村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-055",
+    "name": "埔田镇-溪南山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-056",
+    "name": "埔田镇-饶平村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-057",
+    "name": "埔田镇-南湖村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-058",
+    "name": "埔田镇-埔田村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-059",
+    "name": "埔田镇-新岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-060",
+    "name": "埔田镇-老岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-061",
+    "name": "埔田镇-湖下村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-062",
+    "name": "埔田镇-牌边村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-063",
+    "name": "埔田镇-庵后村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-064",
+    "name": "埔田镇-莲花心村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-065",
+    "name": "埔田镇-新龙村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-066",
+    "name": "埔田镇-老龙村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 18,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-067",
+    "name": "埔田镇-长岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 19,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-068",
+    "name": "埔田镇-竹山社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-07",
+    "sort_order": 20,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-069",
+    "name": "曲溪街道-陈寮村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-070",
+    "name": "曲溪街道-城西社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-071",
+    "name": "曲溪街道-缶灶村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-072",
+    "name": "曲溪街道-港美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-073",
+    "name": "曲溪街道-港畔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-074",
+    "name": "曲溪街道-旧坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-075",
+    "name": "曲溪街道-龙砂村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-076",
+    "name": "曲溪街道-陇埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-077",
+    "name": "曲溪街道-诸美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-078",
+    "name": "曲溪街道-寨一村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-079",
+    "name": "曲溪街道-圩埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-080",
+    "name": "曲溪街道-路篦村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-081",
+    "name": "曲溪街道-新篦村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-082",
+    "name": "曲溪街道-五堆村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-083",
+    "name": "曲溪街道-上围村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-084",
+    "name": "曲溪街道-寨二村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-085",
+    "name": "曲溪街道-蟠龙村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-086",
+    "name": "曲溪街道-云南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 18,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-087",
+    "name": "曲溪街道-三友村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 19,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-088",
+    "name": "曲溪街道-曲溪社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 20,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-089",
+    "name": "云路镇-赵埔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-090",
+    "name": "云路镇-中厦村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-091",
+    "name": "云路镇-棋盘村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-092",
+    "name": "云路镇-军田村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-093",
+    "name": "云路镇-洪住村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-094",
+    "name": "云路镇-梅坛村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-095",
+    "name": "云路镇-古湖村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-096",
+    "name": "云路镇-下径村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-097",
+    "name": "云路镇-象岗村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-098",
+    "name": "云路镇-云七村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-099",
+    "name": "云路镇-田东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-100",
+    "name": "云路镇-陇上村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-101",
+    "name": "云路镇-北洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-102",
+    "name": "云路镇-永和村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-103",
+    "name": "云路镇-老桃村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-104",
+    "name": "云路镇-新桃村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-105",
+    "name": "云路镇-西洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-106",
+    "name": "云路镇-翁洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 18,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-107",
+    "name": "云路镇-东后村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 19,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-108",
+    "name": "云路镇-月浦村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 20,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-109",
+    "name": "云路镇-云路社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-02",
+    "sort_order": 21,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-110",
+    "name": "玉滘镇-饶美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-111",
+    "name": "玉滘镇-新寨村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-112",
+    "name": "玉滘镇-桥头村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-113",
+    "name": "玉滘镇-东面村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-114",
+    "name": "玉滘镇-半洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-115",
+    "name": "玉滘镇-凤美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-116",
+    "name": "玉滘镇-大窖村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-117",
+    "name": "玉滘镇-谢坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-118",
+    "name": "玉滘镇-尖山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-119",
+    "name": "玉滘镇-池渡村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-120",
+    "name": "玉滘镇-玉窖社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-03",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-121",
+    "name": "龙尾镇-高明村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-122",
+    "name": "龙尾镇-美联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-123",
+    "name": "龙尾镇-龙珠村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-124",
+    "name": "龙尾镇-珠坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-125",
+    "name": "龙尾镇-新丰村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-126",
+    "name": "龙尾镇-石坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-127",
+    "name": "龙尾镇-东湖村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-128",
+    "name": "龙尾镇-四联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-129",
+    "name": "龙尾镇-河坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-130",
+    "name": "龙尾镇-龙尾社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-12",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-131",
+    "name": "白塔镇-广联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-132",
+    "name": "白塔镇-红坡村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-133",
+    "name": "白塔镇-花坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-134",
+    "name": "白塔镇-广和村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-135",
+    "name": "白塔镇-新村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-136",
+    "name": "白塔镇-塔东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-137",
+    "name": "白塔镇-塔西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-138",
+    "name": "白塔镇-塔南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-139",
+    "name": "白塔镇-塔北村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-140",
+    "name": "白塔镇-元联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-141",
+    "name": "白塔镇-金勾村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-142",
+    "name": "白塔镇-古塘村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-143",
+    "name": "白塔镇-林田村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-144",
+    "name": "白塔镇-桐联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-145",
+    "name": "白塔镇-桐和村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-146",
+    "name": "白塔镇-瑞联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-147",
+    "name": "白塔镇-宝联村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-148",
+    "name": "白塔镇-马坑村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 18,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-149",
+    "name": "白塔镇-玉塔社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-13",
+    "sort_order": 19,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-150",
+    "name": "霖磐镇-东风村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-151",
+    "name": "霖磐镇-德南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-152",
+    "name": "霖磐镇-联东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-153",
+    "name": "霖磐镇-德北村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-154",
+    "name": "霖磐镇-德中村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-155",
+    "name": "霖磐镇-西龙村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-156",
+    "name": "霖磐镇-桂西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-157",
+    "name": "霖磐镇-南塘村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-158",
+    "name": "霖磐镇-东洲村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-159",
+    "name": "霖磐镇-联西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-160",
+    "name": "霖磐镇-桂东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-161",
+    "name": "霖磐镇-霖磐社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-10",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-162",
+    "name": "桂岭镇-港尾村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-163",
+    "name": "桂岭镇-玉白村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-164",
+    "name": "桂岭镇-岭丰村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-165",
+    "name": "桂岭镇-联新村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-166",
+    "name": "桂岭镇-鸟围村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-167",
+    "name": "桂岭镇-大岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-168",
+    "name": "桂岭镇-龙岭村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-169",
+    "name": "桂岭镇-建豪村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-170",
+    "name": "桂岭镇-玉步村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-171",
+    "name": "桂岭镇-凤光村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-172",
+    "name": "桂岭镇-客洞村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-173",
+    "name": "桂岭镇-柏旺村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-174",
+    "name": "桂岭镇-围头村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-175",
+    "name": "桂岭镇-东升村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-176",
+    "name": "桂岭镇-福岗村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-177",
+    "name": "桂岭镇-赤步村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-178",
+    "name": "桂岭镇-桂岭社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-11",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-179",
+    "name": "月城镇-棉洋村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-180",
+    "name": "月城镇-篮头村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-181",
+    "name": "月城镇-刘畔村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-182",
+    "name": "月城镇-寮东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-183",
+    "name": "月城镇-松山村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-184",
+    "name": "月城镇-月南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-185",
+    "name": "月城镇-寨内村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-186",
+    "name": "月城镇-西河村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-187",
+    "name": "月城镇-德东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-188",
+    "name": "月城镇-双河村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-189",
+    "name": "月城镇-赤岸村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-190",
+    "name": "月城镇-玉步头村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-191",
+    "name": "月城镇-新围村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-192",
+    "name": "月城镇-西湖村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-193",
+    "name": "月城镇-月城社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-09",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-194",
+    "name": "磐东街道-城南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 1,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-195",
+    "name": "磐东街道-肇沟村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 2,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-196",
+    "name": "磐东街道-城西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 3,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-197",
+    "name": "磐东街道-河中村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 4,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-198",
+    "name": "磐东街道-浦东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 5,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-199",
+    "name": "磐东街道-富经桥村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 6,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-200",
+    "name": "磐东街道-乔东村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 7,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-201",
+    "name": "磐东街道-南河村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 8,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-202",
+    "name": "磐东街道-潭角村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 9,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-203",
+    "name": "磐东街道-乔南村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 10,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-204",
+    "name": "磐东街道-乔西村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 11,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-205",
+    "name": "磐东街道-沟美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 12,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-206",
+    "name": "磐东街道-阳美村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 13,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-207",
+    "name": "磐东街道-北河村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 14,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-208",
+    "name": "磐东街道-下寨村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 15,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-209",
+    "name": "磐东街道-溪墘村",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 16,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-210",
+    "name": "磐东街道-磐东社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-08",
+    "sort_order": 17,
+    "external_code": null,
+    "enabled": true
+  },
+  {
+    "code": "JD-V-211",
+    "name": "曲溪街道-城东社区",
+    "level": "village",
+    "category": "administrative",
+    "parent_code": "JD-T-01",
+    "sort_order": 21,
+    "external_code": null,
+    "enabled": true
+  }
+]
