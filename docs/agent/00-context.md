@@ -32,11 +32,11 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 **M0：理解与骨架 → M0.5：11.12 初步 demo**（2026-11-06 起）
 
 - 已完成：原始材料分析、数据模板拆解、技术栈/数据模型/Agent/部署决策、agent 文档体系、批次记录模板、文档内链检查。
-- 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框 + 可缩放/可点击页面地图（`docs/product/ue/page-map.html`）。
+- 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
 - 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 前交付 demo + 技术文档 + 成本评估。
 - 未开始：可运行代码、数据库、API、页面。
-- Git：已推送 `origin/main @ 01e22ec`（2026-11-06）；工作区 clean。
-- 当前批次：`B-002 11.12 demo 冲刺`（方案/文档/工作流/费用/页面地图/目录骨架已完成；下一步写代码；见 `15-demo-plan-1112.md`）。
+- Git：已推送 `origin/main`（2026-11-06）；最新提交见 `git log`；工作区 clean。
+- 当前批次：`B-002 11.12 demo 冲刺`（方案/文档/工作流/费用/页面地图/目录骨架已完成；下一步按 `20-b002-delegation-plan.md` 委派 subagent 写代码）。
 
 ## 技术栈（已确认方向，B-002 验证）
 
@@ -100,7 +100,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 
 ## 下一步（11.12 冲刺）
 
-1. 执行 `B-002 11.12 demo 冲刺`：原生小程序 + FastAPI + SQLite + DeepSeek + 最小后台。
+1. 按 `20-b002-delegation-plan.md` 委派 WP-BE1，再按依赖推进 WP-DATA1/WP-MP1/WP-ADMIN1/WP-AI1；主 agent 集成验收。
 2. 按 [15-demo-plan-1112.md](15-demo-plan-1112.md) 的 6 天排期推进，按“砍范围顺序”保主路径。
 3. 页面设计以 [05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html) 为准；接口/数据流见 [18-workflows.md](18-workflows.md)。
 4. 11.12 前产出 demo、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
@@ -118,5 +118,6 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 批次记录：[08-batch-log/](08-batch-log/)
 - 三类工作流：[18-workflows.md](18-workflows.md)
 - 费用调研：[19-cost-research.md](19-cost-research.md)
+- B-002 委派计划：[20-b002-delegation-plan.md](20-b002-delegation-plan.md)
 - 页面结构：[product/05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)
 - 交接快照：[11-handoff.md](11-handoff.md)

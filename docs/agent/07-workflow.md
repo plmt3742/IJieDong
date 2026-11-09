@@ -130,6 +130,41 @@ chore(ci): 缓存 pnpm 依赖
 - [ ] 文件位置/命名符合 06。
 - [ ] 测试不是“只测 happy path”。
 
+### 2.4 任务规划与子代理委派（强制）
+
+除单行 typo、配置值等 trivial 修改外，后续任务一律按以下顺序执行：
+
+1. **写计划**：目标、范围、非目标、验收标准、依赖、文件归属、验证方式、风险。
+2. **拆工作包**：一个工作包只交付一个可验证结果；优先按端/模块拆分。
+3. **委派 subagent**：可并行的独立目录/文件并行委派；共享文件由主 agent 统一修改。
+4. **主 agent 集成**：审查 diff、处理契约冲突、合并代码。
+5. **主 agent 复跑验证**：lint/test/build/手动路径；不能只看子代理自述。
+6. **留痕**：更新任务、批次记录、交接文档、OpenAPI/架构文档。
+
+工作包最小字段：
+
+```text
+TASK:
+WORK PACKAGE:
+FILES YOU OWN:
+FILES YOU MUST NOT TOUCH:
+GOAL:
+ACCEPTANCE:
+MUST DO:
+MUST NOT DO:
+CONTEXT:
+VERIFY:
+HANDOFF:
+```
+
+规则：
+
+- 子代理不得直接 commit/push；合并与提交由主 agent 执行。
+- 子代理不得修改 `Resource/`、提交密钥、扩大任务范围。
+- 工作包之间不得同时修改同一文件；共享文件（router、models `__init__`、OpenAPI、05 文档）由主 agent 处理。
+- 主 agent 必须检查：是否越界改文件、是否真的跑测试、是否引入新依赖、是否更新文档、是否可复现。
+- 详细示例见 `docs/agent/20-b002-delegation-plan.md`。
+
 ## 3. Definition of Done
 
 一个任务只有满足以下条件才算 DONE：
@@ -141,6 +176,7 @@ chore(ci): 缓存 pnpm 依赖
 5. 手动验证有记录（命令输出/截图/步骤）。
 6. 没有密钥、调试代码、无意义日志。
 7. 可回滚：知道改了什么、怎么退。
+8. 若由 subagent 实现：主 agent 已审查 diff 并复跑验证，子代理自述不能代替验收。
 
 ## 4. 文档同步矩阵
 
@@ -167,7 +203,7 @@ chore(ci): 缓存 pnpm 依赖
 | 数据库 | `alembic upgrade head` + 回滚；查询结果 |
 | AI | 评测集跑分；一次真实问答记录（脱敏） |
 | 部署 | 访问地址、健康检查、日志片段 |
-| 文档 | 链接检查、目录树、关键文件存在 |
+| 文档 | 链接检查、无 emoji 检查、目录树、关键文件存在 |
 
 ## 6. Agent 使用规则
 

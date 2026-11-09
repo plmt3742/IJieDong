@@ -25,6 +25,8 @@ ID:
 依赖:
 估算:
 验收标准:
+委派: 主 agent / subagent（工作包 ID）
+验收: 主 agent 复跑命令/手动路径
 状态: TODO | DOING | DONE | BLOCKED | DEFERRED
 备注:
 ```
@@ -64,7 +66,16 @@ ID:
 ## 2. 当前批次：B-002 11.12 demo 冲刺（11.06–11.12）
 
 > 只做演示闭环；详细范围/排期/砍范围见 [15-demo-plan-1112.md](15-demo-plan-1112.md)。
-> 标记 `P1` 的任务可后置到 11.12 之后。
+> 子代理工作包、文件归属、提示词模板见 [20-b002-delegation-plan.md](20-b002-delegation-plan.md)。
+
+| 工作包 | 覆盖任务 | 建议 category |
+|---|---|---|
+| WP-BE1 | SH-001、BE-001、BE-002 | deep-low |
+| WP-DATA1 | DATA-001 至 DATA-008 | deep-low |
+| WP-MP1 | MP-001 至 MP-004 | visual-engineering |
+| WP-ADMIN1 | FE-001 至 FE-004 | visual-engineering |
+| WP-AI1 | AI-001 至 AI-007 | deep-low |
+| WP-INT1 | QA-001、SH-002/003、集成验收 | 主 agent |
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|

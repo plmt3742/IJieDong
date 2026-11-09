@@ -24,7 +24,7 @@
 | 查原始资料摘要 | [agent/10-resources.md](agent/10-resources.md) |
 | 切换会话/交接 | [agent/11-handoff.md](agent/11-handoff.md) |
 | 查未确认需求 | [agent/12-open-questions.md](agent/12-open-questions.md) |
-| 11.12 冲刺 | [agent/15-demo-plan-1112.md](agent/15-demo-plan-1112.md) + [agent/16-cost-estimate.md](agent/16-cost-estimate.md) |
+| 11.12 冲刺 | [agent/15-demo-plan-1112.md](agent/15-demo-plan-1112.md) + [agent/20-b002-delegation-plan.md](agent/20-b002-delegation-plan.md) |
 | 向对方提问 | [agent/17-outreach-copy.md](agent/17-outreach-copy.md) |
 | 看每批次 agent 做了什么 | [agent/08-batch-log/](agent/08-batch-log/) |
 
@@ -55,6 +55,7 @@
 | [agent/17-outreach-copy.md](agent/17-outreach-copy.md) | 可直接发给需求方/政数局的通俗问题 | 对外对接 |
 | [agent/18-workflows.md](agent/18-workflows.md) | 用户/开发/系统三类工作流（Mermaid） | 设计/开发前 |
 | [agent/19-cost-research.md](agent/19-cost-research.md) | 有来源的云资源/LLM/合规费用调研 | 预算/报价 |
+| [agent/20-b002-delegation-plan.md](agent/20-b002-delegation-plan.md) | B-002 子代理工作包、文件归属、验收、提示词模板 | 代码冲刺/交接 |
 
 ### 产品设计
 
@@ -103,6 +104,8 @@
 5. **决策留痕**：不可逆或跨模块决策写 ADR，不要只留在聊天记录。
 6. **不复制原文**：`Resource/` 只做摘要，原文留在本地。
 7. **不写密钥**：文档、示例、日志中都不出现真实密钥。
+8. **不使用 emoji**：工程文档与 README 一律使用正式文字；`scripts/check-no-emoji.py` 校验。
+9. **先规划再委派**：非简单任务先写工作包，再委派 subagent；主 agent 负责集成与复跑验证。
 
 ## 变更记录
 

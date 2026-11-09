@@ -25,6 +25,7 @@
 | 接续上一批 | [08-batch-log/](08-batch-log/) 最新一篇 + [11-handoff.md](11-handoff.md) | 全量重读 |
 | 需求澄清 | [01-project.md](01-project.md)、[12-open-questions.md](12-open-questions.md) | 代码细节 |
 | 页面/流程设计 | [18-workflows.md](18-workflows.md)、[05-page-structure.md](../product/05-page-structure.md)、[ue/page-map.html](../product/ue/page-map.html) | 数据库迁移细节 |
+| 代码冲刺/委派 | [20-b002-delegation-plan.md](20-b002-delegation-plan.md)、[07-workflow.md](07-workflow.md) | 全量历史文档 |
 
 ## 2. 事实来源优先级
 
@@ -52,8 +53,16 @@
 | `QA-` | 测试、验收、可用性 |
 | `YX-` | 粤政易/等保/信创对接 |
 | `SH-` | 跨模块/项目管理 |
+| `WP-` | 子代理工作包（如 WP-BE1、WP-DATA1） |
 
 引用任务写完整 ID，例如“完成 DATA-003 后开始 BE-005”。
+
+## 3.1 任务执行方式
+
+- 非简单任务先写工作包，再委派 subagent；主 agent 负责集成与复跑验证。
+- 子代理不得直接 commit/push；共享文件由主 agent 统一修改。
+- 工程文档不使用 emoji；README 保持正式。
+- 详细模板见 `20-b002-delegation-plan.md`。
 
 ## 4. 状态图例
 

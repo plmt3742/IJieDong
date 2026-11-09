@@ -7,7 +7,7 @@
 
 - 阶段：**M0.5 11.12 初步 demo**（2026-11-06 起）
 - 当前状态：文档/决策/三类工作流/费用调研/目录骨架/页面结构地图已完成；业务代码尚未开始
-- 当前批次：`B-002 11.12 demo 冲刺`（文档/方案已完成，等待确认后开始代码；见 `docs/agent/15-demo-plan-1112.md`）
+- 当前批次：`B-002 11.12 demo 冲刺`（子代理工作包已规划，见 `docs/agent/20-b002-delegation-plan.md`）
 - 已确认：公职人员；原生微信小程序；粤政易等程序搭建完再接；数据来源 Excel/接口/手工；DeepSeek API；11.12 前 demo+文档+成本
 - 当前头号风险：6 天截止过紧、原生小程序图表、真实数据/Key/AppID 未到
 
@@ -28,7 +28,7 @@
 | 原生小程序 | `06-file-tree.md`、`docs/product/02-ia-and-flows.md`、`13-tech-stack-review.md` | 数据库迁移细节 |
 | AI/Agent | `05-architecture.md` 的 Agent 节、`ADR-003`、`09-risks.md` 的 AI 部分 | 后台 CRUD 细节 |
 | 部署/合规 | `07-workflow.md`、`ADR-004`、`09-risks.md` | 产品交互细节 |
-| 11.12 冲刺 | `15-demo-plan-1112.md`、`16-cost-estimate.md`、`17-outreach-copy.md` | 全量历史文档 |
+| 11.12 冲刺 | `15-demo-plan-1112.md`、`16-cost-estimate.md`、`17-outreach-copy.md`、`20-b002-delegation-plan.md` | 全量历史文档 |
 | 页面/交互设计 | `docs/product/05-page-structure.md`、`docs/product/ue/page-map.html`、`18-workflows.md` | 数据库迁移细节 |
 | 预算/资源 | `19-cost-research.md`、`16-cost-estimate.md` | 页面视觉细节 |
 | 接续上一批 | `08-batch-log/` 最新一篇 + `11-handoff.md` | 全量重读 |
@@ -45,17 +45,30 @@
 8. **不新建顶层目录**：按 `06-file-tree.md` 放置；确需新增，先改文档并说明理由。
 9. **不跳过验证**：没有命令输出/截图/测试结果，不得标记 DONE。
 10. **每批次必须留痕**：更新 `08-batch-log/`、`04-tasks.md`、`11-handoff.md`。
+11. **工程文档不使用 emoji**，尤其是 `README.md`；README 必须保持正式、可对外展示。
+12. **非简单任务先规划、再委派 subagent**：主 agent 负责拆分、审查、集成与最终验证，不能直接包办；子代理不得直接 commit/push。
 
 ## 4. 批次工作流（单人 + agent）
 
 ```text
-读上下文 → 选任务 → 写批次计划 → 实现 → 自测 → 更新文档 → 记录批次 → 交接
+读上下文 → 选任务 → 写批次计划（含工作包拆分）
+        → 委派 subagent → 主 agent 审查/集成/复跑验证
+        → 更新文档 → 记录批次 → 交接
 ```
 
 - 一个批次 0.5–2 天，必须有明确目标、范围、非目标、验收标准。
 - 批次 ID：`B-001`、`B-002`……；记录模板见 `docs/agent/08-batch-log/B-000-template.md`。
 - 代码改动前后都要更新文档：API/数据/目录变化先改 `05/06`，再改代码。
 - 完成后把状态写回 `04-tasks.md`，并把“当前快照”更新到 `11-handoff.md`。
+
+### 4.1 子代理委派（强制）
+
+- 除单行 typo、配置值等 trivial 修改外，所有任务必须先写工作包，再委派。
+- 每个工作包必须有：任务 ID、目标、文件归属、禁止修改项、验收标准、验证命令、交接格式。
+- 可并行的工作包使用独立目录/文件；共享文件（router、models `__init__`、OpenAPI、05 文档）由主 agent 统一修改。
+- 子代理先复述任务与计划，再实现；不得修改 `Resource/`、不得提交密钥、不得直接 commit/push。
+- 主 agent 必须复跑 lint/test/build/手动路径；子代理自述不能作为完成依据。
+- 详细模板与 B-002 工作包见 `docs/agent/20-b002-delegation-plan.md`。
 
 ## 5. 事实来源优先级
 

@@ -120,14 +120,17 @@ flowchart LR
 ```mermaid
 flowchart LR
   A[读上下文] --> B[选任务 ID]
-  B --> C[写批次计划]
+  B --> C[写批次计划/工作包]
   C --> D[改文档/契约]
-  D --> E[实现]
-  E --> F[自测 lint/test/build]
-  F --> G[批次记录]
-  G --> H[更新任务/交接]
-  H --> A
+  D --> E[委派 subagent]
+  E --> F[子代理实现/自测]
+  F --> G[主 agent 审查/集成/复跑]
+  G --> H[批次记录]
+  H --> I[更新任务/交接]
+  I --> A
 ```
+
+> 非简单任务按 `07-workflow.md` §2.4 拆工作包并委派 subagent；主 agent 不能只转述子代理结果，必须复跑验证。
 
 ### 2.2 Git/CI
 

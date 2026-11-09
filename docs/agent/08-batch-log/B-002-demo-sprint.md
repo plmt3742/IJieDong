@@ -10,7 +10,7 @@
 | 状态 | DOING |
 | 关联任务 | DOC-017~027、SH-001、BE-001/002、DATA-001~007、MP-001~004、FE-001~003、AI-001~006、QA-001 |
 | 关联 ADR | ADR-001、ADR-002、ADR-003、ADR-005 |
-| 分支/PR | `main @ 01e22ec`（初始推送） |
+| 分支/PR | `main` 已推送（初始提交 `01e22ec`；后续提交见 `git log`） |
 
 ## 2. 目标
 
@@ -62,6 +62,19 @@
 | 11.10 | DeepSeek + 工具 + 问答页 |
 | 11.11 | 联调/修 bug/文档/成本 |
 | 11.12 | 缓冲/彩排/交付 |
+
+### 7.1 子代理工作包
+
+详细文件归属与提示词见 [20-b002-delegation-plan.md](../20-b002-delegation-plan.md)。
+
+| 工作包 | 覆盖 | 状态 |
+|---|---|---|
+| WP-BE1 | FastAPI + SQLite + health + tests | TODO |
+| WP-DATA1 | 模型/迁移/种子/导入/查询 API | TODO |
+| WP-MP1 | 原生小程序首页/区域/指标/图表 | TODO |
+| WP-ADMIN1 | 后台登录/列表/导入 | TODO |
+| WP-AI1 | DeepSeek/工具/ChartSpec/问答 API | TODO |
+| WP-INT1 | 主 agent 集成/验收/文档 | TODO |
 
 ## 8. 执行记录
 

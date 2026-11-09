@@ -14,6 +14,7 @@
 ```text
 export-openapi.sh / .ps1
 check-links.py
+check-no-emoji.py
 dev.ps1 / dev.sh
 ```
 
@@ -26,4 +27,5 @@ dev.ps1 / dev.sh
 
 ## 当前
 
-- `check-links.py`：文档内链检查（B-001 验证用）。
+- `check-links.py`：文档内链检查。
+- `check-no-emoji.py`：工程 Markdown 不使用 emoji 的校验。

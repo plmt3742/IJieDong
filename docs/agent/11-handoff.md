@@ -14,19 +14,21 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 项 | 状态 |
 |---|---|
 | 阶段 | M0 → **M0.5 11.12 初步 demo** |
-| 仓库 | https://github.com/plmt3742/IJieDong（初始为空；本地文档已建，尚未提交） |
+| 仓库 | https://github.com/plmt3742/IJieDong（main 分支已推送；最新提交见 git log） |
 | 代码 | 无业务代码；只有目录骨架与占位 README |
-| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；内链检查通过；新增 13~19、ADR-005、三类工作流、费用调研 |
+| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；内链检查通过；新增 13~20、ADR-005、三类工作流、费用调研、B-002 委派计划 |
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
+| 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
 | 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
-| Git | `main @ 01e22ec`；已推送 `origin/main`；工作区 clean |
+| Git | `main` 已推送 `origin/main`；工作区 clean（以 `git status` 为准） |
+| 工作方式 | 非简单任务先写工作包，再委派 subagent；主 agent 审查/集成/复跑验证 |
 | 用户/入口 | **公职人员**；原生微信小程序；后续接粤政易工作台；粤政易等程序搭建完再接入 |
 | 数据 | 来源支持 **Excel/接口/手工**；当前只有空白 xls 模板；真实样例待提供 |
 | 技术栈 | **原生微信小程序 + Vue3 后台 + FastAPI + SQLite(demo)/PostgreSQL(prod) + DeepSeek API + ECharts** |
 | 数据模型 | Proposed：区域/指标/数据值规范化；见 ADR-002 |
 | Agent | Proposed：只读工具 + ChartSpec；见 ADR-003；LLM 见 14 |
 | 部署 | 11.12 本地进程；生产 Docker/PostgreSQL 后置；见 ADR-004 |
-| 下一步 | 继续 B-002：目录/文档/页面地图已完成，开始写代码；按 `15-demo-plan-1112.md` 执行 |
+| 下一步 | 按 `20-b002-delegation-plan.md` 委派 WP-BE1，再按依赖推进；按 `15-demo-plan-1112.md` 验收 |
 | 最大风险 | 6 天截止过紧、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
 
 ## 1. 最小启动提示词（复制即用）
@@ -37,6 +39,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 2. docs/agent/00-context.md
 3. docs/agent/04-tasks.md
 4. docs/agent/05-architecture.md 的「2 技术栈」「5 数据模型」「6 API v0」「7 Agent 设计」
+5. docs/agent/20-b002-delegation-plan.md
 
 读完不要立刻写代码。先用 5 行总结：
 - 项目一句话
@@ -45,7 +48,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 - 关键约束（技术栈/不做什么）
 - 你看到的最大风险
 
-然后给我一个 3–5 步计划，等我确认后再动手。
+然后给我一个 3–5 步计划；非简单任务先拆工作包，再委派 subagent，主 agent 负责集成与复跑验证。
 
 当前任务：<任务 ID + 一句话>
 范围：<只改哪些目录/文件>
@@ -180,3 +183,5 @@ LLM 只能调用白名单工具；不允许生成 SQL/JS/任意代码；不允�
 - 不要一次把 `docs/` 全读；按 `docs/agent/README.md` 的路由读。
 - 不要新建顶层目录；按 `06-file-tree.md` 放文件。
 - 不要把 xls 空值当 0；不要用模糊匹配解决区域名称不一致。
+- 不要跳过规划直接写代码；非简单任务先拆工作包并委派 subagent，主 agent 复跑验收。
+- 不要在工程文档或 README 中使用 emoji。
