@@ -1,6 +1,6 @@
 # services/api · FastAPI 后端
 
-> 状态：B00 可运行脚手架（B-002）。服务可启动、可测试；领域模型与数据库迁移由 B01 负责。
+> 状态：B00 + B01 可运行数据层（B-002）。服务可启动、可测试；12 张 Demo v0 表与 Alembic 初始迁移已完成；种子/业务 API 待 B02/B04。
 
 ## 职责
 
@@ -20,13 +20,20 @@
 - 健康检查：`GET /health`（不查库）、`GET /ready`（`SELECT 1`，失败返回 503 `NOT_READY`）。
 - 同时挂载根路径与 `/api/v1` 版本路径。
 
+## 当前能力（B01）
+
+- 12 张 Demo v0 表：`regions`、`region_aliases`、`indicators`、`data_sources`、`users`、`import_jobs`、`data_values`、`user_applications`、`chat_sessions`、`chat_messages`、`export_jobs`、`audit_logs`。
+- `data_values` 为受控观测表（契约名 `observations`），含 `quality_status`、`dimension_hash`、`version`。
+- Alembic 初始迁移 `0001`：`alembic upgrade head` / `alembic downgrade base` 均通过；`alembic check` 无差异。
+- 模型测试覆盖表注册、SQLite 友好主键、唯一约束、索引、角色检查与 mapper 配置。
+
 ## 技术栈
 
 Python 3.13 + FastAPI + Pydantic v2 + SQLAlchemy 2.0（async）+ SQLite（11.12 演示）。
 
 - 演示环境：SQLite 文件 `./data/app.db`，已加入 `.gitignore`。
 - 生产目标：PostgreSQL 16；切换只改 `DATABASE_URL`。
-- Alembic 迁移与领域模型属于 B01，本批次不包含。
+- Alembic 迁移与领域模型属于 B01，已完成；种子数据属于 B02。
 
 ## 目录
 
@@ -51,10 +58,13 @@ tests/
 ```bash
 cd services/api
 python -m pip install -r requirements.txt
+python -m alembic -c alembic.ini upgrade head
 python -m uvicorn app.main:app --reload
 ```
 
 默认地址：`http://127.0.0.1:8000`。
+
+数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。
 
 | 路径 | 用途 |
 |---|---|
@@ -113,5 +123,6 @@ python -m ruff check .
 
 ## 下一步
 
-1. B01：领域模型、Alembic 初始迁移、SQLite 与 PostgreSQL 双跑验证。
-2. 后续批次：认证、区域/指标/数据端点、OpenAPI 导出与契约同步。
+1. B02：227/15/1608 确定性合成种子，覆盖文本/数值/空值/不适用/开发区/村居。
+2. B04：区域/指标/数据值/排名/对比查询 API。
+3. 后续批次：认证、申请审批、导出、OpenAPI 同步与三端联调。

@@ -54,6 +54,7 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | 文档体系 | DONE | `docs/` 三层 + 批次记录 + 11.12 计划/成本/对接文案 + 费用调研/工作流/页面地图 |
 | 契约冻结 | DONE（2026-11-10） | `21`~`25`、`product/06`、`product/07` 完成；DOC-029~032 DONE |
 | B00 后端脚手架 | DONE（2026-11-10） | FastAPI + SQLite session + `/health`/`/ready`；commit `b943aa8` |
+| B01 数据模型/迁移 | DONE（2026-11-10） | 12 张 Demo v0 表 + Alembic 初始迁移；commit `111914a` |
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |
 | 页面设计 v2 | DONE（草案） | `product/06-page-design-v2.md`：MP01~MP15、AD01~AD13、状态/数据映射/导出/管理 |

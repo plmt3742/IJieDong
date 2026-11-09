@@ -81,7 +81,7 @@ ID:
 |---|---|---|---|---|---|---|
 | SH-001 | 初始化 monorepo（pnpm workspace + Python venv；uv 可选） | P0 | DOC-015 | 根目录可管理 apps/packages；`pnpm -v`/Python 版本记录 | 0.5d | TODO |
 | BE-001 | FastAPI 脚手架 | P0 | SH-001 | `uvicorn` 可启动；`/health` 返回 200；配置/日志/CORS 就绪 | 1d | DONE |
-| BE-002 | SQLite 连接与 Alembic | P0 | BE-001 | SQLite 可连；`alembic upgrade head` 成功；PostgreSQL 兼容预留 | 0.5d | DOING |
+| BE-002 | SQLite 连接与 Alembic | P0 | BE-001 | SQLite 可连；`alembic upgrade head` 成功；PostgreSQL 兼容预留 | 0.5d | DONE |
 | FE-001 | Web 后台脚手架 | P0 | SH-001 | Vue3+Vite+TS+Element Plus+Router+Pinia；`pnpm dev` 可启动 | 1d | TODO |
 | MP-001 | **原生微信小程序**脚手架 | P0 | SH-001 | 微信开发者工具可打开；首页可打开；TypeScript/request/TDesign 就绪 | 1.5d | TODO |
 | PKG-001 | OpenAPI 类型生成链路 | P1 | BE-001 | 后端导出 OpenAPI；前端可生成 TS 类型；脚本可重复执行 | 1d | TODO |
@@ -104,8 +104,8 @@ ID:
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
-| DATA-001 | 区域/指标/数据值/来源/审计模型 | P0 | BE-002 | 表结构覆盖 `05-architecture.md`；唯一约束/索引/外键正确 | 1.5d | TODO |
-| DATA-002 | Alembic 初始迁移 + 回滚 | P0 | DATA-001 | 空库升级/降级成功；CI 可跑 | 0.5d | TODO |
+| DATA-001 | 区域/指标/数据值/来源/审计模型 | P0 | BE-002 | 表结构覆盖 `05-architecture.md`；唯一约束/索引/外键正确 | 1.5d | DONE |
+| DATA-002 | Alembic 初始迁移 + 回滚 | P0 | DATA-001 | 空库升级/降级成功；CI 可跑 | 0.5d | DONE |
 | DATA-003 | 区域种子数据（1+15+211） | P0 | DATA-001 | 227 个区域可查；层级正确；经开区/生态城无村居不报错 | 1d | TODO |
 | DATA-004 | 指标种子数据（15 个） | P0 | DATA-001 | 指标编码/单位/类型/适用层级正确 | 0.5d | TODO |
 | DATA-005 | Excel 导入器 + 校验 | P0 | DATA-001~004 | 原始模板可导入；错误行可定位；重复导入更新 | 2.5d | TODO |
@@ -186,3 +186,4 @@ ID:
 | 2026-11-10 | DOC-028 | 开发准则修订：强制规划并委派 subagent；取消单独领导模式（产品文档已同步） |
 | 2026-11-10 | DOC-029~032 | 契约文档：数据/API、认证/申请、页面设计 v2、AI/组件/导出；主 agent 审查并冻结 |
 | 2026-11-10 | B00 | FastAPI + SQLite session 脚手架；`/health`、`/ready`、request_id、统一错误；commit `b943aa8` |
+| 2026-11-10 | B01 | 12 张 Demo v0 表 + Alembic 初始迁移；升级/回滚/`alembic check` 通过；commit `111914a` |
