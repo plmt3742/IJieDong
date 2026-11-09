@@ -1,0 +1,2196 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "i揭东 API",
+    "version": "0.1.0",
+    "description": "i揭东 Demo v0 API contract (B04 query endpoints; auth/AI/admin endpoints pending)."
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Liveness probe",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Readiness probe",
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Liveness probe",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Readiness probe",
+        "operationId": "ready_api_v1_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/regions": {
+      "get": {
+        "tags": [
+          "regions"
+        ],
+        "summary": "List regions",
+        "description": "Paginated region list filtered by level, parent, name, and enabled state.",
+        "operationId": "list_regions_endpoint_api_v1_regions_get",
+        "parameters": [
+          {
+            "name": "level",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "district",
+                    "town",
+                    "village"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Region level filter.",
+              "title": "Level"
+            },
+            "description": "Region level filter."
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Parent region ID filter.",
+              "title": "Parent Id"
+            },
+            "description": "Parent region ID filter."
+          },
+          {
+            "name": "parent_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Parent region code filter.",
+              "title": "Parent Code"
+            },
+            "description": "Parent region code filter."
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name contains filter.",
+              "title": "Q"
+            },
+            "description": "Name contains filter."
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Filter by enabled state.",
+              "default": true,
+              "title": "Enabled"
+            },
+            "description": "Filter by enabled state."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "1-based page number.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "1-based page number."
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Items per page.",
+              "default": 50,
+              "title": "Page Size"
+            },
+            "description": "Items per page."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEnvelope_RegionOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/regions/tree": {
+      "get": {
+        "tags": [
+          "regions"
+        ],
+        "summary": "Get region tree",
+        "description": "Nested region tree starting at root_code, including up to depth edges.",
+        "operationId": "get_region_tree_endpoint_api_v1_regions_tree_get",
+        "parameters": [
+          {
+            "name": "root_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "description": "Root region code.",
+              "default": "JD",
+              "title": "Root Code"
+            },
+            "description": "Root region code."
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 3,
+              "minimum": 1,
+              "description": "Number of edges below the root.",
+              "default": 2,
+              "title": "Depth"
+            },
+            "description": "Number of edges below the root."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemEnvelope_RegionTreeOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/regions/{region_id}": {
+      "get": {
+        "tags": [
+          "regions"
+        ],
+        "summary": "Get region detail",
+        "description": "Return one region with its parent summary. 404 when the region is missing.",
+        "operationId": "get_region_detail_endpoint_api_v1_regions__region_id__get",
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Region Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemEnvelope_RegionDetailOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/regions/{region_id}/profile": {
+      "get": {
+        "tags": [
+          "regions"
+        ],
+        "summary": "Get region profile",
+        "description": "Return region text, applicable numeric metrics, and data freshness. Development zones omit farmland, forest, and village-count indicators; villages omit district-only indicators.",
+        "operationId": "get_region_profile_endpoint_api_v1_regions__region_id__profile_get",
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Region Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemEnvelope_RegionProfileOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/indicators": {
+      "get": {
+        "tags": [
+          "indicators"
+        ],
+        "summary": "List indicators",
+        "description": "Return enabled indicator metadata ordered by sort_order.",
+        "operationId": "list_indicators_endpoint_api_v1_indicators_get",
+        "parameters": [
+          {
+            "name": "level",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "district",
+                    "town",
+                    "village"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only indicators applicable to this region level.",
+              "title": "Level"
+            },
+            "description": "Only indicators applicable to this region level."
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 32
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator category filter.",
+              "title": "Category"
+            },
+            "description": "Indicator category filter."
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Filter by enabled state.",
+              "default": true,
+              "title": "Enabled"
+            },
+            "description": "Filter by enabled state."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEnvelope_IndicatorOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/indicators/{indicator_id}": {
+      "get": {
+        "tags": [
+          "indicators"
+        ],
+        "summary": "Get indicator detail",
+        "description": "Return one indicator's metadata or 404 when it is missing.",
+        "operationId": "get_indicator_detail_endpoint_api_v1_indicators__indicator_id__get",
+        "parameters": [
+          {
+            "name": "indicator_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Indicator Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemEnvelope_IndicatorOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data-values/rank": {
+      "get": {
+        "tags": [
+          "data-values"
+        ],
+        "summary": "Rank regions by a numeric indicator",
+        "description": "Rank published numeric values for one region level. Null values and missing/not_applicable/suppressed qualities are excluded. Text indicators return 422 INDICATOR_NOT_NUMERIC.",
+        "operationId": "rank_data_values_endpoint_api_v1_data_values_rank_get",
+        "parameters": [
+          {
+            "name": "indicator_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator ID.",
+              "title": "Indicator Id"
+            },
+            "description": "Indicator ID."
+          },
+          {
+            "name": "indicator_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator code.",
+              "title": "Indicator Code"
+            },
+            "description": "Indicator code."
+          },
+          {
+            "name": "period_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2100,
+              "minimum": 2000,
+              "description": "Data period year.",
+              "default": 2025,
+              "title": "Period Year"
+            },
+            "description": "Data period year."
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "district",
+                "town",
+                "village"
+              ],
+              "type": "string",
+              "description": "Region level to rank.",
+              "default": "town",
+              "title": "Level"
+            },
+            "description": "Region level to rank."
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "Sort order.",
+              "default": "desc",
+              "title": "Order"
+            },
+            "description": "Sort order."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "description": "Maximum ranked rows.",
+              "default": 10,
+              "title": "Limit"
+            },
+            "description": "Maximum ranked rows."
+          },
+          {
+            "name": "include_development_zones",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include development zones when ranking town level.",
+              "default": false,
+              "title": "Include Development Zones"
+            },
+            "description": "Include development zones when ranking town level."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RankEnvelope_RankItemOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data-values/compare": {
+      "get": {
+        "tags": [
+          "data-values"
+        ],
+        "summary": "Compare regions by a numeric indicator",
+        "description": "Compare 2-20 regions in the requested order. Missing values stay null; differences are only computed when both the region and first value are numeric.",
+        "operationId": "compare_data_values_endpoint_api_v1_data_values_compare_get",
+        "parameters": [
+          {
+            "name": "indicator_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator ID.",
+              "title": "Indicator Id"
+            },
+            "description": "Indicator ID."
+          },
+          {
+            "name": "indicator_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator code.",
+              "title": "Indicator Code"
+            },
+            "description": "Indicator code."
+          },
+          {
+            "name": "region_codes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Comma-separated region codes in display order.",
+              "title": "Region Codes"
+            },
+            "description": "Comma-separated region codes in display order."
+          },
+          {
+            "name": "region_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Comma-separated region IDs in display order.",
+              "title": "Region Ids"
+            },
+            "description": "Comma-separated region IDs in display order."
+          },
+          {
+            "name": "period_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2100,
+              "minimum": 2000,
+              "description": "Data period year.",
+              "default": 2025,
+              "title": "Period Year"
+            },
+            "description": "Data period year."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareEnvelope_CompareItemOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data-values": {
+      "get": {
+        "tags": [
+          "data-values"
+        ],
+        "summary": "List data values",
+        "description": "Paginated observations joined with region and indicator fields. Null numeric values are preserved and never replaced with zero; an empty result set returns 200 with an empty data list.",
+        "operationId": "list_data_values_endpoint_api_v1_data_values_get",
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Region ID filter.",
+              "title": "Region Id"
+            },
+            "description": "Region ID filter."
+          },
+          {
+            "name": "region_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Region code filter.",
+              "title": "Region Code"
+            },
+            "description": "Region code filter."
+          },
+          {
+            "name": "indicator_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator ID filter.",
+              "title": "Indicator Id"
+            },
+            "description": "Indicator ID filter."
+          },
+          {
+            "name": "indicator_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Indicator code filter.",
+              "title": "Indicator Code"
+            },
+            "description": "Indicator code filter."
+          },
+          {
+            "name": "period_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2100,
+              "minimum": 2000,
+              "description": "Data period year.",
+              "default": 2025,
+              "title": "Period Year"
+            },
+            "description": "Data period year."
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "draft",
+                "published",
+                "archived"
+              ],
+              "type": "string",
+              "description": "Publication status filter.",
+              "default": "published",
+              "title": "Status"
+            },
+            "description": "Publication status filter."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "1-based page number.",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "1-based page number."
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "description": "Items per page.",
+              "default": 50,
+              "title": "Page Size"
+            },
+            "description": "Items per page."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEnvelope_DataValueOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dashboard/overview": {
+      "get": {
+        "tags": [
+          "dashboard"
+        ],
+        "summary": "Get dashboard overview",
+        "description": "District-level core metrics for one period. Null values stay null with a quality_status; town_count counts enabled town-level regions.",
+        "operationId": "get_dashboard_overview_endpoint_api_v1_dashboard_overview_get",
+        "parameters": [
+          {
+            "name": "period_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2100,
+              "minimum": 2000,
+              "description": "Data period year.",
+              "default": 2025,
+              "title": "Period Year"
+            },
+            "description": "Data period year."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemEnvelope_DashboardOverviewOut_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CompareEnvelope_CompareItemOut_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/CompareItemOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/CompareMeta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "CompareEnvelope[CompareItemOut]"
+      },
+      "CompareItemOut": {
+        "properties": {
+          "region_id": {
+            "type": "integer",
+            "title": "Region Id",
+            "description": "Region ID."
+          },
+          "region_code": {
+            "type": "string",
+            "title": "Region Code",
+            "description": "Region code."
+          },
+          "region_name": {
+            "type": "string",
+            "title": "Region Name",
+            "description": "Region display name."
+          },
+          "value_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Number",
+            "description": "Numeric value; null means no published value."
+          },
+          "quality_status": {
+            "type": "string",
+            "title": "Quality Status",
+            "description": "Quality status of the observation."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit."
+          },
+          "diff_from_first": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diff From First",
+            "description": "Value minus the first region value; null when either side is missing."
+          },
+          "diff_pct_from_first": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diff Pct From First",
+            "description": "Percentage difference from the first region; null when not computable."
+          }
+        },
+        "type": "object",
+        "required": [
+          "region_id",
+          "region_code",
+          "region_name",
+          "quality_status",
+          "unit"
+        ],
+        "title": "CompareItemOut",
+        "description": "One region inside a comparison result, in the requested order."
+      },
+      "CompareMeta": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "description": "Request correlation ID."
+          },
+          "indicator_code": {
+            "type": "string",
+            "title": "Indicator Code",
+            "description": "Indicator code compared."
+          },
+          "period_year": {
+            "type": "integer",
+            "title": "Period Year",
+            "description": "Data period year."
+          },
+          "requested_count": {
+            "type": "integer",
+            "minimum": 2.0,
+            "title": "Requested Count",
+            "description": "Regions included in the comparison."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id",
+          "indicator_code",
+          "period_year",
+          "requested_count"
+        ],
+        "title": "CompareMeta",
+        "description": "Metadata describing a comparison request."
+      },
+      "DashboardMetricOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Indicator code."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Display label taken from indicator metadata."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit taken from indicator metadata."
+          },
+          "value_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Number",
+            "description": "Numeric value; null means no published value (never zero-filled)."
+          },
+          "quality_status": {
+            "type": "string",
+            "title": "Quality Status",
+            "description": "Quality status of the value."
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "label",
+          "unit",
+          "quality_status"
+        ],
+        "title": "DashboardMetricOut",
+        "description": "One core district-level metric."
+      },
+      "DashboardOverviewOut": {
+        "properties": {
+          "period_year": {
+            "type": "integer",
+            "title": "Period Year",
+            "description": "Data period year."
+          },
+          "town_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Town Count",
+            "description": "Number of enabled town-level regions."
+          },
+          "data_as_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data As Of",
+            "description": "Latest data update or successful import time."
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/DashboardMetricOut"
+            },
+            "type": "array",
+            "title": "Metrics",
+            "description": "Core district metrics in a stable display order."
+          }
+        },
+        "type": "object",
+        "required": [
+          "period_year",
+          "town_count",
+          "metrics"
+        ],
+        "title": "DashboardOverviewOut",
+        "description": "District-level overview for one data period."
+      },
+      "DataValueOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "Observation ID."
+          },
+          "region_id": {
+            "type": "integer",
+            "title": "Region Id",
+            "description": "Region ID."
+          },
+          "region_code": {
+            "type": "string",
+            "title": "Region Code",
+            "description": "Region code."
+          },
+          "region_name": {
+            "type": "string",
+            "title": "Region Name",
+            "description": "Region display name."
+          },
+          "region_level": {
+            "type": "string",
+            "title": "Region Level",
+            "description": "Region level."
+          },
+          "region_category": {
+            "type": "string",
+            "title": "Region Category",
+            "description": "Region category."
+          },
+          "indicator_id": {
+            "type": "integer",
+            "title": "Indicator Id",
+            "description": "Indicator ID."
+          },
+          "indicator_code": {
+            "type": "string",
+            "title": "Indicator Code",
+            "description": "Indicator code."
+          },
+          "indicator_name": {
+            "type": "string",
+            "title": "Indicator Name",
+            "description": "Indicator display name."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit."
+          },
+          "period_year": {
+            "type": "integer",
+            "title": "Period Year",
+            "description": "Data period year."
+          },
+          "value_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Number",
+            "description": "Numeric value; null means no data and is never replaced with zero."
+          },
+          "value_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Text",
+            "description": "Text value for long-text indicators."
+          },
+          "quality_status": {
+            "type": "string",
+            "title": "Quality Status",
+            "description": "missing, not_applicable, suppressed, estimated, provisional, or verified."
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Publication status: draft, published, or archived."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Last update time of the observation."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "region_id",
+          "region_code",
+          "region_name",
+          "region_level",
+          "region_category",
+          "indicator_id",
+          "indicator_code",
+          "indicator_name",
+          "unit",
+          "period_year",
+          "quality_status",
+          "status",
+          "updated_at"
+        ],
+        "title": "DataValueOut",
+        "description": "One observation joined with its region and indicator display fields."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IndicatorOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "Internal indicator ID."
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Stable indicator code."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Indicator display name."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit, or a text marker for long text."
+          },
+          "value_type": {
+            "type": "string",
+            "title": "Value Type",
+            "description": "long_text, decimal, integer, or currency."
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "Indicator category such as 人口 or 经济."
+          },
+          "applicable_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Applicable Levels",
+            "description": "Region levels this indicator applies to."
+          },
+          "applicable_region_categories": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applicable Region Categories",
+            "description": "Region categories this indicator applies to; null means all."
+          },
+          "aggregation": {
+            "type": "string",
+            "title": "Aggregation",
+            "description": "Aggregation hint."
+          },
+          "precision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Precision",
+            "description": "Decimal places for display."
+          },
+          "max_length": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Length",
+            "description": "Maximum text length, if applicable."
+          },
+          "direction": {
+            "type": "string",
+            "title": "Direction",
+            "description": "Direction hint such as neutral or higher_is_better."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Definition and calculation notes."
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order",
+            "description": "Display order."
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "description": "Whether the indicator is enabled."
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Indicator lifecycle status."
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version",
+            "description": "Indicator metadata version."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name",
+          "unit",
+          "value_type",
+          "applicable_levels",
+          "aggregation",
+          "precision",
+          "direction",
+          "sort_order",
+          "enabled",
+          "status",
+          "version"
+        ],
+        "title": "IndicatorOut",
+        "description": "Indicator metadata, including applicability and presentation hints."
+      },
+      "ItemEnvelope_DashboardOverviewOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/DashboardOverviewOut"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ItemEnvelope[DashboardOverviewOut]"
+      },
+      "ItemEnvelope_IndicatorOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/IndicatorOut"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ItemEnvelope[IndicatorOut]"
+      },
+      "ItemEnvelope_RegionDetailOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RegionDetailOut"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ItemEnvelope[RegionDetailOut]"
+      },
+      "ItemEnvelope_RegionProfileOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RegionProfileOut"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ItemEnvelope[RegionProfileOut]"
+      },
+      "ItemEnvelope_RegionTreeOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RegionTreeOut"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ItemEnvelope[RegionTreeOut]"
+      },
+      "ListEnvelope_IndicatorOut_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/IndicatorOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "ListEnvelope[IndicatorOut]"
+      },
+      "Meta": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "description": "Request correlation ID."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id"
+        ],
+        "title": "Meta",
+        "description": "Metadata shared by every response."
+      },
+      "PageEnvelope_DataValueOut_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/DataValueOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "PageEnvelope[DataValueOut]"
+      },
+      "PageEnvelope_RegionOut_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/RegionOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "PageEnvelope[RegionOut]"
+      },
+      "PageMeta": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "description": "Request correlation ID."
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Page",
+            "description": "1-based page number."
+          },
+          "page_size": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Page Size",
+            "description": "Items requested per page."
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total",
+            "description": "Total rows matching the filters."
+          },
+          "has_next": {
+            "type": "boolean",
+            "title": "Has Next",
+            "description": "True when another page is available."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id",
+          "page",
+          "page_size",
+          "total",
+          "has_next"
+        ],
+        "title": "PageMeta",
+        "description": "Pagination metadata for list endpoints."
+      },
+      "ProfileMetricOut": {
+        "properties": {
+          "indicator_id": {
+            "type": "integer",
+            "title": "Indicator Id",
+            "description": "Indicator ID."
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Indicator code."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Indicator display name."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit."
+          },
+          "value_number": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value Number",
+            "description": "Numeric value; null means no published value (never zero-filled)."
+          },
+          "quality_status": {
+            "type": "string",
+            "title": "Quality Status",
+            "description": "missing, not_applicable, suppressed, estimated, provisional, or verified."
+          },
+          "period_year": {
+            "type": "integer",
+            "title": "Period Year",
+            "description": "Data period year for this value."
+          }
+        },
+        "type": "object",
+        "required": [
+          "indicator_id",
+          "code",
+          "name",
+          "unit",
+          "quality_status",
+          "period_year"
+        ],
+        "title": "ProfileMetricOut",
+        "description": "One numeric indicator shown on a region profile."
+      },
+      "RankEnvelope_RankItemOut_": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/RankItemOut"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/RankMeta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "RankEnvelope[RankItemOut]"
+      },
+      "RankItemOut": {
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Rank",
+            "description": "1-based rank after filtering nulls."
+          },
+          "region_id": {
+            "type": "integer",
+            "title": "Region Id",
+            "description": "Region ID."
+          },
+          "region_code": {
+            "type": "string",
+            "title": "Region Code",
+            "description": "Region code."
+          },
+          "region_name": {
+            "type": "string",
+            "title": "Region Name",
+            "description": "Region display name."
+          },
+          "value_number": {
+            "type": "number",
+            "title": "Value Number",
+            "description": "Numeric value."
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit",
+            "description": "Measurement unit."
+          }
+        },
+        "type": "object",
+        "required": [
+          "rank",
+          "region_id",
+          "region_code",
+          "region_name",
+          "value_number",
+          "unit"
+        ],
+        "title": "RankItemOut",
+        "description": "One ranked region for a numeric indicator."
+      },
+      "RankMeta": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "description": "Request correlation ID."
+          },
+          "indicator_code": {
+            "type": "string",
+            "title": "Indicator Code",
+            "description": "Indicator code used for ranking."
+          },
+          "period_year": {
+            "type": "integer",
+            "title": "Period Year",
+            "description": "Data period year."
+          },
+          "level": {
+            "type": "string",
+            "title": "Level",
+            "description": "Region level ranked."
+          },
+          "order": {
+            "type": "string",
+            "title": "Order",
+            "description": "Sort order: asc or desc."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "Maximum rows requested."
+          },
+          "include_development_zones": {
+            "type": "boolean",
+            "title": "Include Development Zones",
+            "description": "Whether development zones were included at town level."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id",
+          "indicator_code",
+          "period_year",
+          "level",
+          "order",
+          "limit",
+          "include_development_zones"
+        ],
+        "title": "RankMeta",
+        "description": "Metadata describing how a ranking was produced."
+      },
+      "RegionDetailOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "Internal region ID."
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Stable internal region code."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Display name."
+          },
+          "level": {
+            "type": "string",
+            "title": "Level",
+            "description": "district, town, or village."
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "administrative or development_zone."
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "Parent region ID; null for the district."
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order",
+            "description": "Display order within the parent."
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "description": "Whether the region is enabled for display."
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RegionOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Parent region summary, if any."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name",
+          "level",
+          "category",
+          "sort_order",
+          "enabled"
+        ],
+        "title": "RegionDetailOut",
+        "description": "Region detail with a compact parent summary."
+      },
+      "RegionOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "Internal region ID."
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Stable internal region code."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Display name."
+          },
+          "level": {
+            "type": "string",
+            "title": "Level",
+            "description": "district, town, or village."
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "administrative or development_zone."
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "Parent region ID; null for the district."
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order",
+            "description": "Display order within the parent."
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "description": "Whether the region is enabled for display."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name",
+          "level",
+          "category",
+          "sort_order",
+          "enabled"
+        ],
+        "title": "RegionOut",
+        "description": "One region in the three-level tree."
+      },
+      "RegionProfileOut": {
+        "properties": {
+          "region": {
+            "$ref": "#/components/schemas/RegionOut",
+            "description": "Region the profile belongs to."
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RegionOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Parent region summary, if any."
+          },
+          "intro": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intro",
+            "description": "Region introduction text, if available."
+          },
+          "feature": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feature",
+            "description": "Region feature text, if available."
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/ProfileMetricOut"
+            },
+            "type": "array",
+            "title": "Metrics",
+            "description": "Numeric indicators applicable to this region and level."
+          },
+          "applicable_indicator_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Applicable Indicator Codes",
+            "description": "Indicator codes applicable by level and region category."
+          },
+          "data_as_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data As Of",
+            "description": "Latest data update or successful import time for this region."
+          }
+        },
+        "type": "object",
+        "required": [
+          "region"
+        ],
+        "title": "RegionProfileOut",
+        "description": "Region profile: narrative text, numeric metrics, and data freshness."
+      },
+      "RegionTreeOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id",
+            "description": "Internal region ID."
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Stable internal region code."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Display name."
+          },
+          "level": {
+            "type": "string",
+            "title": "Level",
+            "description": "district, town, or village."
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "administrative or development_zone."
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "Parent region ID; null for the root."
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order",
+            "description": "Display order within the parent."
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "description": "Whether the region is enabled for display."
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/RegionTreeOut"
+            },
+            "type": "array",
+            "title": "Children",
+            "description": "Nested child regions up to the requested depth."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name",
+          "level",
+          "category",
+          "sort_order",
+          "enabled"
+        ],
+        "title": "RegionTreeOut",
+        "description": "Nested region tree node."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
