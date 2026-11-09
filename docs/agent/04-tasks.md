@@ -80,8 +80,8 @@ ID:
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
 | SH-001 | 初始化 monorepo（pnpm workspace + Python venv；uv 可选） | P0 | DOC-015 | 根目录可管理 apps/packages；`pnpm -v`/Python 版本记录 | 0.5d | TODO |
-| BE-001 | FastAPI 脚手架 | P0 | SH-001 | `uvicorn` 可启动；`/health` 返回 200；配置/日志/CORS 就绪 | 1d | TODO |
-| BE-002 | SQLite 连接与 Alembic | P0 | BE-001 | SQLite 可连；`alembic upgrade head` 成功；PostgreSQL 兼容预留 | 0.5d | TODO |
+| BE-001 | FastAPI 脚手架 | P0 | SH-001 | `uvicorn` 可启动；`/health` 返回 200；配置/日志/CORS 就绪 | 1d | DONE |
+| BE-002 | SQLite 连接与 Alembic | P0 | BE-001 | SQLite 可连；`alembic upgrade head` 成功；PostgreSQL 兼容预留 | 0.5d | DOING |
 | FE-001 | Web 后台脚手架 | P0 | SH-001 | Vue3+Vite+TS+Element Plus+Router+Pinia；`pnpm dev` 可启动 | 1d | TODO |
 | MP-001 | **原生微信小程序**脚手架 | P0 | SH-001 | 微信开发者工具可打开；首页可打开；TypeScript/request/TDesign 就绪 | 1.5d | TODO |
 | PKG-001 | OpenAPI 类型生成链路 | P1 | BE-001 | 后端导出 OpenAPI；前端可生成 TS 类型；脚本可重复执行 | 1d | TODO |
@@ -185,3 +185,4 @@ ID:
 | 2026-11-06 | DOC-024~027 | 三类工作流、成本调研（有来源）、目录骨架、页面结构地图/低保真线框 |
 | 2026-11-10 | DOC-028 | 开发准则修订：强制规划并委派 subagent；取消单独领导模式（产品文档已同步） |
 | 2026-11-10 | DOC-029~032 | 契约文档：数据/API、认证/申请、页面设计 v2、AI/组件/导出；主 agent 审查并冻结 |
+| 2026-11-10 | B00 | FastAPI + SQLite session 脚手架；`/health`、`/ready`、request_id、统一错误；commit `b943aa8` |
