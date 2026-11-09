@@ -56,6 +56,7 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | B00 后端脚手架 | DONE（2026-11-10） | FastAPI + SQLite session + `/health`/`/ready`；commit `b943aa8` |
 | B01 数据模型/迁移 | DONE（2026-11-10） | 12 张 Demo v0 表 + Alembic 初始迁移；commit `111914a` |
 | B02 合成种子 | DONE（2026-11-10） | 227/15/1608 合成数据，42 缺失，454 文本；commit `52d0adb` |
+| B04 只读查询 API | DONE（2026-11-10） | 区域/指标/数据值/排名/对比/总览；36 tests；OpenAPI 14 paths；commit `29dfe61` |
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |
 | 页面设计 v2 | DONE（草案） | `product/06-page-design-v2.md`：MP01~MP15、AD01~AD13、状态/数据映射/导出/管理 |

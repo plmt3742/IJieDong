@@ -92,6 +92,7 @@
 | 2026-11-10 | B00 FastAPI + SQLite session 脚手架 | `services/api/**` | DONE；`python -m pytest -q` 5 passed；`/health` 200；`/ready` 200；commit `b943aa8` |
 | 2026-11-10 | B01 数据模型 + Alembic 初始迁移 | `services/api/app/models/**`、`alembic/**`、`tests/unit/test_models.py`、`test_migrations.py` | DONE；12 张表；`pytest` 12 passed；`alembic upgrade/downgrade` 通过；`alembic check` 无差异；commit `111914a` |
 | 2026-11-10 | B02 确定性合成种子 | `services/api/scripts/**`、`tests/unit/test_seed_demo.py` | DONE；227 区域/15 指标/1608 值；42 缺失；454 文本；`pytest` 20 passed；commit `52d0adb` |
+| 2026-11-10 | B04 只读查询 API | `services/api/app/schemas/**`、`app/services/query_service.py`、`app/api/v1/**`、`tests/api/**`、`contracts/openapi.json` | DONE；区域/指标/数据值/排名/对比/总览；`pytest` 36 passed；OpenAPI 14 paths；commit `29dfe61` |
 | | | | |
 
 ## 9. 风险与阻塞

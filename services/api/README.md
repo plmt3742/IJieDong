@@ -1,6 +1,6 @@
 # services/api · FastAPI 后端
 
-> 状态：B00 + B01 + B02 可运行数据层（B-002）。服务可启动、可测试；12 张 Demo v0 表、Alembic 初始迁移、227/15/1608 合成种子已完成；业务 API 待 B04。
+> 状态：B00 + B01 + B02 + B04 可运行只读 API（B-002）。服务可启动、可测试；12 张表、迁移、合成种子、区域/指标/数据/排名/对比/总览接口已完成；认证/申请、AI、管理端待后续批次。
 
 ## 职责
 
@@ -33,6 +33,23 @@
 - 覆盖区/13 行政镇街/2 开发区/211 村居；GDP 仅 3 行，行政村数量 14 行，耕地/林地各 225 行。
 - `玉窖镇 -> 玉滘镇` 别名；`演示数据（合成）` 数据源与 `seed_demo.py` 导入批次。
 - 种子幂等；`--check` 只打印计数，不写库。
+
+## 当前能力（B04）
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/api/v1/regions` | 区域分页筛选（层级/父级/名称/启用） |
+| GET | `/api/v1/regions/tree` | 区域树（root_code/depth） |
+| GET | `/api/v1/regions/{id}` | 区域详情 + 父级 |
+| GET | `/api/v1/regions/{id}/profile` | 文本简介/特色 + 适用指标 + 数据时效 |
+| GET | `/api/v1/indicators` | 15 个指标元数据 |
+| GET | `/api/v1/indicators/{id}` | 指标详情 |
+| GET | `/api/v1/data-values` | 数据值分页查询 |
+| GET | `/api/v1/data-values/rank` | 排名（排除空值/缺失；可选开发区） |
+| GET | `/api/v1/data-values/compare` | 2–20 区域对比 + 差异 |
+| GET | `/api/v1/dashboard/overview` | 区级核心指标 + 镇街数 + 数据时效 |
+
+`contracts/openapi.json` 已由 FastAPI 生成，包含 14 个路径；认证/申请、AI、管理端端点待补。
 
 ## 技术栈
 
@@ -72,7 +89,8 @@ python -m uvicorn app.main:app --reload
 
 默认地址：`http://127.0.0.1:8000`。
 
-数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。  
+数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。
+
 种子检查：`python scripts/seed_demo.py --check`；重新播种：`python scripts/seed_demo.py`（幂等）。
 
 | 路径 | 用途 |
@@ -132,5 +150,6 @@ python -m ruff check .
 
 ## 下一步
 
-1. B04：区域/指标/数据值/排名/对比查询 API。
-2. 后续批次：认证、申请审批、导出、OpenAPI 同步与三端联调。
+1. C01/C02：认证/申请审批 API + Web 后台可视化。
+2. D01~D05：小程序壳、首页/区域/指标、AI 问答、申请/审批页。
+3. E01~E03：AI 工具、AnswerBlocks、组件注册表；F01~F04 集成/部署/彩排。

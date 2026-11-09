@@ -1,6 +1,6 @@
 # contracts · OpenAPI 契约
 
-> 状态：占位（B-002/B-003 生成）。
+> 状态：已生成 B04 只读查询端点；认证/申请、AI、管理端端点待补。
 
 ## 职责
 
@@ -18,8 +18,12 @@
 ## 命令（B-002 后）
 
 ```bash
-# 后端运行后导出
-curl http://localhost:8000/api/v1/openapi.json -o contracts/openapi.json
-# 或使用脚本
-bash scripts/export-openapi.sh
+# 后端运行后导出（FastAPI 默认路径）
+curl http://localhost:8000/openapi.json -o contracts/openapi.json
+```
+
+或从 `services/api` 直接生成：
+
+```bash
+python -c "import json; from app.main import app; open('../../contracts/openapi.json','w',encoding='utf-8').write(json.dumps(app.openapi(), ensure_ascii=False, indent=2) + '\n')"
 ```

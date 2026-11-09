@@ -110,7 +110,7 @@ ID:
 | DATA-004 | 指标种子数据（15 个） | P0 | DATA-001 | 指标编码/单位/类型/适用层级正确 | 0.5d | DONE |
 | DATA-005 | Excel 导入器 + 校验 | P0 | DATA-001~004 | 原始模板可导入；错误行可定位；重复导入更新 | 2.5d | TODO |
 | DATA-006 | 导入报告/错误明细 | P0 | DATA-005 | 总数/成功/失败/错误原因；可下载/查看 | 0.5d | TODO |
-| DATA-007 | 数据查询 API（区域/指标/值） | P0 | DATA-001 | 支持按层级/父级/指标/年份查询；分页；空结果正常 | 1.5d | TODO |
+| DATA-007 | 数据查询 API（区域/指标/值） | P0 | DATA-001 | 支持按层级/父级/指标/年份查询；分页；空结果正常 | 1.5d | DONE |
 | DATA-008 | 数据质量规则与别名映射 | P0 | DATA-005 | 处理玉滘/玉窖、镇街前缀、缺失指标；有测试 | 1d | TODO |
 | DATA-009 | 演示种子数据 | P1 | DATA-001 | 生成可演示的非真实数据，明确标注“演示数据” | 1d | DONE |
 
@@ -188,3 +188,4 @@ ID:
 | 2026-11-10 | B00 | FastAPI + SQLite session 脚手架；`/health`、`/ready`、request_id、统一错误；commit `b943aa8` |
 | 2026-11-10 | B01 | 12 张 Demo v0 表 + Alembic 初始迁移；升级/回滚/`alembic check` 通过；commit `111914a` |
 | 2026-11-10 | B02 | 227 区域/15 指标/1608 合成值；42 缺失；20 tests passed；commit `52d0adb` |
+| 2026-11-10 | B04 | 区域/指标/数据值/排名/对比/总览 API；36 tests passed；OpenAPI 14 paths；commit `29dfe61` |
