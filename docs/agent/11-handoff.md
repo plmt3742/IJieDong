@@ -31,6 +31,16 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 下一步 | B04 已完成；进入 C01/C02 认证申请与 Web 后台、D01~D05 小程序、E01~E03 AI/组件；上下文接近 85% 时先写交接再继续 |
 | 最大风险 | 质量优先下的范围控制、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
 
+## 0.1 本轮上下文保护快照（2026-11-10）
+
+- 分支：`feat/b002-demo-v0`；B04 代码 `29dfe61`，B04 文档 `e3a8a45`。
+- 已完成：B00 脚手架、B01 模型/迁移、B02 合成种子、B04 只读查询 API。
+- 验证：`pytest` 36 passed；`alembic upgrade/downgrade/check` 通过；OpenAPI 14 paths。
+- 未开始：C01/C02 认证/申请/后台、D01~D05 小程序、E01~E03 AI/组件、F 部署联调。
+- 新会话先读：本文件、`04-tasks.md`、`21`~`25`、`product/06`、`product/07`。
+- 验证命令：`cd services/api && python -m pytest -q`；`python -m alembic -c alembic.ini upgrade head`；`python scripts/seed_demo.py --check`。
+- 已知边界：OpenAPI 仅 B04 查询端点；认证/AI/管理端待补；尚未部署小服务器。
+
 ## 1. 最小启动提示词（复制即用）
 
 ```text
