@@ -1,6 +1,6 @@
 # services/api · FastAPI 后端
 
-> 状态：B00 + B01 可运行数据层（B-002）。服务可启动、可测试；12 张 Demo v0 表与 Alembic 初始迁移已完成；种子/业务 API 待 B02/B04。
+> 状态：B00 + B01 + B02 可运行数据层（B-002）。服务可启动、可测试；12 张 Demo v0 表、Alembic 初始迁移、227/15/1608 合成种子已完成；业务 API 待 B04。
 
 ## 职责
 
@@ -26,6 +26,13 @@
 - `data_values` 为受控观测表（契约名 `observations`），含 `quality_status`、`dimension_hash`、`version`。
 - Alembic 初始迁移 `0001`：`alembic upgrade head` / `alembic downgrade base` 均通过；`alembic check` 无差异。
 - 模型测试覆盖表注册、SQLite 友好主键、唯一约束、索引、角色检查与 mapper 配置。
+
+## 当前能力（B02）
+
+- 确定性合成种子：227 区域、15 指标、1608 个适用数据值、454 个文本值、42 个缺失值。
+- 覆盖区/13 行政镇街/2 开发区/211 村居；GDP 仅 3 行，行政村数量 14 行，耕地/林地各 225 行。
+- `玉窖镇 -> 玉滘镇` 别名；`演示数据（合成）` 数据源与 `seed_demo.py` 导入批次。
+- 种子幂等；`--check` 只打印计数，不写库。
 
 ## 技术栈
 
@@ -59,12 +66,14 @@ tests/
 cd services/api
 python -m pip install -r requirements.txt
 python -m alembic -c alembic.ini upgrade head
+python scripts/seed_demo.py
 python -m uvicorn app.main:app --reload
 ```
 
 默认地址：`http://127.0.0.1:8000`。
 
-数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。
+数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。  
+种子检查：`python scripts/seed_demo.py --check`；重新播种：`python scripts/seed_demo.py`（幂等）。
 
 | 路径 | 用途 |
 |---|---|
@@ -123,6 +132,5 @@ python -m ruff check .
 
 ## 下一步
 
-1. B02：227/15/1608 确定性合成种子，覆盖文本/数值/空值/不适用/开发区/村居。
-2. B04：区域/指标/数据值/排名/对比查询 API。
-3. 后续批次：认证、申请审批、导出、OpenAPI 同步与三端联调。
+1. B04：区域/指标/数据值/排名/对比查询 API。
+2. 后续批次：认证、申请审批、导出、OpenAPI 同步与三端联调。

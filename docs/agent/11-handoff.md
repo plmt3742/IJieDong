@@ -15,12 +15,12 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 |---|---|
 | 阶段 | M0 → **M0.5 11.12 初步 demo** |
 | 仓库 | https://github.com/plmt3742/IJieDong（main 分支已推送；最新提交见 git log） |
-| 代码 | B00/B01 已完成：FastAPI + SQLite session + 12 张 Demo v0 表 + Alembic 初始迁移（`b943aa8`、`111914a`）；B02 种子/API/页面待做 |
+| 代码 | B00/B01/B02 已完成：FastAPI + SQLite + 12 张表 + 迁移 + 227/15/1608 合成种子（`b943aa8`、`111914a`、`52d0adb`）；B04 查询 API/页面待做 |
 | 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；2026-11-10 决策已记录（`12` §0.3、`15` §11）；契约文档 21~25、06/07 已完成初稿并通过主 agent 一致性审查，A05 契约冻结完成 |
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
 | 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
 | 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
-| Git | 分支 `feat/b002-demo-v0`；`1f8ef15` 文档/契约、`b943aa8` B00、`111914a` B01；工作区 clean；未 push（最新提交见 `git log`） |
+| Git | 分支 `feat/b002-demo-v0`；`1f8ef15` 文档/契约、`b943aa8` B00、`111914a` B01、`52d0adb` B02；工作区 clean；未 push（最新提交见 `git log`） |
 | 工作方式 | 非简单任务必须规划、拆工作包并委派 subagent；主 agent 负责审查 diff、集成与复跑验证；上下文接近 85% 必须先写交接；每批完成后 Git 留档 |
 | 用户/入口 | **公职人员**；原生微信小程序；游客/申请/审批最小闭环；后续接粤政易工作台，粤政易等程序搭建完再接入 |
 | 数据 | 来源支持 **Excel/接口/手工**；11.12 先用**确定性合成演示数据**覆盖当前模板全量，真实 Excel 数据后续提供；**GDP 排名不作为 11.12 要求**，排名演示用常住人口/面积 |
@@ -28,7 +28,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 数据模型 | ADR-002 基线 + v2 契约草案（periods/dimensions/derived/quality/answer_blocks/component_registry/export_jobs）；Demo v0 子集见 `21` §3.2 |
 | Agent | 只读工具 + AnswerBlocks；保留 ChartSpec 兼容；见 ADR-003、`24`；LLM 见 14 |
 | 部署 | 11.12 部署到用户小服务器并用微信小程序实测；Web 后台必须可视化；生产 Docker/PostgreSQL 后置；见 ADR-004 |
-| 下一步 | B00/B01 已完成；进入 B02 合成种子（227/15/1608），随后 B04 查询 API、C/D/E 并行；不按日期排 |
+| 下一步 | B00/B01/B02 已完成；进入 B04 查询/排名/对比 API，随后 C/D/E 并行；不按日期排 |
 | 最大风险 | 质量优先下的范围控制、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
 
 ## 1. 最小启动提示词（复制即用）

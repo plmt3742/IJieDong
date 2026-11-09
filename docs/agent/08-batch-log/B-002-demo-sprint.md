@@ -91,6 +91,7 @@
 | 2026-11-10 | 记录 11.12 用户决策（数据、登录/申请、数据类型、demo 形态、角色、导出、视觉），完成契约文档起草与主 agent 一致性审查 | `12-open-questions.md` §0.3、`15-demo-plan-1112.md` §11、`04-tasks.md` §2.1、`11-handoff.md`、`21`~`25`、`product/06`、`product/07`、本记录 | DOC-029~032 DONE；契约文档 21/22、23、06、24/07/25 已完成；diff/链接/无 emoji 检查通过（主 agent 复跑） |
 | 2026-11-10 | B00 FastAPI + SQLite session 脚手架 | `services/api/**` | DONE；`python -m pytest -q` 5 passed；`/health` 200；`/ready` 200；commit `b943aa8` |
 | 2026-11-10 | B01 数据模型 + Alembic 初始迁移 | `services/api/app/models/**`、`alembic/**`、`tests/unit/test_models.py`、`test_migrations.py` | DONE；12 张表；`pytest` 12 passed；`alembic upgrade/downgrade` 通过；`alembic check` 无差异；commit `111914a` |
+| 2026-11-10 | B02 确定性合成种子 | `services/api/scripts/**`、`tests/unit/test_seed_demo.py` | DONE；227 区域/15 指标/1608 值；42 缺失；454 文本；`pytest` 20 passed；commit `52d0adb` |
 | | | | |
 
 ## 9. 风险与阻塞

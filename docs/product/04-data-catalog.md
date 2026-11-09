@@ -182,7 +182,7 @@ Sheet2（数据项目录）列：`区域类型`、`数据名称`、`数据期`�
 - 真实数据未到前，只能使用**明确标注的演示数据**。
 - 演示数据用于：页面布局、图表渲染、AI 评测、导入流程验证。
 - 不得把演示数据当作真实统计对外展示；界面/文档标注“演示数据”。
-- 生成脚本放在 `services/api/scripts/seed_demo.py`（B-003 创建），不提交真实数据。
+- 生成脚本已创建：`services/api/scripts/seed_demo.py`（B02）；区域结构 fixture 在 `services/api/scripts/fixtures/regions_2025.json`。不提交真实数据。
 
 ## 8. 待确认
 
