@@ -1,13 +1,13 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 新建文件/目录前；review 目录结构时；不确定文件放哪时
 ---
 
 # 06 · 文件树与目录职责
 
-## 1. 当前实际结构（2026-11-06）
+## 1. 当前实际结构（2026-11-10）
 
 ```text
 IJieDong/
@@ -46,7 +46,13 @@ IJieDong/
 │   │   ├── 16-cost-estimate.md
 │   │   ├── 17-outreach-copy.md
 │   │   ├── 18-workflows.md
-│   │   └── 19-cost-research.md
+│   │   ├── 19-cost-research.md
+│   │   ├── 20-b002-delegation-plan.md
+│   │   ├── 21-technical-architecture-v2.md
+│   │   ├── 22-data-integration-spec.md
+│   │   ├── 23-auth-and-application-spec.md
+│   │   ├── 24-ai-and-component-spec.md
+│   │   └── 25-export-spec.md
 │   ├── product/
 │   │   ├── README.md
 │   │   ├── 01-prd-lite.md
@@ -54,6 +60,8 @@ IJieDong/
 │   │   ├── 03-page-specs.md
 │   │   ├── 04-data-catalog.md
 │   │   ├── 05-page-structure.md
+│   │   ├── 06-page-design-v2.md
+│   │   ├── 07-component-library-spec.md
 │   │   └── ue/
 │   │       ├── README.md
 │   │       ├── page-map.html

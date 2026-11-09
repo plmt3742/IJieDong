@@ -1,6 +1,6 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 技术选型复核；B-002 开工前；有人质疑“为什么不用 X”时
 ---
@@ -121,10 +121,10 @@ read_when: 技术选型复核；B-002 开工前；有人质疑“为什么不用
 
 ## 8. 认证与部署
 
-- 后台：JWT + 用户名/密码；角色 admin/editor/viewer。
+- 后台：JWT + 用户名/密码；角色覆盖六类身份（见 `05` §9 与 `23`）。
 - 小程序：微信登录（`wx.login` → 后端 `code2session`）+ 本地用户；开发期可用测试号/模拟登录。
 - 粤政易：后期 SSO；`AuthProvider` 抽象，本地账号可回退。
-- 11.12 演示：本地进程（FastAPI + SQLite + Vite + 微信开发者工具），**不强依赖 Docker**（当前机器未安装 Docker）。
+- 11.12 演示：开发用本地进程，交付部署到用户小服务器（FastAPI + SQLite + Vite + 微信小程序实测），**不强依赖 Docker**（当前机器未安装 Docker）。
 - 生产：Docker Compose / Nginx / PostgreSQL / HTTPS；政务外网另配。
 
 ## 9. 最终技术栈
@@ -138,7 +138,7 @@ read_when: 技术选型复核；B-002 开工前；有人质疑“为什么不用
 | LLM | **DeepSeek API（OpenAI 兼容）+ 适配层** | 生产可私有化 |
 | 图表 | **ECharts + ChartSpec** | 跨端一致 |
 | 包管理 | pnpm + uv（或 venv/pip 过渡） | 当前机器 uv 未安装 |
-| 部署 | 本地进程（demo）→ Docker Compose（生产） | Docker 后置 |
+| 部署 | 本地进程（开发）→ 小服务器（Demo v0）→ Docker Compose（生产） | Docker 后置 |
 
 ## 10. 什么情况下需要改
 

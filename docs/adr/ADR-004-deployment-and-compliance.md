@@ -26,8 +26,10 @@
 
 ### 阶段 1：11.12 初步 demo（现在）
 
-- **本地进程**：FastAPI + SQLite + Vite + 原生微信小程序；**不强制 Docker**（当前机器未安装 Docker）。
-- 如需公网 demo：一台服务器 + Nginx + HTTPS + 域名；小程序配置合法域名。
+> 2026-11-10 更新：11.12 Demo v0 部署到用户小服务器，并用微信小程序实测；本地进程仍用于日常开发。
+
+- **小服务器 + 本地进程**：FastAPI + SQLite + Vite + 原生微信小程序；**不强制 Docker**（当前机器未安装 Docker）。
+- 小服务器：Nginx/Caddy + HTTPS + 域名；小程序配置合法域名。
 - 本地账号/JWT 或测试号/模拟登录；不接粤政易 SSO。
 - LLM 用 **DeepSeek API**（OpenAI 兼容）；Key 只在服务端。
 - 演示数据明确标注；不把演示数据当真实统计。

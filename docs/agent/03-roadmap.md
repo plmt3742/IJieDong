@@ -1,6 +1,6 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 每次开工/收工；需要判断“现在到哪、下一步做什么”时
 ---
@@ -41,19 +41,21 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 
 > 11.12 前只做 B-002；B-003 之后按 demo 反馈调整。详细 6 天排期见 [15-demo-plan-1112.md](15-demo-plan-1112.md)；子代理工作包见 [20-b002-delegation-plan.md](20-b002-delegation-plan.md)。
 
-## 4. 当前进度（2026-11-06）
+## 4. 当前进度（2026-11-10）
 
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 原始材料阅读 | DONE | 需求问答、xls 模板、粤政易指引、项目概况 |
 | 数据模板拆解 | DONE | 15 指标 / 227 区域 / 2025 / 空值；见 `product/04-data-catalog.md` |
 | 技术栈决策 | ACCEPTED | 原生小程序 ADR-005；后端/后台/数据库 ADR-001；LLM 见 14 |
-| 数据模型决策 | PROPOSED | ADR-002；待 B-002 落地（SQLite） |
-| Agent 架构决策 | PROPOSED | ADR-003；待 B-002 验证 |
-| 部署/合规策略 | ACCEPTED（方向） | 11.12 本地演示；粤政易等程序完成后再接 |
+| 数据模型决策 | PROPOSED（v2 草案） | ADR-002 基线；v2 见 `21`；Demo v0 子集见 `21` §3.2 |
+| Agent 架构决策 | PROPOSED（v2 草案） | ADR-003 基线；AnswerBlocks 见 `24` |
+| 部署/合规策略 | ACCEPTED（方向） | 11.12 小服务器 + 小程序实测；Web 后台可视化；粤政易等程序完成后再接 |
 | 文档体系 | DONE | `docs/` 三层 + 批次记录 + 11.12 计划/成本/对接文案 + 费用调研/工作流/页面地图 |
+| 契约冻结 | DONE（2026-11-10） | `21`~`25`、`product/06`、`product/07` 完成；DOC-029~032 DONE |
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |
+| 页面设计 v2 | DONE（草案） | `product/06-page-design-v2.md`：MP01~MP15、AD01~AD13、状态/数据映射/导出/管理 |
 | B-002 子代理工作包 | DONE（计划） | `20-b002-delegation-plan.md`：WP-BE1/DATA1/MP1/ADMIN1/AI1/INT1 |
 | 业务代码 | TODO | 11.12 冲刺开始 |
 | 真实数据 | 部分确认 | 来源支持 Excel/接口/手工；样例数据待提供 |
@@ -104,6 +106,7 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | 日期 | 批次 | 状态 | 摘要 |
 |---|---|---|---|
 | 2026-11-06 | B-001 | DONE | 完成材料分析、文档体系、ADR、数据目录、任务板；无代码 |
-| 2026-11-06 | B-002 | DOING | 11.12 demo 冲刺：文档/方案/工作包已完成；下一步按 `20` 委派 WP-BE1 |
+| 2026-11-06 | B-002 | DOING | 11.12 demo 冲刺：文档/方案/工作包已完成 |
+| 2026-11-10 | B-002 | DOING | 决策冻结 + 契约冻结完成（21~25/06/07）；按原子任务进入数据底座与三端实现 |
 
 > 详细动作记录见 [08-batch-log/](08-batch-log/)；任务状态见 [04-tasks.md](04-tasks.md)。

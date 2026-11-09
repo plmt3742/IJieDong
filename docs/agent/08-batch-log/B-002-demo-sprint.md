@@ -8,7 +8,7 @@
 | 日期 | 2026-11-06 ~ 2026-11-12 |
 | 操作者 | 人 + agent |
 | 状态 | DOING |
-| 关联任务 | DOC-017~027、SH-001、BE-001/002、DATA-001~007、MP-001~004、FE-001~003、AI-001~006、QA-001 |
+| 关联任务 | DOC-017~032、SH-001、BE-001/002、DATA-001~007、MP-001~004、FE-001~003、AI-001~006、QA-001 |
 | 关联 ADR | ADR-001、ADR-002、ADR-003、ADR-005 |
 | 分支/PR | `main` 已推送（初始 `01e22ec`；最新提交见 `git log`） |
 
@@ -87,6 +87,8 @@
 | 2026-11-06 | 有来源的费用调研 | `19-cost-research.md`、`16-cost-estimate.md` | DONE |
 | 2026-11-06 | 目录骨架 | `apps/`、`services/`、`packages/` 等 `.gitkeep` | DONE |
 | 2026-11-06 | 页面结构地图 | `docs/product/05-page-structure.md`、`ue/page-map.html`、`ue/wireframes.html`、18 页线框 | DONE；地图与线框总览均验证通过 |
+| 2026-11-10 | 开发准则修订（DOC-028）：强制规划并委派 subagent、质量优先；取消单独领导模式 | `AGENTS.md`、`README.md`、`docs/README.md`、`docs/agent/{README,01-project,02-goals,04-tasks,07-workflow,11-handoff,18-workflows,20-b002-delegation-plan}.md`、`docs/product/01-prd-lite.md`、本记录 | 文档已更新；diff/链接/无 emoji 检查通过（主 agent 复跑） |
+| 2026-11-10 | 记录 11.12 用户决策（数据、登录/申请、数据类型、demo 形态、角色、导出、视觉），完成契约文档起草与主 agent 一致性审查 | `12-open-questions.md` §0.3、`15-demo-plan-1112.md` §11、`04-tasks.md` §2.1、`11-handoff.md`、`21`~`25`、`product/06`、`product/07`、本记录 | DOC-029~032 DONE；契约文档 21/22、23、06、24/07/25 已完成；diff/链接/无 emoji 检查通过（主 agent 复跑） |
 | | | | |
 
 ## 9. 风险与阻塞
@@ -112,6 +114,6 @@
 
 ## 11. 下一步
 
-1. 继续 B-002：按 11.06–11.12 排期开始代码（FastAPI/SQLite/原生小程序/DeepSeek）。
+1. 继续 B-002：主 agent 审查/集成契约文档（DOC-029~032），随后开始数据底座与三端实现。
 2. 每完成一天更新本记录和 `04-tasks.md`。
 3. 11.12 交付后写复盘，进入 B-003。

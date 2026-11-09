@@ -1,6 +1,6 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 切换会话、换 agent、让新 agent 接手任务时
 ---
@@ -9,27 +9,27 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 
 > 目标：让新 agent 在 **3 分钟**内知道“项目是什么、现在到哪、我要做什么、不能做什么”，不用把 `docs/` 全读。
 
-## 0. 当前快照（2026-11-06）
+## 0. 当前快照（2026-11-10）
 
 | 项 | 状态 |
 |---|---|
 | 阶段 | M0 → **M0.5 11.12 初步 demo** |
 | 仓库 | https://github.com/plmt3742/IJieDong（main 分支已推送；最新提交见 git log） |
 | 代码 | 无业务代码；只有目录骨架与占位 README |
-| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；内链检查通过；新增 13~20、ADR-005、三类工作流、费用调研、B-002 委派计划 |
+| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；2026-11-10 决策已记录（`12` §0.3、`15` §11）；契约文档 21~25、06/07 已完成初稿并通过主 agent 一致性审查，A05 契约冻结完成 |
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
 | 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
 | 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
-| Git | `main` 已推送 `origin/main`；工作区 clean（最新提交见 `git log`） |
-| 工作方式 | 非简单任务先写工作包，再委派 subagent；主 agent 审查/集成/复跑验证 |
-| 用户/入口 | **公职人员**；原生微信小程序；后续接粤政易工作台；粤政易等程序搭建完再接入 |
-| 数据 | 来源支持 **Excel/接口/手工**；当前只有空白 xls 模板；真实样例待提供 |
+| Git | `main` 已推送 `origin/main`；工作区有未提交文档改动（DOC-028 与 2026-11-10 决策/契约文档），未 commit/push（最新提交见 `git log`） |
+| 工作方式 | 非简单任务必须规划、拆工作包并委派 subagent；主 agent 负责审查 diff、集成与复跑验证；上下文接近 85% 必须先写交接；每批完成后 Git 留档 |
+| 用户/入口 | **公职人员**；原生微信小程序；游客/申请/审批最小闭环；后续接粤政易工作台，粤政易等程序搭建完再接入 |
+| 数据 | 来源支持 **Excel/接口/手工**；11.12 先用**确定性合成演示数据**覆盖当前模板全量，真实 Excel 数据后续提供；**GDP 排名不作为 11.12 要求**，排名演示用常住人口/面积 |
 | 技术栈 | **原生微信小程序 + Vue3 后台 + FastAPI + SQLite(demo)/PostgreSQL(prod) + DeepSeek API + ECharts** |
-| 数据模型 | Proposed：区域/指标/数据值规范化；见 ADR-002 |
-| Agent | Proposed：只读工具 + ChartSpec；见 ADR-003；LLM 见 14 |
-| 部署 | 11.12 本地进程；生产 Docker/PostgreSQL 后置；见 ADR-004 |
-| 下一步 | 按 `20-b002-delegation-plan.md` 委派 WP-BE1，再按依赖推进；按 `15-demo-plan-1112.md` 验收 |
-| 最大风险 | 6 天截止过紧、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
+| 数据模型 | ADR-002 基线 + v2 契约草案（periods/dimensions/derived/quality/answer_blocks/component_registry/export_jobs）；Demo v0 子集见 `21` §3.2 |
+| Agent | 只读工具 + AnswerBlocks；保留 ChartSpec 兼容；见 ADR-003、`24`；LLM 见 14 |
+| 部署 | 11.12 部署到用户小服务器并用微信小程序实测；Web 后台必须可视化；生产 Docker/PostgreSQL 后置；见 ADR-004 |
+| 下一步 | A05 契约冻结已完成；按原子任务依赖进入 B01 数据模型/迁移与 B02 合成种子，随后 B04 查询 API、C/D/E 并行；不按日期排 |
+| 最大风险 | 质量优先下的范围控制、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
 
 ## 1. 最小启动提示词（复制即用）
 
@@ -48,7 +48,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 - 关键约束（技术栈/不做什么）
 - 你看到的最大风险
 
-然后给我一个 3–5 步计划；非简单任务先拆工作包，再委派 subagent，主 agent 负责集成与复跑验证。
+然后给我一个 3–5 步计划。除 trivial 修改外，非简单任务必须先拆工作包，再按 category/skills 委派 subagent；主 agent 负责审查 diff、集成、复跑验证与留痕，不能直接包办，子代理自述不能作为完成依据。上下文接近 85% 时先更新本文件/批次记录/任务板，再决定是否继续。
 
 当前任务：<任务 ID + 一句话>
 范围：<只改哪些目录/文件>
@@ -183,5 +183,7 @@ LLM 只能调用白名单工具；不允许生成 SQL/JS/任意代码；不允�
 - 不要一次把 `docs/` 全读；按 `docs/agent/README.md` 的路由读。
 - 不要新建顶层目录；按 `06-file-tree.md` 放文件。
 - 不要把 xls 空值当 0；不要用模糊匹配解决区域名称不一致。
-- 不要跳过规划直接写代码；非简单任务先拆工作包并委派 subagent，主 agent 复跑验收。
+- 不要跳过规划直接写代码；除 trivial 修改外，非简单任务必须先拆工作包并委派 subagent，主 agent 审查、集成并复跑验收，不能直接包办。
+- 不要在上下文接近 85% 后继续开新任务；先写交接、批次记录与未完成项，再收尾或提交。
+- 不要把 `.env`、API Key、数据库密码、JWT Secret、微信 AppSecret 写入仓库；密钥只放本地环境变量或 gitignored `.env`。
 - 不要在工程文档或 README 中使用 emoji。

@@ -11,6 +11,8 @@
 | [03-page-specs.md](03-page-specs.md) | 页面规范模板 + 核心页面清单 | 模板/部分 |
 | [04-data-catalog.md](04-data-catalog.md) | 数据模板分析：区域、指标、质量、导入规则 | 初稿 |
 | [05-page-structure.md](05-page-structure.md) | 页面清单、跳转/数据传递、页面详情 | 初稿 |
+| [06-page-design-v2.md](06-page-design-v2.md) | 页面设计 v2：MP/AD 页面、状态、数据映射、申请/导出/管理 | 草案 |
+| [07-component-library-spec.md](07-component-library-spec.md) | 组件库规范：注册表、manifest、AI 调用协议、静态渲染边界 | 草案 |
 | [ue/page-map.html](ue/page-map.html) | 18 页低保真线框 + 可缩放/可点击页面地图 | 可验证 |
 | [ue/wireframes.html](ue/wireframes.html) | 18 页灰度线框总览 | 可验证 |
 
@@ -24,7 +26,7 @@
 
 ## 状态
 
-- 当前为 **M0.5（11.12 初步 demo）** 初稿，未经过需求方评审。
-- 已确认：公职人员、原生微信小程序、粤政易后置、Excel/接口/手工、DeepSeek API。
+- 当前为 **M0.5（11.12 Demo v0）** 初稿，未经过需求方评审。
+- 已确认：公职人员、原生微信小程序、粤政易后置、Excel/接口/手工、DeepSeek API；11.12 可在小服务器部署并实测，后台必须可视化；游客不可导出，导出支持 PNG/PDF/XLSX/CSV 且不设默认。
 - 仍需确认的问题与对外话术：`docs/agent/12-open-questions.md`、`docs/agent/17-outreach-copy.md`。
 - 11.12 范围/排期：`docs/agent/15-demo-plan-1112.md`。

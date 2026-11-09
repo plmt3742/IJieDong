@@ -1,6 +1,6 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 每次新会话的第一份文档；需要 30 秒了解项目全貌
 ---
@@ -33,10 +33,11 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 
 - 已完成：原始材料分析、数据模板拆解、技术栈/数据模型/Agent/部署决策、agent 文档体系、批次记录模板、文档内链检查。
 - 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
-- 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 前交付 demo + 技术文档 + 成本评估。
+- 已完成（2026-11-10 契约冻结）：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出共 7 份契约草案（`21`~`25`、`product/06`、`product/07`）。
+- 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 可运行 Demo v0，小服务器 + 小程序实测，Web 后台可视化；游客不可导出，导出 PNG/PDF/XLSX/CSV 且不设默认。
 - 未开始：可运行代码、数据库、API、页面。
-- Git：已推送 `origin/main`（2026-11-06）；最新提交见 `git log`；工作区 clean。
-- 当前批次：`B-002 11.12 demo 冲刺`（方案/文档/工作流/费用/页面地图/目录骨架已完成；下一步按 `20-b002-delegation-plan.md` 委派 subagent 写代码）。
+- Git：已推送 `origin/main`；最新提交见 `git log`；工作区有未提交文档改动（决策/契约草案）。
+- 当前批次：`B-002 11.12 demo 冲刺`（决策/契约已完成；下一步按原子任务进入数据底座与三端实现）。
 
 ## 技术栈（已确认方向，B-002 验证）
 
@@ -81,7 +82,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 ## 头号风险
 
 1. **数据未到位**：xls 是空白模板，真实数据、更新频率、责任人未确认。
-2. **11.12 截止过紧**：6 天内要做原生小程序 + 后端 + 数据 + 图表 + AI + 文档/成本，必须砍范围。
+2. **质量优先下的范围控制**：11.12 是 Demo v0，时间不是压缩质量的理由；但未来类型、最终视觉、合规不能塞进同一批，必须按原子任务与验收推进。
 3. **粤政易/等保/信创周期长**：外部审批、测评、网络策略不可控，不能按普通 Web 项目排期。
 4. **单人开发 + 范围过大**：数据平台 + 可视化 + AI + 小程序 + 合规，必须分阶段。
 5. **LLM 数据安全与准确性**：敏感数据不能出网、答案必须可追溯、图表不能由模型随意生成。
@@ -100,11 +101,11 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 
 ## 下一步（11.12 冲刺）
 
-1. 按 `20-b002-delegation-plan.md` 委派 WP-BE1，再按依赖推进 WP-DATA1/WP-MP1/WP-ADMIN1/WP-AI1；主 agent 集成验收。
-2. 按 [15-demo-plan-1112.md](15-demo-plan-1112.md) 的 6 天排期推进，按“砍范围顺序”保主路径。
-3. 页面设计以 [05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html) 为准；接口/数据流见 [18-workflows.md](18-workflows.md)。
-4. 11.12 前产出 demo、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
-5. 11.12 后再补数据治理/后台/权限/部署，启动粤政易/等保/信创。
+1. 按原子任务依赖推进：B01 数据模型/迁移 → B02 合成种子 → B04 查询 API；C/D/E 在契约冻结后并行。
+2. 按 [21-technical-architecture-v2.md](21-technical-architecture-v2.md) 的 Demo v0 子集和 [15-demo-plan-1112.md](15-demo-plan-1112.md) §11 验收。
+3. 页面设计以 [product/06-page-design-v2.md](../product/06-page-design-v2.md) 为准；旧结构图见 [05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)；数据流见 [18-workflows.md](18-workflows.md)。
+4. 11.12 前产出可运行 Demo v0、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
+5. 11.12 后再补数据治理、未来数据类型、视觉风格、粤政易/等保/信创。
 
 ## 文档入口
 
@@ -119,5 +120,8 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 三类工作流：[18-workflows.md](18-workflows.md)
 - 费用调研：[19-cost-research.md](19-cost-research.md)
 - B-002 委派计划：[20-b002-delegation-plan.md](20-b002-delegation-plan.md)
-- 页面结构：[product/05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)
+- 契约 v2：[21 技术架构](21-technical-architecture-v2.md)、[22 数据接入](22-data-integration-spec.md)、[23 认证/申请](23-auth-and-application-spec.md)、[24 AI](24-ai-and-component-spec.md)、[25 导出](25-export-spec.md)
+- 页面设计 v2：[product/06-page-design-v2.md](../product/06-page-design-v2.md)
+- 组件库规范：[product/07-component-library-spec.md](../product/07-component-library-spec.md)
+- 页面结构（旧）：[product/05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)
 - 交接快照：[11-handoff.md](11-handoff.md)

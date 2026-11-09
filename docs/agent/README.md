@@ -1,6 +1,6 @@
 # Agent 加载指南
 
-> owner: 项目开发者 · last_updated: 2026-11-06 · read_when: 第一次让 agent 接手本仓库任务
+> owner: 项目开发者 · last_updated: 2026-11-10 · read_when: 第一次让 agent 接手本仓库任务
 
 这份文档解决四件事：**先读什么、以什么为准、改完同步什么、什么时候停**。
 
@@ -16,10 +16,11 @@
 
 | 任务类型 | 追加读 | 不要读 |
 |---|---|---|
-| 后端接口/数据库 | [06-file-tree.md](06-file-tree.md)、[07-workflow.md](07-workflow.md)、[09-risks.md](09-risks.md) 的数据/安全节 | 小程序页面细节 |
-| Web 后台 | [06-file-tree.md](06-file-tree.md)、[product/03-page-specs.md](../product/03-page-specs.md)、[product/02-ia-and-flows.md](../product/02-ia-and-flows.md) | LLM 内部实现 |
-| 原生微信小程序 | [06-file-tree.md](06-file-tree.md)、[product/02-ia-and-flows.md](../product/02-ia-and-flows.md)、[product/04-data-catalog.md](../product/04-data-catalog.md)、[13-tech-stack-review.md](13-tech-stack-review.md) | 数据库迁移细节 |
-| AI/Agent | [05-architecture.md](05-architecture.md) 的 Agent 节、[ADR-003](../adr/ADR-003-agent-architecture.md)、[09-risks.md](09-risks.md) 的 AI 节 | 后台 CRUD 细节 |
+| 后端接口/数据库 | [06-file-tree.md](06-file-tree.md)、[07-workflow.md](07-workflow.md)、[09-risks.md](09-risks.md) 的数据/安全节、[21-technical-architecture-v2.md](21-technical-architecture-v2.md)、[22-data-integration-spec.md](22-data-integration-spec.md) | 小程序页面细节 |
+| Web 后台 | [06-file-tree.md](06-file-tree.md)、[product/06-page-design-v2.md](../product/06-page-design-v2.md)、[product/03-page-specs.md](../product/03-page-specs.md) | LLM 内部实现 |
+| 原生微信小程序 | [06-file-tree.md](06-file-tree.md)、[product/06-page-design-v2.md](../product/06-page-design-v2.md)、[product/07-component-library-spec.md](../product/07-component-library-spec.md)、[13-tech-stack-review.md](13-tech-stack-review.md) | 数据库迁移细节 |
+| AI/Agent | [05-architecture.md](05-architecture.md) 的 Agent 节、[24-ai-and-component-spec.md](24-ai-and-component-spec.md)、[product/07-component-library-spec.md](../product/07-component-library-spec.md)、[ADR-003](../adr/ADR-003-agent-architecture.md) | 后台 CRUD 细节 |
+| 契约/架构 v2 | [21](21-technical-architecture-v2.md)、[22](22-data-integration-spec.md)、[23](23-auth-and-application-spec.md)、[24](24-ai-and-component-spec.md)、[25](25-export-spec.md)、[product/06](../product/06-page-design-v2.md)、[product/07](../product/07-component-library-spec.md) | 全量历史文档 |
 | 部署/合规 | [07-workflow.md](07-workflow.md)、[ADR-004](../adr/ADR-004-deployment-and-compliance.md)、[09-risks.md](09-risks.md) | 产品交互细节 |
 | 修 bug | [09-risks.md](09-risks.md) 对应条目、[05-architecture.md](05-architecture.md)、相关代码 | 全量产品文档 |
 | 接续上一批 | [08-batch-log/](08-batch-log/) 最新一篇 + [11-handoff.md](11-handoff.md) | 全量重读 |
@@ -59,8 +60,11 @@
 
 ## 3.1 任务执行方式
 
-- 非简单任务先写工作包，再委派 subagent；主 agent 负责集成与复跑验证。
-- 子代理不得直接 commit/push；共享文件由主 agent 统一修改。
+- **强制委派**：除 trivial 修改外，所有非简单工作必须先写工作包，再委派 subagent；不得以时间紧或自己更快为由跳过。
+- **质量优先**：可并行的独立工作包优先并行；按工作性质选择 category 与 skills；架构、数据契约、页面设计、疑难 bug 先评审再实现。
+- 主 agent 负责契约与共享文件、审查 diff、集成和复跑验证（lint/test/build/手动路径）；子代理自述不能作为验收依据。
+- 子代理不得直接 commit/push；不得修改 `Resource/`、提交密钥、越界改文件或新增未批准依赖。
+- 确需主 agent 直接执行时，在批次记录写明原因、替代质量措施与验证方式。
 - 工程文档不使用 emoji；README 保持正式。
 - 详细模板见 `20-b002-delegation-plan.md`。
 

@@ -1,6 +1,6 @@
 ---
 owner: 项目开发者
-last_updated: 2026-11-06
+last_updated: 2026-11-10
 status: active
 read_when: 写前后端代码前；改 API/数据模型/Agent 前；做技术选型复核时
 ---
@@ -8,6 +8,8 @@ read_when: 写前后端代码前；改 API/数据模型/Agent 前；做技术选
 # 05 · 架构与技术契约
 
 > 本文件是**开发契约**。代码可以比它更细，但不能与它冲突；要改先改这里，并同步 OpenAPI/ADR。
+>
+> 2026-11-10 契约草案：数据模型/API/AI/组件的下一版见 `21`~`25` 与 `product/06`、`07`。本文仍是当前实现事实；草案合并进本文并生成 OpenAPI 前，不得当作已实现接口。
 
 ## 0. 设计原则
 
@@ -66,7 +68,7 @@ flowchart TB
 | 图表 | ECharts 5 + `ChartSpec` | 主版本 | 小程序用 echarts-for-weixin；后台用 echarts |
 | 包管理 | pnpm（Node）+ Python venv/uv | — | 当前机器 uv 未安装；可先用 venv/pip |
 | 质量 | ruff + pytest；ESLint + Prettier + tsc | — | CI 必须通过 |
-| 部署 | 11.12 本地进程；生产 Docker Compose + Nginx；GitHub Actions | — | 预留 ARM64 多架构镜像 |
+| 部署 | 11.12 小服务器 + 本地开发；生产 Docker Compose + Nginx；GitHub Actions | — | 预留 ARM64 多架构镜像 |
 
 **不引入**（MVP）：LangChain/LlamaIndex、Redis、Celery、Kafka、Elasticsearch、图数据库、微服务网关。理由：单人维护成本高，当前数据量与并发不需要。
 
@@ -295,7 +297,7 @@ erDiagram
 | username | VARCHAR(64) | UNIQUE |
 | password_hash | VARCHAR(255) | NULL（微信/SSO 用户可无密码） |
 | display_name | VARCHAR(64) | |
-| role | VARCHAR(16) | `admin` / `editor` / `viewer` |
+| role | VARCHAR(16) | `admin` / `editor` / `viewer` / `approver`（guest/applicant 不建 users 记录） |
 | status | VARCHAR(16) | `active` / `disabled` |
 | wechat_openid | VARCHAR(64) | UNIQUE, NULL |
 | created_at / last_login_at | TIMESTAMPTZ | |
@@ -314,6 +316,8 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 
 ### 5.3 数据建模决策
 
+> v2 目标模型（periods/dimensions/derived_metrics/quality/answer_blocks/component_registry/export_jobs）见 [21 §3](21-technical-architecture-v2.md)；11.12 只实现 [21 §3.2](21-technical-architecture-v2.md) 的子集。
+
 - **不用宽表**（一行一个区域、15 列指标）：新增指标/年份需要改表，历史与稀疏数据难处理。
 - **不用纯 EAV 无约束**：当前模型是“受控 EAV”：指标有元数据、值有类型/单位/层级校验。
 - 区域与指标分离，数据值只引用 ID；显示名变更不影响历史。
@@ -323,6 +327,8 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 ## 6. API v0
 
 ### 6.1 约定
+
+> v2 新增认证申请、组件、导出端点（见 [21](21-technical-architecture-v2.md)/[23](23-auth-and-application-spec.md)/[25](25-export-spec.md)）；在合并到本节并生成 OpenAPI 前，以下端点表仍为 v0 基线。
 
 - Base：`/api/v1`
 - 认证：`Authorization: Bearer <JWT>`；公开浏览接口可匿名（按需求确认）。
@@ -504,6 +510,8 @@ System prompt 必须包含：
 
 ### 7.5 输出契约
 
+> v2 草案改用 AnswerBlocks（见 [24](24-ai-and-component-spec.md)），保留 `chart_spec` 作为兼容字段；合并前以本节为准。
+
 ```json
 {
   "answer_markdown": "string",
@@ -558,11 +566,16 @@ System prompt 必须包含：
 
 ## 9. 认证与权限
 
+> 2026-11-10 确认：v2 采用六类身份（游客/申请者/查看者/编辑者/管理员/审批者），账号来源为后台批量导入 + 小程序申请；详见 [23](23-auth-and-application-spec.md)。领导/决策者不是独立角色，使用查看者页面并导出汇报卡。
+
 | 角色 | 权限 |
 |---|---|
-| `viewer` | 浏览已发布数据、使用 AI 问答 |
+| `guest` | 浏览已发布数据、AI 限次；不可导出 |
+| `applicant` | 仅提交/查看本人申请；无数据权限 |
+| `viewer` | 浏览已发布数据、使用 AI 问答、按角色导出 |
 | `editor` | viewer + 编辑数据值 + 导入 |
-| `admin` | editor + 用户管理 + 指标/区域管理 + 审计 |
+| `approver` | viewer + 审批申请；小程序审批子集 |
+| `admin` | editor + 用户/角色/指标/区域/审计/组件库 |
 
 - 后端 JWT：HS256；`sub=user_id`、`role`、`exp`；access token 8h（可配置）。
 - 密码：argon2id（优先）或 bcrypt；禁止明文/MD5。
@@ -589,7 +602,7 @@ System prompt 必须包含：
 
 ## 11. 部署拓扑
 
-### 11.1 11.12 开发/演示（本地）
+### 11.1 11.12 开发/演示（本地开发 + 小服务器）
 
 ```text
 本地进程（不强制 Docker）
@@ -599,7 +612,7 @@ System prompt 必须包含：
         └── request → http://127.0.0.1:8000（开发期需关闭域名校验/用测试号）
 ```
 
-> 公网 demo 时：一台服务器 + Nginx + HTTPS + FastAPI + SQLite/PostgreSQL；小程序配置合法域名。
+> 11.12 Demo v0：在用户小服务器上部署 FastAPI + SQLite + Web 后台静态文件，Nginx/Caddy 终止 HTTPS；小程序配置合法域名后实测。本地进程仍用于日常开发。
 > Docker/PostgreSQL 生产部署在 11.12 之后做（当前机器未安装 Docker）。
 
 ### 11.2 生产（后期）
