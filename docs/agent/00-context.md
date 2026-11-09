@@ -35,7 +35,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
 - 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 前交付 demo + 技术文档 + 成本评估。
 - 未开始：可运行代码、数据库、API、页面。
-- Git：已推送 `origin/main @ 3bdea54`（2026-11-06）；工作区 clean。
+- Git：已推送 `origin/main`（2026-11-06）；最新提交见 `git log`；工作区 clean。
 - 当前批次：`B-002 11.12 demo 冲刺`（方案/文档/工作流/费用/页面地图/目录骨架已完成；下一步按 `20-b002-delegation-plan.md` 委派 subagent 写代码）。
 
 ## 技术栈（已确认方向，B-002 验证）

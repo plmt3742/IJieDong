@@ -20,7 +20,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
 | 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
 | 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
-| Git | `main @ 3bdea54`；已推送 `origin/main`；工作区 clean |
+| Git | `main` 已推送 `origin/main`；工作区 clean（最新提交见 `git log`） |
 | 工作方式 | 非简单任务先写工作包，再委派 subagent；主 agent 审查/集成/复跑验证 |
 | 用户/入口 | **公职人员**；原生微信小程序；后续接粤政易工作台；粤政易等程序搭建完再接入 |
 | 数据 | 来源支持 **Excel/接口/手工**；当前只有空白 xls 模板；真实样例待提供 |
