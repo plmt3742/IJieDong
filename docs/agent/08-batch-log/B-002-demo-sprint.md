@@ -115,11 +115,80 @@
 | 本地目录 ignore | `git check-ignore -v Resource learning tools .obsidian .omo` | 均命中 `.gitignore` |
 | 目录骨架 | `dir /s /b apps services packages` | 40 个 `.gitkeep` 占位；与 `06-file-tree.md` 一致 |
 | 费用来源 | `19-cost-research.md` | 官方/政府采购/云厂商/转载来源已标注；价格有日期/地区 |
-| 后端 B00~B04 | `pytest`、Alembic、seed、API smoke | `pytest` 36 passed；迁移升级/回滚/`check` 通过；种子 227/15/1608；OpenAPI 14 paths |
-| 小程序/DeepSeek 真机 | 微信开发者工具/真实 Key 调用 | 尚未开始，不能标记 DONE |
+| 后端 B00~B05 + B08 | `pytest`、Alembic、seed、API smoke | `pytest` 119 passed；迁移 0001/0002/0003 升级/回滚/`check` 通过；种子 227/15/1608；OpenAPI 35 paths |
+| Web 后台 | `pnpm build`、headless Edge 走查 | 登录/总览/数据/导入/申请/用户/审计可打开；build 通过 |
+| 原生小程序 | `npm run typecheck`、JSON/WXML 校验 | 10 页/3 组件；typecheck 通过；DevTools/真机未安装 |
+| AI/导出 smoke | TestClient | AI 三例 + no_data；CSV/XLSX/PNG/PDF 均 ready 且下载 200 |
+| 小程序/DeepSeek 真机 | 微信开发者工具/真实 Key 调用 | 尚未执行，不能标记 DONE |
 
 ## 11. 下一步
 
 1. 继续 B-002：主 agent 审查/集成契约文档（DOC-029~032），随后开始数据底座与三端实现。
 2. 每完成一天更新本记录和 `04-tasks.md`。
 3. 11.12 交付后写复盘，进入 B-003。
+
+## 12. 2026-11-10 六步推进
+
+> 目标：按“契约收口 → 认证/后台 → 小程序 → AI/导出 → 种子/部署 → 文档同步”推进 Demo v0。
+
+### Step 1 契约收口（DONE）
+
+| 动作 | 文件 | 结果 |
+|---|---|---|
+| 开发区编码改为 `JD-Z-01`/`JD-Z-02`，行政镇街保持 `JD-T-01`~`JD-T-13` | `services/api/scripts/build_region_fixture.py`、`scripts/fixtures/regions_2025.json` | 227 区域重新生成；13 行政镇街 + 2 开发区 |
+| 区域列表增加 `category`，分页默认 20、最大 100 | `app/api/v1/regions.py`、`app/services/query_service.py` | 与 05/21/22 一致 |
+| 指标列表增加 `value_type` | `app/api/v1/indicators.py`、`app/services/query_service.py` | 文本指标可筛出 2 个 |
+| 数据值列表增加 `quality_status`，公开接口只读 `published`，分页默认 20、最大 100 | `app/api/v1/data.py`、`app/services/query_service.py` | 与 05/21/22 一致 |
+| 总览增加 `coverage` | `app/schemas/dashboard.py`、`app/services/query_service.py` | 区级 13 个数值指标覆盖率 100.0 |
+| 新增 OpenAPI 导出脚本并重新生成契约 | `services/api/scripts/export_openapi.py`、`contracts/openapi.json` | 14 paths、27 schemas；新参数与 coverage 已写入 |
+| 文档同步 | `05-architecture.md`、`21-technical-architecture-v2.md`、`22-data-integration-spec.md` | 明确 Demo v0 用 `period_year`/`root_code`；12 张表；错误码补齐 |
+
+验证：`python -m pytest -q` -> 40 passed；`python -m compileall -q app tests` 通过；`contracts/openapi.json` 14 paths。
+
+### Step 5 部署资产（部分完成）
+
+- 新增 `deploy/docker-compose.yml`、`docker-compose.dev.yml`、`nginx.conf`、`.env.example`、`scripts/backup.sh`、`scripts/restore.sh`。
+- 新增 `services/api/Dockerfile`、`.dockerignore`、`.github/workflows/ci.yml`。
+- SQLite 连接启用 `PRAGMA foreign_keys=ON`、`busy_timeout=5000`、文件库 WAL；新增 `tests/unit/test_db_session.py`。
+
+### Step 2 认证/后台（DONE）
+
+| 动作 | 文件 | 结果 |
+|---|---|---|
+| 认证/JWT/密码哈希/RBAC | `app/core/security.py`、`app/schemas/auth.py`、`app/services/auth_service.py`、`app/api/v1/auth.py` | 登录/me/申请/状态/退出/改密 6 端点 |
+| 申请审批/用户/审计 | `app/schemas/admin.py`、`app/services/audit_service.py`、`app/api/v1/admin.py` | 列表/批准/驳回/用户/审计 6 端点 |
+| Excel 导入 | `app/services/import_service.py` | 上传/批次/错误报告 4 端点；atomic/partial；空值=missing |
+| 迁移 | `alembic/versions/0002_auth_and_admin.py` | users.phone unique/token_version；申请隐私/提交元数据；import source_id |
+| Web 后台 | `apps/admin/**` | 登录/总览/数据/导入/申请/用户/审计；`pnpm build` 通过；真实浏览器走查 |
+
+验证：`pytest` 80 passed；`compileall` 通过；OpenAPI 29 paths；`pnpm build` 通过；管理员批准流程在 headless Edge 中走通。
+
+### Step 3 小程序（DONE，DevTools 待验证）
+
+- 10 页：home/regions/region-detail/indicator-detail/ai/chat/profile/apply/admin-approval/export。
+- 3 组件：ChartSpec Canvas 2D、metric-card、state-view。
+- `npm run typecheck` 通过；JSON 19 个、页面 10 个、WXML 13 个结构校验通过。
+- 微信开发者工具/真机未安装，视觉与端到端未验证。
+
+### Step 5 种子/部署（DONE，资产）
+
+- 数据库已播种：227 区域/15 指标/1608 值/454 文本/42 缺失。
+- SQLite `PRAGMA foreign_keys=ON`、`busy_timeout=5000`、文件库 WAL；`test_db_session.py` 通过。
+- `requirements.txt` 增加 asyncpg、psycopg、xlrd、openpyxl、python-multipart、playwright。
+- 根 `package.json` + `pnpm-workspace.yaml`；`apps/admin` 与 `packages/*` 纳入 workspace。
+- `.github/workflows/ci.yml`：docs/api/web/mp 四个 job。
+- `deploy/`：Compose、Nginx、Dockerfile、备份/恢复脚本。
+
+### Step 4 AI/导出（DONE）
+
+- `/api/v1/ai/chat`：确定性规则 Agent（无 Key）+ OpenAI 兼容 LLM 通道（有 Key）；AnswerBlocks/引用/无数据拒答/会话落库。
+- 10 个只读工具；五层校验；限流 10/min/用户、5/day/游客 IP。
+- `POST/GET /api/v1/exports` + download：PNG/PDF/XLSX/CSV；migration 0003；同步生成 ready。
+- 验证：119 tests passed；OpenAPI 35 paths；AI 三例（云路镇 31038、镇街排名、曲溪/云路对比）与导出四格式 smoke 通过。
+- 真实 DeepSeek Key 本地联调通过：`deepseek-chat`、`degraded=false`；Key 只写 `services/api/.env`（gitignored），未进入仓库。
+
+### Step 6 文档收口（DONE）
+
+- 00/01/03/04/05/06/07/09/11/12/15/18/20/21/22/23/24/25 与批次记录已同步。
+- `contracts/openapi.json` 已重新导出为 35 paths / 83 schemas；`contracts/README.md`、根 README、服务 README、后台/小程序 README 已同步。
+- 全量复跑：pytest 119 passed、compileall、Alembic、Web build、小程序 typecheck、docs checks 全部通过。

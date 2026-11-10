@@ -15,21 +15,21 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 |---|---|
 | 阶段 | M0 → **M0.5 11.12 初步 demo** |
 | 仓库 | https://github.com/plmt3742/IJieDong（main 分支已推送；最新提交见 git log） |
-| 代码 | B00~B04 已完成：FastAPI + SQLite + 12 张表 + 迁移 + 227/15/1608 合成种子 + 只读查询 API（`b943aa8`、`111914a`、`52d0adb`、`29dfe61`）；C/D/E 页面与 AI 待做 |
-| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；2026-11-10 决策已记录（`12` §0.3、`15` §11）；契约文档 21~25、06/07 已完成；`contracts/openapi.json` 已生成 B04 查询端点（14 paths） |
+| 代码 | B00~B05 + B08 已完成：FastAPI + SQLite + 12 张表 + 迁移 0001/0002/0003 + 227/15/1608 合成种子 + 只读查询 + 认证/申请/审批/导入 + AI 问答/四格式导出（119 tests；OpenAPI 35 paths） |
+| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；契约 21~25、06/07 已完成；Step 6 文档收口进行中 |
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
 | 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
-| 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
-| Git | 分支 `feat/b002-demo-v0`；`1f8ef15` 文档/契约、`b943aa8` B00、`111914a` B01、`52d0adb` B02、`29dfe61` B04；未 push（最新提交见 `git log`） |
+| 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；Web 后台与小程序已落地；`deploy/`、`.github/` 已有资产 |
+| Git | 分支 `feat/b002-demo-v0`；大量未提交改动；`main` 在 `3e37611`；提交前按文件归属分组 |
 | 工作方式 | 非简单任务必须规划、拆工作包并委派 subagent；主 agent 负责审查 diff、集成与复跑验证；上下文接近 85% 必须先写交接；每批完成后 Git 留档 |
 | 用户/入口 | **公职人员**；原生微信小程序；游客/申请/审批最小闭环；后续接粤政易工作台，粤政易等程序搭建完再接入 |
-| 数据 | 来源支持 **Excel/接口/手工**；11.12 先用**确定性合成演示数据**覆盖当前模板全量，真实 Excel 数据后续提供；**GDP 排名不作为 11.12 要求**，排名演示用常住人口/面积 |
-| 技术栈 | **原生微信小程序 + Vue3 后台 + FastAPI + SQLite(demo)/PostgreSQL(prod) + DeepSeek API + ECharts** |
-| 数据模型 | ADR-002 基线 + v2 契约草案（periods/dimensions/derived/quality/answer_blocks/component_registry/export_jobs）；Demo v0 子集见 `21` §3.2 |
+| 数据 | 来源支持 **Excel/接口/手工**；11.12 使用**确定性合成演示数据**覆盖模板全量；真实 Excel 后续提供；GDP 排名不作为 11.12 要求 |
+| 技术栈 | **原生微信小程序 + Vue3 后台 + FastAPI + SQLite(demo)/PostgreSQL(prod) + DeepSeek API + ECharts/ChartSpec** |
+| 数据模型 | ADR-002 基线 + v2 契约（periods/dimensions/derived/quality/answer_blocks/component_registry/export_jobs）；Demo v0 已建 12 张表，AI/导出字段已由 0003 补齐 |
 | Agent | 只读工具 + AnswerBlocks；保留 ChartSpec 兼容；见 ADR-003、`24`；LLM 见 14 |
-| 部署 | 11.12 部署到用户小服务器并用微信小程序实测；Web 后台必须可视化；生产 Docker/PostgreSQL 后置；见 ADR-004 |
-| 下一步 | B04 已完成；进入 C01/C02 认证申请与 Web 后台、D01~D05 小程序、E01~E03 AI/组件；上下文接近 85% 时先写交接再继续 |
-| 最大风险 | 质量优先下的范围控制、原生小程序图表、真实数据/Key/AppID 未到、单人范围过大 |
+| 部署 | 11.12 部署到用户小服务器并用微信小程序实测；Compose/Nginx/Dockerfile/CI 已备；实际服务器/AppID/域名待提供 |
+| 下一步 | 六步推进已完成；实际小服务器部署、微信 DevTools/真机、真实 Key/AppID/数据待外部输入 |
+| 最大风险 | 质量优先下的范围控制、小程序 DevTools/真机未验证、真实数据/Key/AppID 未到、AI 准确性与导出字体/渲染 |
 
 ## 0.1 本轮上下文保护快照（2026-11-10）
 
@@ -40,6 +40,22 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 - 新会话先读：本文件、`04-tasks.md`、`21`~`25`、`product/06`、`product/07`。
 - 验证命令：`cd services/api && python -m pytest -q`；`python -m alembic -c alembic.ini upgrade head`；`python scripts/seed_demo.py --check`。
 - 已知边界：OpenAPI 仅 B04 查询端点；认证/AI/管理端待补；尚未部署小服务器。
+
+## 0.2 六步推进快照（2026-11-10）
+
+| Step | 状态 | 结果 |
+|---|---|---|
+| 1 契约收口 | DONE | `period_year`/`root_code`、`JD-Z-01/02`、分页 20/100、category/value_type/quality_status、dashboard coverage；OpenAPI 重新生成 |
+| 2 认证/后台 | DONE | 16 个认证/申请/审批/用户/审计/导入端点；migration 0002；80 tests；Web 后台 build 通过 |
+| 3 小程序 | DONE（DevTools 待验证） | 10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 与 JSON/WXML 校验通过 |
+| 4 AI/导出 | DONE | `/ai/chat` + AnswerBlocks + 10 工具 + 引用；PNG/PDF/XLSX/CSV 导出；migration 0003 |
+| 5 种子/部署 | DONE（资产） | 数据库已播种 227/15/1608/42；SQLite FK/WAL；Compose/Nginx/Dockerfile/CI；根 pnpm workspace |
+| 6 文档收口 | DONE | 00/01/03/04/05/06/07/09/11/12/15/18/20/21/22/23/24/25/批次记录与 OpenAPI 已同步 |
+
+- 当前测试：后端 119 passed；Web `pnpm build` 通过；小程序 `tsc --noEmit` 通过；`check-links` 49 个 Markdown 通过；`check-no-emoji` 57 个 Markdown 通过（已排除 node_modules）。
+- 导出 smoke：CSV 194B、XLSX 6090B、PNG 333872B、PDF 67744B、AI 答案 XLSX 6829B；下载均 200。
+- 真实 DeepSeek Key 已联调（本地 `.env`，不入 Git）：`model=deepseek-chat`、`degraded=false`；云路镇常住人口 31038、玉湖镇画像均返回真实数据与引用。
+- 已确认边界：`曲溪街道 + 常住人口` 在合成种子中为 missing，AI 返回 no_data；演示可用 `云路镇 + 常住人口`（31038）替代。
 
 ## 1. 最小启动提示词（复制即用）
 

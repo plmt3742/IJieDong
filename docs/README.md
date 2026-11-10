@@ -56,11 +56,11 @@
 | [agent/18-workflows.md](agent/18-workflows.md) | 用户/开发/系统三类工作流（Mermaid） | 设计/开发前 |
 | [agent/19-cost-research.md](agent/19-cost-research.md) | 有来源的云资源/LLM/合规费用调研 | 预算/报价 |
 | [agent/20-b002-delegation-plan.md](agent/20-b002-delegation-plan.md) | B-002 子代理工作包、文件归属、验收、提示词模板 | 代码冲刺/交接 |
-| [agent/21-technical-architecture-v2.md](agent/21-technical-architecture-v2.md) | 技术架构 v2 草案：数据模型、API v0、认证/组件/导出摘要 | 草案 |
-| [agent/22-data-integration-spec.md](agent/22-data-integration-spec.md) | 数据接入与 API 契约：Excel v1/v2、15 指标字典、校验、导入报告 | 草案 |
-| [agent/23-auth-and-application-spec.md](agent/23-auth-and-application-spec.md) | 认证与账号申请：六角色、批量导入、小程序申请、审批、游客、导出权限 | 草案 |
-| [agent/24-ai-and-component-spec.md](agent/24-ai-and-component-spec.md) | AI 与 AnswerBlocks：意图、工具、输出契约、校验、评测 | 草案 |
-| [agent/25-export-spec.md](agent/25-export-spec.md) | 导出规范：PNG/PDF/XLSX/CSV、快照、权限、水印、审计 | 草案 |
+| [agent/21-technical-architecture-v2.md](agent/21-technical-architecture-v2.md) | 技术架构 v2：数据模型、API v0、认证/组件/导出摘要 | Demo v0 已实现；M1 目标 |
+| [agent/22-data-integration-spec.md](agent/22-data-integration-spec.md) | 数据接入与 API 契约：Excel v1/v2、15 指标字典、校验、导入报告 | 导入/查询已实现；写接口待补 |
+| [agent/23-auth-and-application-spec.md](agent/23-auth-and-application-spec.md) | 认证与账号申请：六角色、批量导入、小程序申请、审批、游客、导出权限 | Demo v0 已实现；限流等待补 |
+| [agent/24-ai-and-component-spec.md](agent/24-ai-and-component-spec.md) | AI 与 AnswerBlocks：意图、工具、输出契约、校验、评测 | Demo v0 已实现；50 题待补 |
+| [agent/25-export-spec.md](agent/25-export-spec.md) | 导出规范：PNG/PDF/XLSX/CSV、快照、权限、水印、审计 | Demo v0 已实现；PDF 截断/清理待补 |
 
 ### 产品设计
 
@@ -72,8 +72,8 @@
 | [product/03-page-specs.md](product/03-page-specs.md) | 页面规范模板与页面清单 | 模板 |
 | [product/04-data-catalog.md](product/04-data-catalog.md) | 数据模板分析：区域层级、15 个指标、数据质量、导入规则 | 初稿 |
 | [product/05-page-structure.md](product/05-page-structure.md) | 页面清单、跳转/数据传递、页面详情 | 初稿 |
-| [product/06-page-design-v2.md](product/06-page-design-v2.md) | 页面设计 v2：MP/AD 页面、状态、数据映射、申请/导出/管理 | 草案 |
-| [product/07-component-library-spec.md](product/07-component-library-spec.md) | 组件库规范：注册表、manifest、AI 调用协议、静态渲染边界 | 草案 |
+| [product/06-page-design-v2.md](product/06-page-design-v2.md) | 页面设计 v2：MP/AD 页面、状态、数据映射、申请/导出/管理 | 已用于前端实现 |
+| [product/07-component-library-spec.md](product/07-component-library-spec.md) | 组件库规范：注册表、manifest、AI 调用协议、静态渲染边界 | ChartSpec 渲染已实现；注册表待补 |
 | [product/ue/page-map.html](product/ue/page-map.html) | 可缩放/可点击的页面结构地图（离线单文件） | 可验证 |
 | [product/ue/wireframes.html](product/ue/wireframes.html) | 18 页低保真线框总览（灰度、无品牌风格） | 可验证 |
 
@@ -121,3 +121,4 @@
 | 2026-11-06 | 初始化三层文档体系；新增 agent 批次记录、数据目录、开放问题、4 份 ADR |
 | 2026-11-06 | 确认公职人员/原生小程序/粤政易后置/DeepSeek API/11.12 截止；新增技术栈复审、LLM 方案、11.12 计划、成本、对接文案、ADR-005 |
 | 2026-11-10 | 记录 11.12 Demo v0 决策；新增技术架构 v2、数据接入、认证申请、AI/AnswerBlocks、导出、页面设计 v2、组件库规范草案 |
+| 2026-11-10 | 六步推进：契约收口、认证/后台、原生小程序、AI/导出、种子/部署、文档同步；后端 119 tests、OpenAPI 35 paths |

@@ -237,9 +237,16 @@ erDiagram
 | code | VARCHAR(64) | UNIQUE, NOT NULL | 如 `area`、`population_resident`、`gdp` |
 | name | VARCHAR(128) | NOT NULL | 原始中文名 |
 | unit | VARCHAR(32) | NOT NULL | 文本/平方公里/个/人/亩/亿元 |
-| value_type | VARCHAR(16) | NOT NULL, CHECK | `number` / `text` |
+| value_type | VARCHAR(16) | NOT NULL | Demo v0 使用 `long_text` / `integer` / `decimal` / `currency`；完整 12 类见 21 §3.3 |
 | category | VARCHAR(32) | NULL | 基础/人口/经济/资源等 |
 | applicable_levels | JSON | NOT NULL | `["district","town","village"]`（SQLite/PostgreSQL 通用） |
+| applicable_region_categories | JSON | NULL | `["administrative","development_zone"]`；NULL 表示全部 |
+| aggregation | VARCHAR(16) | DEFAULT `none` | 不自动汇总 |
+| precision | SMALLINT | DEFAULT 0 | 展示小数位 |
+| max_length | INT | NULL | 文本指标最大长度 |
+| direction | VARCHAR(16) | DEFAULT `neutral` | 排名方向语义 |
+| status | VARCHAR(16) | DEFAULT `active` | `active` / `disabled` |
+| version | INT | DEFAULT 1 | 元数据版本 |
 | description | TEXT | NULL | 口径说明 |
 | sort_order | INT | DEFAULT 0 | |
 | enabled | BOOLEAN | DEFAULT true | |
@@ -255,13 +262,19 @@ erDiagram
 | period_type | VARCHAR(16) | NOT NULL, DEFAULT `year` | 预留季度/月度 |
 | value_number | NUMERIC(18,4) | NULL | 数值指标 |
 | value_text | TEXT | NULL | 文本指标 |
+| value_json | JSON | NULL | 预留布尔/日期/JSON/地理等扩展值 |
+| quality_status | VARCHAR(16) | NOT NULL, DEFAULT `verified` | `missing` / `not_applicable` / `suppressed` / `estimated` / `provisional` / `verified` |
 | status | VARCHAR(16) | NOT NULL, DEFAULT `published` | `draft` / `published` / `archived` |
 | source_id | BIGINT | FK data_sources.id, NULL | |
+| import_job_id | BIGINT | FK import_jobs.id, NULL | 数据血缘 |
+| dimensions | JSON | NULL | Demo v0 全为 NULL |
+| dimension_hash | VARCHAR(64) | NOT NULL, DEFAULT `''` | Demo v0 无维度时为空字符串；M1 改为 SHA-256 常量 |
+| version | INT | NOT NULL, DEFAULT 1 | 每次覆盖写递增 |
 | updated_by | BIGINT | FK users.id, NULL | |
 | created_at / updated_at | TIMESTAMPTZ | NOT NULL | |
 
-唯一：`(region_id, indicator_id, period_year, period_type)`。
-索引：`(indicator_id, period_year)`、`(region_id, period_year)`、`(indicator_id, period_year, value_number)`。
+唯一：`(region_id, indicator_id, period_year, period_type, dimension_hash)`。
+索引：`(indicator_id, period_year)`、`(region_id, period_year)`、`(indicator_id, period_year, value_number)`、`(import_job_id)`。
 约束：`value_type=number` 时 `value_number` 非空（或允许空值表示无数据）；`value_type=text` 时 `value_text` 非空。空值用 NULL 表示“无数据”，不允许 0 代替。
 
 #### `data_sources`
@@ -302,6 +315,14 @@ erDiagram
 | wechat_openid | VARCHAR(64) | UNIQUE, NULL |
 | created_at / last_login_at | TIMESTAMPTZ | |
 
+#### `user_applications`
+
+Demo v0 最小表：id、application_no（UNIQUE）、display_name、unit、phone、reason、status（`pending`/`approved`/`rejected`）、status_token_hash、reviewed_by、reviewed_at、reject_reason、resubmit_count、created_at / updated_at。索引：`(phone, status)`、`(status, created_at)`。
+
+#### `export_jobs`
+
+Demo v0 最小表：id、user_id（FK users.id, RESTRICT）、source_type（`answer`/`view`/`query`）、source_id、format（`png`/`pdf`/`xlsx`/`csv`/`json`）、status（`queued`/`running`/`ready`/`failed`/`expired`）、params、file_path、file_size、sha256、error_code、created_at / started_at / finished_at / expires_at。完整字段与渲染规则见 25；B05 补 `export_id`、快照字段与下载端点。
+
 #### `chat_sessions` / `chat_messages`
 
 `chat_sessions`：id、user_id、title、created_at、updated_at。
@@ -330,7 +351,7 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 
 > v2 新增认证申请、组件、导出端点（见 [21](21-technical-architecture-v2.md)/[23](23-auth-and-application-spec.md)/[25](25-export-spec.md)）；在合并到本节并生成 OpenAPI 前，以下端点表仍为 v0 基线。
 >
-> 2026-11-10 实现状态：B04 已实现区域/指标/数据值/排名/对比/总览端点，并生成 `contracts/openapi.json`（14 paths）；认证/AI/管理端端点待补。
+> 2026-11-10 实现状态：B04 查询 API + B05 认证/申请/审批/用户/审计/导入 + B08 AI/导出已实现，OpenAPI 35 paths；区域/指标/数据值/排名/对比/总览端点已联调。
 
 - Base：`/api/v1`
 - 认证：`Authorization: Bearer <JWT>`；公开浏览接口可匿名（按需求确认）。
@@ -362,21 +383,21 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
-| GET | `/regions` | `level`、`parent_id`、`q`、`enabled` |
-| GET | `/regions/tree` | `root_id`、`depth`（默认 2） |
+| GET | `/regions` | `level`、`parent_id`、`parent_code`、`q`、`category`、`enabled` |
+| GET | `/regions/tree` | Demo v0 用 `root_code`、`depth`（默认 2）；M1 增加 `root_id` |
 | GET | `/regions/{id}` | 区域详情 + 父级 |
 | GET | `/regions/{id}/profile` | 文本简介/特色 + 关键指标 |
-| GET | `/indicators` | `level`、`category`、`enabled` |
+| GET | `/indicators` | `level`、`category`、`value_type`、`enabled` |
 | GET | `/indicators/{id}` | 指标详情/口径 |
 
 #### 数据
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
-| GET | `/data-values` | `region_id`、`indicator_id`、`period`；分页 |
-| GET | `/data-values/compare` | `indicator_id`、`region_ids`（逗号分隔，≤20）、`period` |
-| GET | `/data-values/rank` | `indicator_id`、`period`、`level`、`order`、`limit`（≤50） |
-| GET | `/dashboard/overview` | `period`：核心指标、镇街排名、覆盖率 |
+| GET | `/data-values` | `region_id`/`region_code`、`indicator_id`/`indicator_code`、`period_year`、`quality_status`；仅 `published`；分页 |
+| GET | `/data-values/compare` | `indicator_id`/`indicator_code`、`region_ids` 或 `region_codes`（逗号分隔，2–20）、`period_year` |
+| GET | `/data-values/rank` | `indicator_id`/`indicator_code`、`period_year`、`level`、`order`、`limit`（≤50） |
+| GET | `/dashboard/overview` | `period_year`：6 个核心指标、`town_count`、`coverage`、`data_as_of` |
 
 #### AI
 
@@ -459,6 +480,12 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 | `AI_INVALID_OUTPUT` | 502 | 模型输出不符合契约 |
 | `RATE_LIMITED` | 429 | 限流 |
 | `INTERNAL_ERROR` | 500 | 未分类错误（不暴露堆栈） |
+| `NOT_READY` | 503 | 就绪检查失败 |
+| `METHOD_NOT_ALLOWED` | 405 | 方法不允许 |
+| `HTTP_ERROR` | 4xx/5xx | 其他 Starlette HTTP 异常 |
+| `INDICATOR_NOT_NUMERIC` | 422 | 文本指标不支持排名/对比 |
+| `REGION_NOT_FOUND` | 404 | 对比/导入中区域不存在 |
+| `COMPARE_REGION_COUNT_INVALID` | 422 | 对比区域数不在 2–20 |
 
 ## 7. Agent 设计
 
@@ -496,6 +523,8 @@ POST /ai/chat
 | `get_region_profile` | `region_code`, `period_year?` | 文本 + 关键指标 | 单区域 |
 | `build_chart` | `chart_type`, `indicator_code`, `region_codes[]`, `period_year`, `title?` | ChartSpec | 类型白名单 |
 
+> 2026-11-10 Step 4 实现以 [24](24-ai-and-component-spec.md) 为准：模型暴露 10 个工具（`resolve_entities`、`describe_dataset`、`query_observations`、`rank_regions`、`compare_regions`、`trend_values`、`composition`、`get_region_profile`、`compute_metric`、`correlation`）；上表 7 个旧名为兼容语义，不再直接暴露给模型。
+
 **禁止**：`execute_sql`、`http_request`、`read_file`、`write_file`、任意代码执行。
 
 ### 7.4 Prompt 规则
@@ -512,7 +541,7 @@ System prompt 必须包含：
 
 ### 7.5 输出契约
 
-> v2 草案改用 AnswerBlocks（见 [24](24-ai-and-component-spec.md)），保留 `chart_spec` 作为兼容字段；合并前以本节为准。
+> v2 草案改用 AnswerBlocks（见 [24](24-ai-and-component-spec.md)），保留 `chart_spec` 作为兼容字段；2026-11-10 Step 4 已按 24 实现 AnswerBlocks，`chart_spec` 从第一个图表块派生。
 
 ```json
 {
@@ -531,7 +560,7 @@ System prompt 必须包含：
 
 ### 7.6 评测
 
-- 50 题：数值查询 15、排名 10、对比 10、区域画像 5、无数据 5、越界/敏感 5。
+- 50 题：数值查询 15、排名 10、对比 10、区域画像 5、无数据 5、越界/敏感 5。Step 4 已落 12 题样例；50 题评测待 AI-007 补齐。
 - 指标：数字正确率、引用完整率、ChartSpec 合法率、拒答正确率、平均延迟、token 成本。
 - 评测集放在 `services/api/tests/fixtures/ai_eval/`（JSON），不包含真实敏感数据。
 
@@ -629,7 +658,7 @@ Docker Compose
 原生微信小程序 → HTTPS API 域名（需备案/证书/白名单）
 ```
 
-### 11.2 政务外网/粤政易（后期）
+### 11.3 政务外网/粤政易（后期）
 
 - 部署在政务外网或省政务云；开通到粤政易 API 的网络策略。
 - SSO、可见人员、统一待办等公共能力只在政务外网可用；互联网部署只能做工作台入口跳转。

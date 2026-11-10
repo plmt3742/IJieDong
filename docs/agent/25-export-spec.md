@@ -1,13 +1,13 @@
 ---
 owner: 项目开发者
 last_updated: 2026-11-10
-status: draft
+status: active
 read_when: 实现或评审导出接口、导出按钮、权限、文件存储与清理前
 ---
 
-# 25 · 导出规范（草案）
+# 25 · 导出规范（Demo v0 已实现）
 
-> 状态：**契约草案，待实现**。本文承接 [05-architecture.md](05-architecture.md) §6/§9 与 [24 AI 与 AnswerBlocks 契约](24-ai-and-component-spec.md)，组件的导出能力见 [07 组件库规范](../product/07-component-library-spec.md) §2/§4。
+> 状态：**Demo v0 子集已实现（2026-11-10，Step 4）**。PNG/PDF/XLSX/CSV 同步导出；`export_jobs` 快照字段与下载端点已落地；119 tests；PDF 2 页硬截断、对象存储、7 天清理扫描待补。
 > 已确认决策：支持 PNG / PDF / XLSX / CSV，**不设默认或预选格式**，每次由用户选择；**游客不能导出**，已批准角色按权限导出；导出使用答案快照，不重新提问、不重新取数；导出内容包含引用、数据时效、生成时间与水印；不单独设"领导模式"。
 > 文中 JSON 数值与文件大小为结构示例，不是真实统计或实测结果。
 

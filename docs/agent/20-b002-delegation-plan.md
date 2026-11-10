@@ -182,3 +182,20 @@ HANDOFF: 返回改动文件、测试结果、未完成项、风险。
 - [ ] 主 agent 已复跑验证。
 - [ ] 已更新 `04-tasks.md`、批次记录、`11-handoff.md`。
 - [ ] 文档无 emoji，README 保持正式。
+
+## 10. 2026-11-10 执行状态
+
+| 工作包 | 状态 | 实际产出 |
+|---|---|---|
+| WP-BE1 | DONE | FastAPI 脚手架、SQLite、健康检查、配置/日志、测试 |
+| WP-DATA1 | DONE | 12 张表、migration 0001/0002、227/15/1608 种子、查询 API、Excel 导入 |
+| WP-MP1 | DONE（DevTools 待验证） | 原生小程序 10 页 + 3 组件 + ChartSpec Canvas 2D |
+| WP-ADMIN1 | DONE | Vue3 后台登录/总览/数据/导入/申请/用户/审计 |
+| WP-AI1 | DONE | `/ai/chat` + AnswerBlocks + 10 工具 + 引用 |
+| WP-INT1 | DOING | 后端/前端/小程序复跑、主路径联调、文档收口 |
+| 新增 WP-AUTH | DONE | JWT/RBAC、申请审批、用户、审计、导入 |
+| 新增 WP-EXPORT | DONE | PNG/PDF/XLSX/CSV 导出与 `export_jobs` |
+
+- 子代理均未 commit/push；主 agent 负责最终 diff 审查、验证与提交。
+- 共享文件（router、models `__init__`、OpenAPI、05 文档）由主 agent 统一收口。
+- 原始 6 天排期已不适用；当前按六步推进，Step 1/2/3/4/5 完成，Step 6 文档收口进行中。

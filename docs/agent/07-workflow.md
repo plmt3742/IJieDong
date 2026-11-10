@@ -294,10 +294,10 @@ HANDOFF:
 
 ```text
 PR:
-  - docs link check（可选）
-  - api: ruff check + pytest
-  - admin: lint + typecheck + build
-  - mp: lint + typecheck + build:h5（+ build:mp-weixin）
+  - docs: python scripts/check-links.py + python scripts/check-no-emoji.py
+  - api: python -m pytest -q（ruff 可选；Playwright Chromium）
+  - web: pnpm install --frozen-lockfile → chart-spec build → admin build
+  - mp: npm --prefix apps/mp ci → npm --prefix apps/mp run typecheck
 ```
 
 - 不把真实 LLM 调用放进 CI；用 mock。

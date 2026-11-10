@@ -35,9 +35,10 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
 - 已完成（2026-11-10 契约冻结）：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出共 7 份契约草案（`21`~`25`、`product/06`、`product/07`）。
 - 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 可运行 Demo v0，小服务器 + 小程序实测，Web 后台可视化；游客不可导出，导出 PNG/PDF/XLSX/CSV 且不设默认。
-- 后端已完成：B00 脚手架 + B01 数据模型/迁移 + B02 合成种子 + B04 只读查询 API（`b943aa8`、`111914a`、`52d0adb`、`29dfe61`）；C/D/E 页面与 AI 待做。
-- Git：分支 `feat/b002-demo-v0`；`1f8ef15` 文档/契约、`b943aa8` B00、`111914a` B01、`52d0adb` B02、`29dfe61` B04；未 push。
-- 当前批次：`B-002 11.12 demo 冲刺`（决策/契约/B00/B01/B02/B04 已完成；下一步 C/D/E）。
+- 后端已完成：B00 脚手架 + B01 数据模型/迁移 + B02 合成种子 + B04 只读查询 API + B05 认证/申请/审批/导入 + B08 AI/导出；119 tests；OpenAPI 35 paths。
+- 前端已完成：Web 后台（登录/总览/数据/导入/申请/用户/审计）与原生小程序（10 页/ChartSpec Canvas 2D）；小程序 DevTools/真机待验证。
+- Git：分支 `feat/b002-demo-v0`；文档/契约/后端/前端改动未提交；`main` 在 `3e37611`。
+- 当前批次：`B-002 11.12 demo 冲刺`（六步推进 Step 1~6 已完成；实际小服务器部署、微信 DevTools/真机、真实数据/Key/AppID 待外部输入）。
 
 ## 技术栈（已确认方向，B-002 验证）
 
@@ -101,11 +102,11 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 
 ## 下一步（11.12 冲刺）
 
-1. 后端 B00~B04 已完成；下一步按 C01/C02 认证申请与 Web 后台 → D01~D05 小程序 → E01~E03 AI/组件 → F 部署联调推进。
-2. 按 [21-technical-architecture-v2.md](21-technical-architecture-v2.md) 的 Demo v0 子集和 [15-demo-plan-1112.md](15-demo-plan-1112.md) §11 验收。
-3. 页面设计以 [product/06-page-design-v2.md](../product/06-page-design-v2.md) 为准；旧结构图见 [05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)；数据流见 [18-workflows.md](18-workflows.md)。
-4. 11.12 前产出可运行 Demo v0、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
-5. 11.12 后再补数据治理、未来数据类型、视觉风格、粤政易/等保/信创。
+1. 主路径联调：登录 → 总览 → 数据 → 导入 → 申请审批 → AI 问答 → 四格式导出。
+2. 复跑：后端 pytest/compileall/Alembic、Web `pnpm build`、小程序 `tsc --noEmit`、文档链接/无 emoji。
+3. 补齐：AI 50 题评测、回答缓存、`/admin/data-values` 写接口、审计日期筛选；真实 LLM Key 已本地联调。
+4. 部署：AppID/域名/服务器到位后上小服务器 + 微信真机。
+5. 11.12 前产出可运行 Demo v0、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
 
 ## 文档入口
 

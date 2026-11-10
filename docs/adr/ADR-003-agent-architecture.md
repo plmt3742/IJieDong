@@ -1,6 +1,6 @@
 # ADR-003: Agent 架构
 
-- 状态：Proposed（待 B-007 验证）
+- 状态：Proposed（Step 4 实现中；AnswerBlocks 以 24 为准，ADR 工具名待同步）
 - 日期：2026-11-06
 - 决策人：项目开发者
 - 相关任务：AI-001~008

@@ -306,3 +306,46 @@ IJieDong/
 4. 再创建目录/文件。
 
 > 单人项目也要走这个流程；否则三个月后自己也不认识仓库。
+
+## 8. 2026-11-10 六步推进实际增量
+
+### 根目录
+
+- `package.json`、`pnpm-workspace.yaml`：pnpm workspace 覆盖 `apps/admin`、`packages/*`；`apps/mp` 使用 npm 独立管理。
+- `pnpm-lock.yaml`：根依赖锁。
+- `.github/workflows/ci.yml`：docs/api/web/mp 四个 job。
+
+### apps/admin
+
+- Vue3 + Vite + TS + Element Plus + Pinia + Router + ECharts。
+- `src/api`、`src/components`、`src/composables`、`src/layouts`、`src/router`、`src/stores`、`src/styles`、`src/utils`、`src/views`。
+- 页面：登录、总览、数据列表、导入、申请审批、用户、审计、问答记录/组件库/设置占位、403/404。
+
+### apps/mp
+
+- 原生微信小程序 + TypeScript + WXML/WXSS；无 H5/uni-app/Taro。
+- 10 页：home、regions、region-detail、indicator-detail、ai、chat、profile、apply、admin-approval、export。
+- 3 组件：chart（ChartSpec Canvas 2D/表格降级）、metric-card、state-view。
+- `services/{config,request,api}.ts`、`utils/{format,storage,auth,application}.ts`、`types/{api,models,chart}.ts`。
+
+### services/api
+
+- 新增 `app/core/security.py`、`app/schemas/{auth,admin}.py`、`app/services/{auth,audit,import}_service.py`、`app/api/v1/{auth,admin}.py`。
+- 新增 `alembic/versions/0002_auth_and_admin.py`、`services/api/scripts/export_openapi.py`、`Dockerfile`、`.dockerignore`。
+- 新增 `app/ai/{__init__,tools,validation,rate_limit,deterministic,llm}.py`、`app/schemas/ai.py`、`app/services/{ai,export}_service.py`、`app/api/v1/{ai,exports}.py`、`alembic/versions/0003_ai_and_export.py`。
+- 新增 `scripts/create_admin.py`（本地/部署管理员初始化，密码交互输入或参数传入，不落库明文）。
+- 新增 `tests/unit/test_ai_validation.py`、`test_ai_rate_limit.py`、`tests/api/test_ai_api.py`、`test_export_api.py`、`tests/fixtures/ai_eval/questions.json`。
+
+### packages
+
+- `packages/chart-spec`：`types.ts`、`schema.ts`、`to-echarts.ts`、`index.ts`、`package.json`、`tsconfig.json`。
+- `packages/contracts`：仍为 README + 空 `src/`，OpenAPI 类型生成待 PKG-001。
+
+### deploy
+
+- `docker-compose.yml`、`docker-compose.dev.yml`、`nginx.conf`、`.env.example`、`scripts/backup.sh`、`scripts/restore.sh`。
+
+### 新增依赖
+
+- Python：PyJWT、asyncpg、psycopg、python-multipart、xlrd、openpyxl、playwright。
+- Node：apps/admin 的 Vue/Element Plus/ECharts/axios 等；apps/mp 的 TypeScript/miniprogram-api-typings/tdesign-miniprogram（TDesign 暂未导入）。

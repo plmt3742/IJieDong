@@ -8,7 +8,7 @@ read_when: 准备/填写 Excel 模板前；实现导入器与数据校验前；�
 # 22 · 数据接入与 API 契约（草案，待实现）
 
 > 本文定义“数据提供方给什么、系统怎么校验、接口怎么调”。与 [21-technical-architecture-v2.md](21-technical-architecture-v2.md) 配套使用。
-> 当前真实数据未提供；文中数值规则来自空白模板分析，不代表真实统计口径。本文不声称任何接口或脚本已实现。
+> 当前真实数据未提供；文中数值规则来自空白模板分析，不代表真实统计口径。B02 已实现确定性 `seed_demo.py` 与 227 区域 fixture；Excel 导入 API 与写接口尚未实现。
 
 ## 1. 数据提供方需要准备什么
 
@@ -203,9 +203,11 @@ read_when: 准备/填写 Excel 模板前；实现导入器与数据校验前；�
 | GET | `/api/v1/admin/imports/{id}` | 批次状态与统计 |
 | GET | `/api/v1/admin/imports/{id}/errors` | 错误报告（JSON 或 CSV） |
 | POST | `/api/v1/admin/imports/{id}/revert` | 回滚（M1） |
-| GET | `/api/v1/data-values` | 查询观测值，支持 `region_id`、`indicator_code`、`period_key` |
+| GET | `/api/v1/data-values` | 查询观测值，支持 `region_id`、`indicator_code`、`period_year`、`quality_status`；Demo v0 使用 `period_year`，M1 改 `period_key` |
 | POST | `/api/v1/admin/data-values` | 单条新增 |
 | PATCH | `/api/v1/admin/data-values/{id}` | 单条修改 |
+
+> Demo v0 已实现 `POST /api/v1/admin/imports`、批次列表/详情/错误报告和只读 `GET /api/v1/data-values`；`/admin/data-values` 单条写接口属于 BE-005，当前返回 404。
 
 创建批次响应：
 

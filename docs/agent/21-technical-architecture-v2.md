@@ -122,9 +122,10 @@ flowchart TB
 
 ### 3.2 Demo v0 表子集
 
-Demo v0 只建：`regions`、`indicators`、`observations`（物理表名沿用 `data_values`，契约名 `observations`）、`data_sources`、`import_jobs`、`users`、`user_applications`、`chat_sessions`、`chat_messages`、`export_jobs`、`audit_logs`。
+Demo v0 只建：`regions`、`region_aliases`、`indicators`、`observations`（物理表名沿用 `data_values`，契约名 `observations`）、`data_sources`、`import_jobs`、`users`、`user_applications`、`chat_sessions`、`chat_messages`、`export_jobs`、`audit_logs`，共 12 张表。
 
 - `periods`、`dimensions`、`indicator_dimensions`、`derived_metrics`、`import_rows`、`data_quality_issues`、`answer_blocks`、`component_registry` 的**字段**在 Demo v0 中先以列或 JSON 形式预留（如 `period_year`/`period_type`、`chat_messages.blocks`、代码内组件注册表），M1 再拆表。
+- Demo v0 查询参数使用 `period_year`（如 `2025`），不暴露 `period_key`；M1 建 `periods` 后统一为 `period_key`。
 - Demo v0 建最小 `export_jobs`，状态可为 `queued`/`running`/`ready`/`failed`/`expired`，用于多格式导出与产物下载；AD13 导出任务列表 UI 仍为 P1。
 
 ### 3.3 值类型
@@ -166,7 +167,7 @@ Demo v0 只建：`regions`、`indicators`、`observations`（物理表名沿用 
 ### 3.5 数据期
 
 `period_type`：`year`、`half_year`、`quarter`、`month`、`day`、`point`（时点快照）。
-`period_key` 规范化：`2025`、`2025H1`、`2025Q1`、`2025-03`、`2025-03-31`。Demo v0 只接受 `year` 且值为 `2025`。
+`period_key` 规范化：`2025`、`2025H1`、`2025Q1`、`2025-03`、`2025-03-31`。Demo v0 只写入 `year` 且值为 `2025`，查询参数用 `period_year`；M1 建 `periods` 后改用 `period_key`。
 
 ### 3.6 维度与 dimension_hash
 
@@ -177,9 +178,9 @@ Demo v0 只建：`regions`、`indicators`、`observations`（物理表名沿用 
 ```
 
 - 规范化：键按字典序排序、UTF-8、无多余空白，再做 SHA-256，得到 `dimension_hash`。
-- 唯一键 `(region_id, indicator_id, period_id, dimension_hash)`；无维度时 hash 为固定常量。
+- 唯一键 `(region_id, indicator_id, period_year, period_type, dimension_hash)`；无维度时 Demo v0 使用空字符串 `''`，M1 改为固定 SHA-256 常量。
 - 维度键必须在 `dimensions` 注册；值必须落在 `value_domain` 内；非法维度拒绝写入。
-- Demo v0 等价于“单维度全量”，hash 恒为常量。
+- Demo v0 等价于“单维度全量”，`dimension_hash` 恒为空字符串。
 
 ### 3.7 质量状态
 
@@ -249,11 +250,13 @@ indicator_ref := 指标 code，可带 period 偏移与 level 过滤
 - 成功：`{"data": ..., "meta": {"request_id": "...", "page": 1, "page_size": 20, "total": 0, "has_next": false, "warnings": []}}`
 - 失败：`{"error": {"code": "...", "message": "...", "details": {}}, "request_id": "..."}`
 - 分页：`page` 从 1 开始，`page_size` 默认 20、最大 100；列表端点必须返回 `meta.total`。
-- 时间：ISO 8601；数据期用 `period_key`；数值不带单位，单位由指标给出。
+- 时间：ISO 8601；Demo v0 查询参数用 `period_year`，M1 数据期用 `period_key`；数值不带单位，单位由指标给出。
 - 写接口支持 `Idempotency-Key` 头，窗口 24 小时；重复键返回首次结果。
 - 数据读取一律取“最新已发布版本”（`status=published`），不做流式推送；`meta.data_version` 标识当前版本。
 
 ### 5.2 端点
+
+> 2026-11-10 实现状态：B04 查询 + B05 认证/申请/审批/用户/审计/导入 + B08 AI/导出已落地；OpenAPI 35 paths。Demo v0 查询参数用 `period_year`/`root_code`；导出同步生成并返回 `ready`。
 
 | 方法 | 路径 | 说明 | 角色 |
 |---|---|---|---|
@@ -264,7 +267,7 @@ indicator_ref := 指标 code，可带 period 偏移与 level 过滤
 | POST | `/auth/apply` | 小程序提交使用申请 | 登录（未授权亦可） |
 | GET | `/auth/application-status` | 查询本人申请状态 | 登录 |
 | GET | `/regions` | `level`、`parent_id`、`q`、`category` | guest+ |
-| GET | `/regions/tree` | `root_id`、`depth`（默认 2） | guest+ |
+| GET | `/regions/tree` | Demo v0 用 `root_code`、`depth`（默认 2）；M1 增加 `root_id` | guest+ |
 | GET | `/regions/{id}` | 区域详情 + 父级 | guest+ |
 | GET | `/regions/{id}/profile` | 文本简介/特色 + 关键指标 | guest+ |
 | GET | `/indicators` | `level`、`category`、`value_type` | guest+ |
@@ -314,7 +317,7 @@ indicator_ref := 指标 code，可带 period 偏移与 level 过滤
 | `ACCOUNT_DISABLED` | 403 | 账号被停用 |
 | `APPLICATION_PENDING` | 403 | 申请审核中，仅可浏览 |
 | `APPLICATION_REJECTED` | 403 | 申请被驳回 |
-| `GUEST_EXPORT_FORBIDDEN` | 403 | 游客不可导出 |
+| `EXPORT_FORBIDDEN` | 403 | 游客/申请者/越权用户不可导出 |
 | `EXPORT_FORMAT_REQUIRED` | 422 | 未显式指定导出格式 |
 | `EXPORT_FORMAT_UNSUPPORTED` | 422 | 格式不在 PNG/PDF/XLSX/CSV |
 | `EXPORT_FAILED` | 500 | 导出生成失败 |
@@ -327,6 +330,10 @@ indicator_ref := 指标 code，可带 period 偏移与 level 过滤
 | `AI_NO_DATA` | 200 | 无数据拒答（业务码，非失败） |
 | `AI_TOOL_LIMIT` | 200 | 工具调用次数用尽，返回已有结论 |
 | `IDEMPOTENCY_CONFLICT` | 409 | 同一幂等键请求体不一致 |
+| `NOT_READY` | 503 | 就绪检查失败 |
+| `INDICATOR_NOT_NUMERIC` | 422 | 文本指标不支持排名/对比 |
+| `REGION_NOT_FOUND` | 404 | 对比/导入中区域不存在 |
+| `COMPARE_REGION_COUNT_INVALID` | 422 | 对比区域数不在 2–20 |
 | `DATA_VERSION_CONFLICT` | 409 | 基于旧版本修改 |
 
 ## 6. 认证与申请流程（摘要）
@@ -414,7 +421,7 @@ indicator_ref := 指标 code，可带 period 偏移与 level 过滤
 
 | 阶段 | 范围 | 出口标准 |
 |---|---|---|
-| 11.12 Demo v0 | 合成数据、导入、浏览、基础图表、AI 问答、后台可视化、PNG/XLSX/CSV 导出 | 小服务器可访问，小程序真机跑通，演示脚本连续 3 次成功 |
+| 11.12 Demo v0 | 合成数据、导入、浏览、基础图表、AI 问答、后台可视化、PNG/PDF/XLSX/CSV 导出 | 小服务器可访问，小程序真机跑通，演示脚本连续 3 次成功 |
 | M1 数据治理 | periods/dimensions/derived_metrics、行级导入结果、质量问题、真实数据导入 | 真实模板导入零阻塞错误，派生指标可复算 |
 | M2 组件与可视化 | 组件注册表持久化、PDF、更多图表、对比/排名完善 | 组件契约测试通过，跨端渲染一致 |
 | M3 生产与合规 | PostgreSQL、Docker、备份恢复、等保/信创预留、粤政易接入准备 | 压测与安全自检通过，合规材料可提交 |

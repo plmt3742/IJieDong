@@ -211,3 +211,36 @@ read_when: 11.12 冲刺期间；每日开工/收工；判断“能不能按时�
 - 粤政易 SSO/工作台接入、等保、信创、密评。
 - 最终视觉风格与设计系统定稿。
 - 完整 RBAC 配置界面、组件运行时动态加载、完整测试/压测。
+
+## 12. 2026-11-10 执行状态
+
+| 项 | 状态 | 证据 |
+|---|---|---|
+| 合成数据落库 | DONE | 227 区域/15 指标/1608 值/454 文本/42 缺失；`seed_demo.py --check` |
+| 只读查询 API | DONE | 区域/指标/数据/排名/对比/总览；`pytest` 通过 |
+| 认证/申请/审批/用户/审计/导入 | DONE | 16 个端点；migration 0002；80 tests；OpenAPI 29 paths |
+| Web 后台 | DONE | 登录/总览/数据/导入/申请/用户/审计；`pnpm build` 通过 |
+| 原生小程序 | DONE（DevTools 待验证） | 10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 通过 |
+| AI 问答/四格式导出 | DONE | `/ai/chat` + AnswerBlocks + 10 工具；PNG/PDF/XLSX/CSV；119 tests；OpenAPI 35 paths |
+| 真实 DeepSeek Key 联调 | DONE（本地 .env，不入 Git） | `deepseek-chat`、`degraded=false`；云路镇 31038、玉湖镇画像带引用 |
+| 部署资产/CI | DONE（资产） | Compose/Nginx/Dockerfile/CI/根 pnpm workspace |
+| 实际小服务器/微信真机 | 待外部输入 | AppID、域名、服务器、真实 Key 未到 |
+| 真实数据导入验收 | 延期 | 需求方尚未提供填好的 Excel |
+
+验证命令：
+
+```bash
+cd services/api
+python -m pytest -q
+python -m compileall -q app tests
+python -m alembic -c alembic.ini upgrade head
+python scripts/seed_demo.py --check
+python scripts/export_openapi.py
+
+cd ../..
+pnpm build:admin
+pnpm build:chart-spec
+npm --prefix apps/mp run typecheck
+python scripts/check-links.py
+python -X utf8 scripts/check-no-emoji.py
+```

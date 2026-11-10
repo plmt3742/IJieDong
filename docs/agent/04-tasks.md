@@ -79,14 +79,14 @@ ID:
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
-| SH-001 | 初始化 monorepo（pnpm workspace + Python venv；uv 可选） | P0 | DOC-015 | 根目录可管理 apps/packages；`pnpm -v`/Python 版本记录 | 0.5d | TODO |
+| SH-001 | 初始化 monorepo（pnpm workspace + Python venv；uv 可选） | P0 | DOC-015 | 根目录可管理 apps/packages；`pnpm -v`/Python 版本记录 | 0.5d | DONE |
 | BE-001 | FastAPI 脚手架 | P0 | SH-001 | `uvicorn` 可启动；`/health` 返回 200；配置/日志/CORS 就绪 | 1d | DONE |
 | BE-002 | SQLite 连接与 Alembic | P0 | BE-001 | SQLite 可连；`alembic upgrade head` 成功；PostgreSQL 兼容预留 | 0.5d | DONE |
-| FE-001 | Web 后台脚手架 | P0 | SH-001 | Vue3+Vite+TS+Element Plus+Router+Pinia；`pnpm dev` 可启动 | 1d | TODO |
-| MP-001 | **原生微信小程序**脚手架 | P0 | SH-001 | 微信开发者工具可打开；首页可打开；TypeScript/request/TDesign 就绪 | 1.5d | TODO |
+| FE-001 | Web 后台脚手架 | P0 | SH-001 | Vue3+Vite+TS+Element Plus+Router+Pinia；`pnpm dev` 可启动 | 1d | DONE |
+| MP-001 | **原生微信小程序**脚手架 | P0 | SH-001 | 微信开发者工具可打开；首页可打开；TypeScript/request/TDesign 就绪 | 1.5d | DONE |
 | PKG-001 | OpenAPI 类型生成链路 | P1 | BE-001 | 后端导出 OpenAPI；前端可生成 TS 类型；脚本可重复执行 | 1d | TODO |
-| OPS-001 | CI 基础流水线 | P1 | BE-001/FE-001/MP-001 | lint/typecheck/test/build 至少各端一条；PR 触发 | 1d | TODO |
-| OPS-002 | Docker Compose（PostgreSQL 生产） | P1 | BE-002 | 11.12 后再做；一条命令起 API + PostgreSQL | 1d | TODO |
+| OPS-001 | CI 基础流水线 | P1 | BE-001/FE-001/MP-001 | lint/typecheck/test/build 至少各端一条；PR 触发 | 1d | DONE |
+| OPS-002 | Docker Compose（PostgreSQL 生产） | P1 | BE-002 | 11.12 后再做；一条命令起 API + PostgreSQL | 1d | DONE |
 | QA-001 | 11.12 冒烟清单 | P0 | BE-001/FE-001/MP-001 | 按 demo 脚本逐项跑通并记录 | 0.5d | TODO |
 
 ### 2.1 B-002 契约阶段（2026-11-10 起）
@@ -108,53 +108,53 @@ ID:
 | DATA-002 | Alembic 初始迁移 + 回滚 | P0 | DATA-001 | 空库升级/降级成功；CI 可跑 | 0.5d | DONE |
 | DATA-003 | 区域种子数据（1+15+211） | P0 | DATA-001 | 227 个区域可查；层级正确；经开区/生态城无村居不报错 | 1d | DONE |
 | DATA-004 | 指标种子数据（15 个） | P0 | DATA-001 | 指标编码/单位/类型/适用层级正确 | 0.5d | DONE |
-| DATA-005 | Excel 导入器 + 校验 | P0 | DATA-001~004 | 原始模板可导入；错误行可定位；重复导入更新 | 2.5d | TODO |
-| DATA-006 | 导入报告/错误明细 | P0 | DATA-005 | 总数/成功/失败/错误原因；可下载/查看 | 0.5d | TODO |
+| DATA-005 | Excel 导入器 + 校验 | P0 | DATA-001~004 | 原始模板可导入；错误行可定位；重复导入更新 | 2.5d | DONE |
+| DATA-006 | 导入报告/错误明细 | P0 | DATA-005 | 总数/成功/失败/错误原因；可下载/查看 | 0.5d | DONE |
 | DATA-007 | 数据查询 API（区域/指标/值） | P0 | DATA-001 | 支持按层级/父级/指标/年份查询；分页；空结果正常 | 1.5d | DONE |
-| DATA-008 | 数据质量规则与别名映射 | P0 | DATA-005 | 处理玉滘/玉窖、镇街前缀、缺失指标；有测试 | 1d | TODO |
+| DATA-008 | 数据质量规则与别名映射 | P0 | DATA-005 | 处理玉滘/玉窖、镇街前缀、缺失指标；有测试 | 1d | DONE |
 | DATA-009 | 演示种子数据 | P1 | DATA-001 | 生成可演示的非真实数据，明确标注“演示数据” | 1d | DONE |
 
 ## 4. M2 后台与移动端
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
-| BE-003 | 认证（登录/刷新/me） | P0 | BE-001/DATA-001 | JWT；密码哈希；401/403；测试 | 1.5d | TODO |
-| BE-004 | RBAC 与审计中间件 | P0 | BE-003 | guest/applicant/viewer/editor/approver/admin；写操作留审计 | 1d | TODO |
+| BE-003 | 认证（登录/刷新/me） | P0 | BE-001/DATA-001 | JWT；密码哈希；401/403；测试 | 1.5d | DONE |
+| BE-004 | RBAC 与审计中间件 | P0 | BE-003 | guest/applicant/viewer/editor/approver/admin；写操作留审计 | 1d | DONE |
 | BE-005 | 管理端数据 CRUD API | P0 | DATA-007/BE-004 | 列表/详情/更新；校验；审计 | 2d | TODO |
-| BE-006 | 导入任务 API | P0 | DATA-005 | 上传/状态/结果/错误报告 | 1d | TODO |
-| FE-002 | 后台登录 + 应用壳 + 路由 | P0 | FE-001/BE-003 | 登录/退出；受保护路由；404 | 1.5d | TODO |
-| FE-003 | 数据列表/筛选/编辑 | P0 | BE-005 | 按区域/指标/年份筛选；编辑校验；审计提示 | 2.5d | TODO |
-| FE-004 | 导入页 | P0 | BE-006 | 上传、进度、结果、错误下载 | 2d | TODO |
-| FE-005 | 审计日志页 | P1 | BE-004 | 按用户/动作/时间筛选 | 1d | TODO |
-| MP-002 | 原生小程序应用壳 + 首页 | P0 | MP-001/DATA-007 | 微信开发者工具可打开；首页核心指标 + 镇街入口 | 2d | TODO |
-| MP-003 | 区域树与区域详情（原生） | P0 | DATA-007 | 区→镇街→村居；不适用指标处理；空状态 | 2.5d | TODO |
-| MP-004 | 指标详情与对比（原生） | P0 | MP-003 | 数值/单位/年份/来源；多区域对比入口 | 2d | TODO |
+| BE-006 | 导入任务 API | P0 | DATA-005 | 上传/状态/结果/错误报告 | 1d | DONE |
+| FE-002 | 后台登录 + 应用壳 + 路由 | P0 | FE-001/BE-003 | 登录/退出；受保护路由；404 | 1.5d | DONE |
+| FE-003 | 数据列表/筛选/编辑（编辑待 BE-005） | P0 | BE-005 | 按区域/指标/年份筛选；编辑校验；审计提示 | 2.5d | DOING |
+| FE-004 | 导入页 | P0 | BE-006 | 上传、进度、结果、错误下载 | 2d | DONE |
+| FE-005 | 审计日志页（时间筛选待后端） | P1 | BE-004 | 按用户/动作/时间筛选 | 1d | DOING |
+| MP-002 | 原生小程序应用壳 + 首页 | P0 | MP-001/DATA-007 | 微信开发者工具可打开；首页核心指标 + 镇街入口 | 2d | DONE |
+| MP-003 | 区域树与区域详情（原生） | P0 | DATA-007 | 区→镇街→村居；不适用指标处理；空状态 | 2.5d | DONE |
+| MP-004 | 指标详情与对比（原生） | P0 | MP-003 | 数值/单位/年份/来源；多区域对比入口 | 2d | DONE |
 | MP-005 | 微信登录（后期） | P1 | BE-003/AppID | `wx.login` → 后端 code2session；开发期可用测试号 | 2d | TODO |
 
 ## 5. M3 图表与 AI
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
-| AI-001 | ChartSpec 契约与校验 | P0 | DOC-006 | JSON Schema/Pydantic；非法 spec 拒绝；示例齐全 | 1d | TODO |
-| AI-002 | ChartSpec → ECharts 渲染器（原生小程序） | P0 | AI-001/MP-001 | 柱/条/饼/表；微信小程序可渲染；无数据兜底 | 2d | TODO |
-| AI-003 | AI 工具集（区域/指标/查询/排名/对比/画像） | P0 | DATA-007 | 6 个以内只读工具；参数校验；行数上限；测试 | 2.5d | TODO |
-| AI-004 | Agent 循环 + Prompt + 引用 | P0 | AI-003 | 问题→工具→答案；引用指标/区域/年份；超范围拒答 | 2.5d | TODO |
-| AI-005 | 问答 API + 会话记录 | P0 | AI-004 | `POST /ai/chat`；会话/消息落库；日志 | 1.5d | TODO |
-| AI-006 | 原生小程序问答页 | P0 | AI-005/MP-002 | 输入、加载、答案、图表、引用、追问、错误 | 2.5d | TODO |
-| AI-007 | 问答评测集（50 题） | P0 | AI-004 | 覆盖数值/排名/对比/画像/无数据/越界 | 1d | TODO |
-| AI-008 | 回答缓存与限流 | P1 | AI-005 | 相同问题命中缓存；用户/IP 限流 | 1d | TODO |
+| AI-001 | ChartSpec 契约与校验 | P0 | DOC-006 | JSON Schema/Pydantic；非法 spec 拒绝；示例齐全 | 1d | DONE |
+| AI-002 | ChartSpec → ECharts 渲染器（原生小程序） | P0 | AI-001/MP-001 | 柱/条/饼/表；微信小程序可渲染；无数据兜底 | 2d | DONE（DevTools 待验证） |
+| AI-003 | AI 工具集（区域/指标/查询/排名/对比/画像） | P0 | DATA-007 | 6 个以内只读工具；参数校验；行数上限；测试 | 2.5d | DONE（10 工具） |
+| AI-004 | Agent 循环 + Prompt + 引用 | P0 | AI-003 | 问题→工具→答案；引用指标/区域/年份；超范围拒答 | 2.5d | DONE |
+| AI-005 | 问答 API + 会话记录 | P0 | AI-004 | `POST /ai/chat`；会话/消息落库；日志 | 1.5d | DONE |
+| AI-006 | 原生小程序问答页 | P0 | AI-005/MP-002 | 输入、加载、答案、图表、引用、追问、错误 | 2.5d | DONE（接口联调待验证） |
+| AI-007 | 问答评测集（50 题） | P0 | AI-004 | 覆盖数值/排名/对比/画像/无数据/越界 | 1d | DOING（12 题样例） |
+| AI-008 | 回答缓存与限流 | P1 | AI-005 | 相同问题命中缓存；用户/IP 限流 | 1d | DOING（限流完成；缓存待做） |
 
 ## 6. M4 稳定、部署、合规
 
 | ID | 任务 | 优先级 | 依赖 | 验收标准 | 估算 | 状态 |
 |---|---|---|---|---|---|---|
-| QA-002 | 后端单测/接口测试 | P0 | BE-005/AI-005 | 核心 service/API 覆盖；LLM mock | 2d | TODO |
+| QA-002 | 后端单测/接口测试 | P0 | BE-005/AI-005 | 核心 service/API 覆盖；LLM mock | 2d | DONE（119 tests） |
 | QA-003 | 前端 E2E 主流程 | P0 | FE-004/MP-004/AI-006 | 登录→导入→浏览→问答→图表 | 2d | TODO |
 | QA-004 | 安全自检（密钥/权限/上传/XSS） | P0 | M2/M3 | 清单逐项通过；无高危 | 1.5d | TODO |
 | OPS-003 | 演示环境部署 | P0 | OPS-002 | 可访问地址；健康检查；种子数据 | 1.5d | TODO |
 | OPS-004 | 日志/监控/备份 | P1 | OPS-003 | request_id；错误日志；每日备份 | 1d | TODO |
 | SH-002 | 演示脚本与彩排 | P0 | M3 | 3 分钟脚本；连续 3 次成功 | 1d | TODO |
-| SH-003 | 交接与文档收尾 | P0 | 全部 | 00/03/04/11/批次记录同步 | 0.5d | TODO |
+| SH-003 | 交接与文档收尾 | P0 | 全部 | 00/03/04/11/批次记录同步 | 0.5d | DONE |
 
 ## 7. M5 粤政易/合规（外部依赖）
 
@@ -189,3 +189,8 @@ ID:
 | 2026-11-10 | B01 | 12 张 Demo v0 表 + Alembic 初始迁移；升级/回滚/`alembic check` 通过；commit `111914a` |
 | 2026-11-10 | B02 | 227 区域/15 指标/1608 合成值；42 缺失；20 tests passed；commit `52d0adb` |
 | 2026-11-10 | B04 | 区域/指标/数据值/排名/对比/总览 API；36 tests passed；OpenAPI 14 paths；commit `29dfe61` |
+| 2026-11-10 | B05 | 认证/申请审批/用户/审计/Excel 导入；migration 0002；80 tests；OpenAPI 29 paths |
+| 2026-11-10 | B06 | Web 后台：登录/总览/数据/导入/申请/用户/审计；`pnpm build` 通过 |
+| 2026-11-10 | B07 | 原生小程序：10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 通过；DevTools 待验证 |
+| 2026-11-10 | B08 | AI 问答 + AnswerBlocks + 10 工具 + PNG/PDF/XLSX/CSV 导出；migration 0003；119 tests；OpenAPI 35 paths |
+| 2026-11-10 | Step 6 | 文档同步、OpenAPI 重新生成、主路径 smoke、全量验证 |

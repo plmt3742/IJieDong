@@ -40,6 +40,8 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | **B-006 粤政易/合规** | 合规入口 | SSO/工作台入口/友好页/图标/测试报告/等保/信创 | 外部账号/网络/材料 | 5–8 天 + 外部周期 |
 
 > 11.12 前只做 B-002；B-003 之后按 demo 反馈调整。详细 6 天排期见 [15-demo-plan-1112.md](15-demo-plan-1112.md)；子代理工作包见 [20-b002-delegation-plan.md](20-b002-delegation-plan.md)。
+>
+> 里程碑编号说明：`02-goals.md` 的 M3 为“图表与 AI”，本表把图表/AI 并入 M2“可视化与 AI 完善”，因此编号暂不连续；不改变阶段目标。
 
 ## 4. 当前进度（2026-11-10）
 
@@ -57,11 +59,17 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | B01 数据模型/迁移 | DONE（2026-11-10） | 12 张 Demo v0 表 + Alembic 初始迁移；commit `111914a` |
 | B02 合成种子 | DONE（2026-11-10） | 227/15/1608 合成数据，42 缺失，454 文本；commit `52d0adb` |
 | B04 只读查询 API | DONE（2026-11-10） | 区域/指标/数据值/排名/对比/总览；36 tests；OpenAPI 14 paths；commit `29dfe61` |
+| B05 认证/申请/审批/导入 | DONE（2026-11-10） | 16 个认证/管理/导入端点；migration 0002；80 tests；OpenAPI 29 paths |
+| B06 Web 后台 | DONE（2026-11-10） | Vue3 + Vite + TS + Element Plus；登录/总览/数据/导入/申请/用户/审计；`pnpm build` 通过 |
+| B07 原生小程序 | DONE（2026-11-10，DevTools 待验证） | 10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 通过 |
+| B08 AI/导出 | DONE（2026-11-10） | `/ai/chat` + AnswerBlocks + 10 工具；PNG/PDF/XLSX/CSV 导出；119 tests；migration 0003；OpenAPI 35 paths |
+| B09 部署/CI | DONE（资产） | Compose/Nginx/Dockerfile/CI；实际小服务器部署待 AppID/域名/服务器 |
+| 六步推进 | DONE | 契约收口 → 认证/后台 → 小程序 → AI/导出 → 种子/部署 → 文档同步；119 tests / 35 paths |
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |
 | 页面设计 v2 | DONE（草案） | `product/06-page-design-v2.md`：MP01~MP15、AD01~AD13、状态/数据映射/导出/管理 |
-| B-002 子代理工作包 | DONE（部分实现） | `20-b002-delegation-plan.md`：B00~B04 已落地；C/D/E 待续 |
-| 业务代码 | DOING（后端） | B00~B04 已完成；小程序/Web 后台/AI 待续 |
+| B-002 子代理工作包 | DONE（部分实现） | `20-b002-delegation-plan.md`：B00~B09 已落地或进行中；AI/导出待收口 |
+| 业务代码 | DOING（收尾） | 后端查询/认证/管理/导入/AI/导出、Web 后台、小程序已落地；主路径联调/文档收口进行中 |
 | 真实数据 | 部分确认 | 来源支持 Excel/接口/手工；样例数据待提供 |
 | 粤政易测试账号 | 后置 | 等程序搭建完再申请/接入 |
 

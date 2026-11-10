@@ -1,13 +1,13 @@
 ---
 owner: 项目开发者
 last_updated: 2026-11-10
-status: draft
+status: active
 read_when: 实现或评审 AI 问答、AnswerBlocks、意图路由、工具白名单、问答评测前
 ---
 
-# 24 · AI 与 AnswerBlocks 契约（草案）
+# 24 · AI 与 AnswerBlocks 契约（Demo v0 已实现）
 
-> 状态：**契约草案，待实现**。本文展开 [05-architecture.md](05-architecture.md) §7/§8 与 [ADR-003](../adr/ADR-003-agent-architecture.md)，不替代它们。
+> 状态：**Demo v0 子集已实现（2026-11-10，Step 4）**。确定性规则 Agent + OpenAI 兼容 LLM 通道；10 个只读工具；AnswerBlocks/引用/无数据拒答/会话落库；119 tests；OpenAPI 35 paths；50 题评测待 AI-007 补齐。
 > 事实源顺序：API 路径与错误码以 05 §6 为准；组件元数据以 [07 组件库规范](../product/07-component-library-spec.md) 为准；导出以 [25 导出规范](25-export-spec.md) 为准；本文负责"模型输出什么、如何校验、如何兜底"。
 > 11.12 是可在用户小服务器部署运行的 Demo v0。多维、时序、地理、关系分析属 M1；本文对 M1 类型只做契约预留与 11.12 明确降级。
 > 文中 JSON 数值均为**结构示例**，不是真实统计，禁止作为数据引用。

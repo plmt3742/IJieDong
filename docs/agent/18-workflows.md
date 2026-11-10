@@ -17,7 +17,7 @@ read_when: 设计页面/接口前；需要向别人解释“谁怎么用、系�
 | 角色 | 入口 | 主要任务 | 权限 |
 |---|---|---|---|
 | 数据管理员 | Web 后台 | 导入/修订数据、看导入记录、审计 | admin/editor |
-| 公职人员 | 原生微信小程序（后续粤政易工作台） | 看区域/指标/图表、问数据 | viewer（或游客只读，待定） |
+| 公职人员 | 原生微信小程序（后续粤政易工作台） | 看区域/指标/图表、问数据 | viewer（或 guest 游客只读，已确认） |
 | 领导/决策者 | 小程序/后台 | 看总览、排名、对比；复用统一页面；不单独开发模式 | viewer（只读）+ 导出汇报卡 |
 | AI 问答使用者 | 小程序 | 自然语言查数据、看图表/引用 | viewer |
 | 粤政易/政数管理员 | 粤政易管理中心 | 开通可见人员、配置入口（后期） | 平台侧 |
@@ -268,7 +268,7 @@ flowchart TD
 |---|---|---|---|
 | Region | id/code/name/level/parent_id | `GET /regions`、`/regions/{id}` | MP-02/03、AD-03 |
 | Indicator | id/code/name/unit/value_type | `GET /indicators` | MP-03/04、AD-03 |
-| DataValue | region_id/indicator_id/period/value | `GET /data-values`、`/data-values/rank`、`/compare` | MP-04、AD-03/04 |
+| DataValue | region_id/indicator_id/period/value | `GET /data-values`、`/data-values/rank`、`/data-values/compare` | MP-04、AD-03/04 |
 | ImportJob | job_type/status/errors | `POST /admin/imports`、`GET /admin/imports` | AD-05/06 |
 | ChatMessage | role/content/chart_spec/citations | `POST /ai/chat`、`GET /ai/sessions/{id}/messages` | MP-05/06 |
 | AuditLog | action/resource/detail | `GET /admin/audit-logs` | AD-07 |
@@ -289,8 +289,8 @@ flowchart TD
 
 ## 6. 待确认
 
-1. 小程序是否需要登录？微信/手机号/粤政易？
-2. 游客只读是否开放？
+1. 已确认（2026-11-10）：后台批量建号 + 小程序申请 + 游客只读；微信登录/粤政易 SSO 后置。
+2. 已确认（2026-11-10）：游客只读开放；游客不可导出；申请者只看申请状态。
 3. 后台角色已确认覆盖六类身份（见 `05` §9、`12` §0.3）。
 4. 接口同步的数据源/协议/频率？
 5. 粤政易 SSO/工作台入口的接入时间与网络。
