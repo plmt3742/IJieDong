@@ -1,0 +1,106 @@
+.state-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72rpx 40rpx;
+  text-align: center;
+  background: var(--c-surface, #ffffff);
+  border: 1rpx solid var(--c-border, #dfe5ec);
+  border-radius: var(--r-md, 16rpx);
+}
+
+.state-view--compact {
+  padding: 40rpx 24rpx;
+}
+
+.state-view__spinner {
+  width: 44rpx;
+  height: 44rpx;
+  border: 4rpx solid var(--c-border, #dfe5ec);
+  border-top-color: var(--c-primary, #1f4e79);
+  border-radius: 50%;
+  animation: state-spin 0.9s linear infinite;
+}
+
+@keyframes state-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-view__mark {
+  width: 72rpx;
+  height: 72rpx;
+  border: 2rpx solid var(--c-border-strong, #c7d1dc);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.state-view__mark-line {
+  width: 28rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background: var(--c-text-muted, #6b7280);
+}
+
+.state-view__mark-line--short {
+  width: 16rpx;
+}
+
+.state-view__mark--error {
+  border-color: var(--c-danger, #b3261e);
+}
+
+.state-view__mark--error .state-view__mark-line {
+  background: var(--c-danger, #b3261e);
+}
+
+.state-view__mark--locked {
+  border-color: var(--c-warning, #8a5a00);
+}
+
+.state-view__mark--locked .state-view__mark-line {
+  background: var(--c-warning, #8a5a00);
+}
+
+.state-view__heading {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--c-text, #1f2937);
+}
+
+.state-view__detail {
+  margin-top: 10rpx;
+  max-width: 520rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--c-text-secondary, #5b6573);
+}
+
+.state-view__request {
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  color: var(--c-text-muted, #6b7280);
+  word-break: break-all;
+}
+
+.state-view__actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 28rpx;
+}
+
+.state-view__skeleton {
+  width: 360rpx;
+  margin-top: 24rpx;
+}

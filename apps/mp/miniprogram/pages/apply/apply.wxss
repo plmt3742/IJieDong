@@ -1,0 +1,146 @@
+.apply-head {
+  padding: var(--s-4) var(--s-3);
+  background: var(--c-surface);
+  border: 1rpx solid var(--c-border);
+  border-radius: var(--r-md);
+}
+
+.apply-head__top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+}
+
+.apply-head__title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.apply-head__sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--c-text-secondary);
+}
+
+.apply-form,
+.apply-status,
+.apply-lookup {
+  margin-top: var(--s-3);
+}
+
+.apply-privacy__text {
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--c-text-secondary);
+}
+
+.apply-warning {
+  margin-top: var(--s-2);
+}
+
+.apply-submit {
+  margin-top: var(--s-3);
+}
+
+.apply-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.apply-lookup__note {
+  margin-top: var(--s-2);
+  line-height: 1.6;
+}
+
+.apply-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.apply-footer {
+  margin-top: var(--s-4);
+  padding: var(--s-3) 0;
+  border-top: 1rpx solid var(--c-border);
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: var(--c-text-muted);
+}
+
+.timeline {
+  margin-top: var(--s-3);
+}
+
+.timeline__item {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.timeline__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24rpx;
+}
+
+.timeline__dot {
+  width: 16rpx;
+  height: 16rpx;
+  margin-top: 8rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--c-border-strong);
+  background: var(--c-surface);
+}
+
+.timeline__dot--done {
+  background: var(--c-success);
+  border-color: var(--c-success);
+}
+
+.timeline__dot--current {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.timeline__dot--failed {
+  background: var(--c-danger);
+  border-color: var(--c-danger);
+}
+
+.timeline__line {
+  flex: 1;
+  width: 2rpx;
+  min-height: 44rpx;
+  background: var(--c-border);
+}
+
+.timeline__body {
+  flex: 1;
+  padding-bottom: var(--s-3);
+}
+
+.timeline__label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.timeline__time {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: var(--c-text-muted);
+}
+
+.timeline__desc {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--c-danger);
+}

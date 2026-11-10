@@ -1,0 +1,205 @@
+<view class="page">
+  <view class="apply-head">
+    <view class="apply-head__top">
+      <view class="grow">
+        <text class="apply-head__title">{{mode === 'form' ? '申请账号' : '申请状态'}}</text>
+        <view class="apply-head__sub">
+          {{mode === 'form' ? '提交后由管理员审批；审核通过前只能查看状态，不能浏览数据。' : '凭申请编号与状态令牌查询进度；不支持仅凭手机号查询。'}}
+        </view>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+  </view>
+
+  <block wx:if="{{mode === 'form'}}">
+    <view class="card apply-form">
+      <view class="card__head">
+        <text class="card__title">申请信息</text>
+        <text class="card__extra">所有字段必填</text>
+      </view>
+
+      <view class="field">
+        <view class="field__label"><text class="field__required">*</text><text>姓名</text></view>
+        <input
+          class="input {{errors.display_name ? 'input--error' : ''}}"
+          value="{{form.display_name}}"
+          data-field="display_name"
+          placeholder="2 至 20 字真实姓名"
+          maxlength="20"
+          bindinput="handleField"
+        />
+        <view class="field__error" wx:if="{{errors.display_name}}">{{errors.display_name}}</view>
+      </view>
+
+      <view class="field">
+        <view class="field__label"><text class="field__required">*</text><text>单位 / 科室</text></view>
+        <input
+          class="input {{errors.unit ? 'input--error' : ''}}"
+          value="{{form.unit}}"
+          data-field="unit"
+          placeholder="2 至 50 字"
+          maxlength="50"
+          bindinput="handleField"
+        />
+        <view class="field__error" wx:if="{{errors.unit}}">{{errors.unit}}</view>
+      </view>
+
+      <view class="field">
+        <view class="field__label"><text class="field__required">*</text><text>手机号</text></view>
+        <input
+          class="input {{errors.phone ? 'input--error' : ''}}"
+          value="{{form.phone}}"
+          data-field="phone"
+          type="number"
+          placeholder="用于查重与审批联系"
+          maxlength="11"
+          bindinput="handleField"
+        />
+        <view class="field__error" wx:if="{{errors.phone}}">{{errors.phone}}</view>
+      </view>
+
+      <view class="field">
+        <view class="field__label"><text class="field__required">*</text><text>申请说明</text></view>
+        <textarea
+          class="textarea {{errors.reason ? 'textarea--error' : ''}}"
+          value="{{form.reason}}"
+          data-field="reason"
+          placeholder="10 至 200 字，说明查询或导出需求"
+          maxlength="200"
+          bindinput="handleField"
+        ></textarea>
+        <view class="field__hint">已输入 {{form.reason.length}} / 200 字</view>
+        <view class="field__error" wx:if="{{errors.reason}}">{{errors.reason}}</view>
+      </view>
+
+      <view class="check-row" bindtap="togglePrivacy">
+        <view class="checkbox {{privacyConsent ? 'checkbox--checked' : ''}}"></view>
+        <view class="grow">
+          <text class="apply-privacy__text">我已阅读并同意</text>
+          <text class="link" catchtap="showPrivacy">隐私告知</text>
+          <text class="apply-privacy__text">，同意为审批目的收集上述信息。</text>
+        </view>
+      </view>
+      <view class="field__error" wx:if="{{errors.privacy_consent}}">{{errors.privacy_consent}}</view>
+
+      <view class="banner banner--warning apply-warning">
+        <view class="banner__text">不默认勾选；不收集身份证号、住址、人脸等敏感信息。请确保手机号真实，便于审批核对。</view>
+      </view>
+
+      <button
+        class="btn btn--primary btn--block apply-submit"
+        bindtap="submit"
+        disabled="{{submitting}}"
+      >{{submitting ? '正在提交…' : '提交申请'}}</button>
+      <button class="btn btn--block" bindtap="goProfile">返回我的</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card apply-status" wx:if="{{application}}">
+      <view class="card__head">
+        <text class="card__title">申请进度</text>
+        <text class="badge badge--{{statusTone}}">{{statusLabel}}</text>
+      </view>
+
+      <view class="kv">
+        <text class="kv__key">申请编号</text>
+        <view class="kv__value row">
+          <text>{{application.application_no}}</text>
+          <text class="link" bindtap="copyApplicationNo">复制</text>
+        </view>
+      </view>
+      <view class="kv">
+        <text class="kv__key">提交时间</text>
+        <text class="kv__value">{{submittedAtLabel || '—'}}</text>
+      </view>
+      <view class="kv" wx:if="{{reviewedAtLabel}}">
+        <text class="kv__key">处理时间</text>
+        <text class="kv__value">{{reviewedAtLabel}}</text>
+      </view>
+
+      <view class="timeline">
+        <view class="timeline__item" wx:for="{{timeline}}" wx:key="key">
+          <view class="timeline__rail">
+            <view class="timeline__dot timeline__dot--{{item.state}}"></view>
+            <view class="timeline__line" wx:if="{{index !== timeline.length - 1}}"></view>
+          </view>
+          <view class="timeline__body">
+            <view class="timeline__label">{{item.label}}</view>
+            <view class="timeline__time" wx:if="{{item.time}}">{{item.time}}</view>
+            <view class="timeline__desc" wx:if="{{item.description}}">{{item.description}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="banner banner--danger" wx:if="{{application.status === 'rejected'}}">
+        <view class="banner__title">驳回原因</view>
+        <view class="banner__text">{{application.reject_reason || '未填写原因，请联系管理员。'}}</view>
+      </view>
+      <view class="banner banner--warning" wx:if="{{application.status === 'rejected' && resubmitHint}}">
+        <view class="banner__text">{{resubmitHint}}</view>
+      </view>
+      <view class="banner banner--info" wx:if="{{application.demo}}">
+        <view class="banner__title">本地演示记录</view>
+        <view class="banner__text">申请接口尚未就绪，本记录仅保存在本机，未提交服务器。</view>
+      </view>
+
+      <view class="apply-actions">
+        <button
+          class="btn btn--primary btn--small"
+          wx:if="{{application.status === 'rejected'}}"
+          bindtap="switchToForm"
+        >{{canResubmitNow ? '重新提交申请' : '等待冷却后可重提'}}</button>
+        <button class="btn btn--small" bindtap="contactAdmin">联系管理员</button>
+      </view>
+    </view>
+
+    <view class="card apply-lookup">
+      <view class="card__head">
+        <text class="card__title">查询申请状态</text>
+        <text class="card__extra">编号 + 令牌</text>
+      </view>
+      <view class="field">
+        <view class="field__label">申请编号</view>
+        <input
+          class="input"
+          value="{{statusNo}}"
+          data-field="no"
+          placeholder="例如 AP20261110001"
+          bindinput="handleQueryInput"
+        />
+      </view>
+      <view class="field">
+        <view class="field__label">状态令牌</view>
+        <input
+          class="input"
+          value="{{statusToken}}"
+          data-field="token"
+          placeholder="提交申请后保存在本机"
+          bindinput="handleQueryInput"
+        />
+      </view>
+      <view class="field__error" wx:if="{{statusError}}">{{statusError}}</view>
+      <button
+        class="btn btn--ghost btn--block apply-submit"
+        bindtap="queryStatus"
+        disabled="{{statusLoading}}"
+      >{{statusLoading ? '正在查询…' : '查询状态'}}</button>
+      <view class="caption apply-lookup__note">
+        为保护隐私，不支持仅凭手机号查询他人申请；状态令牌不进入服务器日志。
+      </view>
+    </view>
+
+    <view class="card apply-switch" wx:if="{{!application}}">
+      <view class="caption">尚未提交申请？</view>
+      <button class="btn btn--primary btn--small" bindtap="switchToForm">填写申请</button>
+    </view>
+  </block>
+
+  <view class="apply-footer">
+    <text>审批通过前不能浏览数据；批准后按角色开放浏览、AI 与导出。</text>
+  </view>
+</view>

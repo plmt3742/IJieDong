@@ -1,0 +1,132 @@
+<view class="page page--tab">
+  <view class="home-head">
+    <view class="home-head__top">
+      <view class="home-head__identity">
+        <text class="home-head__name">{{districtName}}</text>
+        <text class="home-head__period">{{periodYear}} 年</text>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+    <view class="home-head__meta">
+      <text>数据时点：{{dataAsOfLabel || '演示种子数据'}}</text>
+      <text wx:if="{{coverageText}}">核心指标覆盖 {{coverageText}}</text>
+    </view>
+  </view>
+
+  <view class="banner banner--info home-banner" wx:if="{{identity && identity.isGuest}}">
+    <view class="banner__title">游客模式</view>
+    <view class="banner__text">可浏览已发布数据；AI 每日限次；导出需申请账号后按角色开放。</view>
+    <view class="home-banner__actions">
+      <button class="btn btn--ghost btn--small" bindtap="goApply">申请账号</button>
+      <text class="caption">{{guestQuota}}</text>
+    </view>
+  </view>
+
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="待审核或已驳回的申请者只能查看申请状态，暂不能浏览数据。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:elif="{{loading}}">
+    <view class="grid home-metrics">
+      <view class="skeleton skeleton--card" wx:for="{{skeletons}}" wx:key="*this"></view>
+    </view>
+    <view class="skeleton skeleton--title" style="margin-top: 32rpx;"></view>
+    <view class="skeleton skeleton--card" style="margin-top: 16rpx;"></view>
+  </block>
+
+  <state-view
+    wx:elif="{{error}}"
+    state="error"
+    description="{{error}}"
+    request-id="{{requestId}}"
+    action-text="重新加载"
+    bind:action="onRetry"
+  />
+
+  <block wx:else>
+    <view class="grid home-metrics">
+      <metric-card
+        wx:for="{{metrics}}"
+        wx:key="code"
+        code="{{item.code}}"
+        label="{{item.label}}"
+        value="{{item.value}}"
+        unit="{{item.unit}}"
+        year="{{item.year}}"
+        status="{{item.status}}"
+        precision="{{item.precision}}"
+        bind:cardtap="handleMetricTap"
+      />
+    </view>
+
+    <view class="section">
+      <view class="section__head">
+        <view class="section__title">镇街概览</view>
+        <text class="section__link" bindtap="goRegions">查看全部</text>
+      </view>
+      <view class="list">
+        <view
+          class="list-row"
+          wx:for="{{towns}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          data-name="{{item.name}}"
+          bindtap="handleTownTap"
+        >
+          <view class="list-row__main">
+            <view class="list-row__title">
+              <text>{{item.name}}</text>
+              <text class="tag tag--zone" wx:if="{{item.category === 'development_zone'}}">开发区/生态城</text>
+            </view>
+            <view class="list-row__meta">镇街 · {{item.code}}</view>
+          </view>
+          <view class="list-row__arrow"></view>
+        </view>
+      </view>
+      <view class="caption home-list-note" wx:if="{{townTotal > 0}}">
+        共 {{townTotal}} 个镇街，当前显示前 {{towns.length}} 个
+      </view>
+    </view>
+
+    <view class="card ai-entry" bindtap="goAi">
+      <view class="ai-entry__mark">问</view>
+      <view class="grow">
+        <view class="ai-entry__title">用一句话查数据</view>
+        <view class="ai-entry__text">例如：2025 年各镇街常住人口排名如何？</view>
+      </view>
+      <view class="list-row__arrow"></view>
+    </view>
+
+    <view class="quick-row">
+      <view class="quick-item" bindtap="goRegions">
+        <text class="quick-item__label">区域导航</text>
+        <text class="quick-item__hint">区 / 镇街 / 村居</text>
+      </view>
+      <view class="quick-item" bindtap="goAi">
+        <text class="quick-item__label">AI 问答</text>
+        <text class="quick-item__hint">数值 / 排名 / 对比</text>
+      </view>
+      <view class="quick-item" bindtap="goExport">
+        <text class="quick-item__label">导出汇报</text>
+        <text class="quick-item__hint">PNG / PDF / XLSX / CSV</text>
+      </view>
+      <view class="quick-item" bindtap="goApply">
+        <text class="quick-item__label">申请账号</text>
+        <text class="quick-item__hint">查看权限与状态</text>
+      </view>
+    </view>
+
+    <view class="home-footer">
+      <text>数据来源：演示种子数据（合成）</text>
+      <text>数值为空时不显示 0；所有演示页面保留“演示数据”标识。</text>
+    </view>
+  </block>
+</view>

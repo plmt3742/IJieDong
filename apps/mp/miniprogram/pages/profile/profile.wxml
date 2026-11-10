@@ -1,0 +1,150 @@
+<view class="page page--tab">
+  <view class="card profile-identity">
+    <view class="profile-identity__top">
+      <view class="profile-identity__avatar">{{avatarText}}</view>
+      <view class="grow">
+        <view class="profile-identity__name">
+          {{identity && identity.name ? identity.name : '游客'}}
+          <text class="badge badge--{{!identity || identity.isGuest ? 'muted' : 'success'}}">{{identity ? identity.label : '游客'}}</text>
+        </view>
+        <view class="profile-identity__meta" wx:if="{{identity && !identity.isGuest}}">
+          {{identity.unit || '单位待完善'}}
+        </view>
+        <view class="profile-identity__meta" wx:else>可浏览已发布数据，导出与完整 AI 需申请账号</view>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+
+    <view class="profile-guest-actions" wx:if="{{identity && identity.isGuest}}">
+      <button class="btn btn--primary btn--small" bindtap="goApply">申请账号</button>
+    </view>
+  </view>
+
+  <view class="card profile-status">
+    <view class="card__head">
+      <text class="card__title">申请状态</text>
+      <text class="badge badge--{{statusTone}}">{{statusLabel}}</text>
+    </view>
+
+    <block wx:if="{{application}}">
+      <view class="kv">
+        <text class="kv__key">申请编号</text>
+        <view class="kv__value row">
+          <text>{{application.application_no}}</text>
+          <text class="link" bindtap="copyApplicationNo">复制</text>
+        </view>
+      </view>
+      <view class="kv">
+        <text class="kv__key">提交时间</text>
+        <text class="kv__value">{{submittedAtLabel || '—'}}</text>
+      </view>
+      <view class="kv" wx:if="{{reviewedAtLabel}}">
+        <text class="kv__key">处理时间</text>
+        <text class="kv__value">{{reviewedAtLabel}}</text>
+      </view>
+      <view class="banner banner--danger profile-reject" wx:if="{{application.status === 'rejected'}}">
+        <view class="banner__title">驳回原因</view>
+        <view class="banner__text">{{application.reject_reason || '未填写原因，请联系管理员。'}}</view>
+      </view>
+
+      <view class="timeline">
+        <view class="timeline__item" wx:for="{{timeline}}" wx:key="key">
+          <view class="timeline__rail">
+            <view class="timeline__dot timeline__dot--{{item.state}}"></view>
+            <view class="timeline__line" wx:if="{{index !== timeline.length - 1}}"></view>
+          </view>
+          <view class="timeline__body">
+            <view class="timeline__label">{{item.label}}</view>
+            <view class="timeline__time" wx:if="{{item.time}}">{{item.time}}</view>
+            <view class="timeline__desc" wx:if="{{item.description}}">{{item.description}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="profile-status__actions">
+        <button class="btn btn--small" bindtap="handleApplicationAction">查看申请详情</button>
+        <button
+          class="btn btn--ghost btn--small"
+          wx:if="{{application.status === 'rejected'}}"
+          bindtap="handleResubmit"
+        >重新提交</button>
+      </view>
+      <view class="caption profile-status__hint" wx:if="{{application.status === 'rejected' && resubmitHint}}">
+        {{resubmitHint}}
+      </view>
+      <view class="caption profile-status__hint" wx:if="{{application.demo}}">
+        本记录为本地演示记录，尚未提交到服务器。
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="profile-status__empty">
+        <view class="caption">当前未提交申请。游客可浏览已发布数据；导出与完整 AI 需账号。</view>
+        <button class="btn btn--primary btn--small" bindtap="goApply">提交申请</button>
+      </view>
+    </block>
+  </view>
+
+  <view class="card profile-admin" wx:if="{{identity && identity.canManage}}" bindtap="goAdmin">
+    <view class="grow">
+      <view class="profile-admin__title">移动端管理</view>
+      <view class="profile-admin__text">待审批、用户启停、审计摘要</view>
+    </view>
+    <view class="list-row__arrow"></view>
+  </view>
+
+  <view class="section">
+    <view class="section__head">
+      <view class="section__title">帮助与信息</view>
+    </view>
+    <view class="list">
+      <view
+        class="list-row"
+        wx:for="{{helpItems}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="handleHelp"
+      >
+        <view class="list-row__main">
+          <view class="list-row__title">{{item.title}}</view>
+          <view class="list-row__meta">{{item.hint}}</view>
+        </view>
+        <view class="list-row__arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card profile-demo">
+    <view class="card__head">
+      <text class="card__title">演示环境</text>
+      <text class="badge badge--warning">合成数据</text>
+    </view>
+    <view class="kv">
+      <text class="kv__key">应用版本</text>
+      <text class="kv__value">{{version}}</text>
+    </view>
+    <view class="kv">
+      <text class="kv__key">API 地址</text>
+      <text class="kv__value">{{apiBase}}</text>
+    </view>
+    <view class="kv">
+      <text class="kv__key">数据环境</text>
+      <text class="kv__value">{{demoMode ? '演示数据（合成）' : '生产环境'}}</text>
+    </view>
+    <view class="caption profile-demo__note">
+      演示页面保留“演示数据”标识；数据时点以最近一次成功导入为准。
+    </view>
+  </view>
+
+  <button class="btn btn--danger btn--block profile-logout" wx:if="{{user}}" bindtap="handleLogout">
+    退出登录
+  </button>
+
+  <view class="profile-footer">
+    <text>{{version}}</text>
+    <text>i揭东 Demo v0</text>
+  </view>
+</view>

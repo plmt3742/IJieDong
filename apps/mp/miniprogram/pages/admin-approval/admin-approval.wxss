@@ -1,0 +1,150 @@
+.admin-head {
+  padding: var(--s-4) var(--s-3);
+  background: var(--c-surface);
+  border: 1rpx solid var(--c-border);
+  border-radius: var(--r-md);
+}
+
+.admin-head__top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+}
+
+.admin-head__title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.admin-head__sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--c-text-secondary);
+}
+
+.admin-tabs {
+  margin-top: var(--s-3);
+}
+
+.admin-notice {
+  margin-top: var(--s-3);
+}
+
+.admin-list {
+  margin-top: var(--s-3);
+}
+
+.admin-app + .admin-app {
+  margin-top: var(--s-2);
+}
+
+.admin-app__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+}
+
+.admin-app__name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.admin-app__meta {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--c-text-muted);
+  line-height: 1.5;
+}
+
+.admin-detail {
+  margin-top: var(--s-3);
+  border-color: #c9dced;
+}
+
+.admin-detail__reason {
+  margin-top: var(--s-2);
+  padding: var(--s-2);
+  background: var(--c-surface-alt);
+  border-radius: var(--r-sm);
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: var(--c-text-secondary);
+}
+
+.admin-detail__section {
+  margin-top: var(--s-3);
+}
+
+.admin-roles {
+  margin-top: var(--s-2);
+}
+
+.role-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 64rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid var(--c-border-strong);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--c-text-secondary);
+  background: var(--c-surface);
+}
+
+.role-chip--active {
+  border-color: var(--c-primary);
+  color: #ffffff;
+  background: var(--c-primary);
+}
+
+.admin-detail__hint {
+  margin-top: 8rpx;
+}
+
+.admin-detail__button {
+  margin-top: var(--s-2);
+}
+
+.admin-search {
+  margin-top: var(--s-3);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+
+.search-bar__input {
+  flex: 1;
+  min-width: 0;
+  height: 80rpx;
+  min-height: 80rpx;
+  font-size: 28rpx;
+}
+
+.search-bar__btn {
+  flex-shrink: 0;
+  min-height: 80rpx;
+  padding: 0 24rpx;
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #ffffff;
+}
+
+.admin-users,
+.admin-audit {
+  margin-top: var(--s-3);
+}
+
+.admin-back {
+  margin-top: var(--s-4);
+}

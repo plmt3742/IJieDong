@@ -1,0 +1,143 @@
+<view class="page">
+  <view class="export-head">
+    <view class="export-head__top">
+      <view class="grow">
+        <text class="export-head__title">导出汇报卡</text>
+        <view class="export-head__sub">选择格式后生成；文件包含来源、数据时点、生成时间与演示水印。</view>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+  </view>
+
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能导出，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:else>
+    <view class="banner banner--warning export-guest" wx:if="{{!allowed}}">
+      <view class="banner__title">游客不可导出</view>
+      <view class="banner__text">导出仅对已批准账号按角色开放。可先提交账号申请，通过后再生成文件。</view>
+      <button class="btn btn--ghost btn--small export-guest__button" bindtap="goApply">申请账号</button>
+    </view>
+
+    <view class="card export-preview">
+      <view class="card__head">
+        <text class="card__title">预览摘要</text>
+        <text class="badge badge--warning">演示水印</text>
+      </view>
+      <view class="export-preview__title">{{title}}</view>
+      <view class="kv">
+        <text class="kv__key">区域</text>
+        <text class="kv__value">{{regionName}}</text>
+      </view>
+      <view class="kv" wx:if="{{indicatorName}}">
+        <text class="kv__key">指标</text>
+        <text class="kv__value">{{indicatorName}}<text wx:if="{{unit}}">（{{unit}}）</text></text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">年份</text>
+        <text class="kv__value">{{periodYear}} 年</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">数据来源</text>
+        <text class="kv__value">{{sourceLabel}}</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">数据时点</text>
+        <text class="kv__value">{{dataAsOfLabel}}</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">生成时间</text>
+        <text class="kv__value">{{generatedAtLabel}}</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">水印</text>
+        <text class="kv__value">{{watermark}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section__head">
+        <view class="section__title">选择格式</view>
+        <text class="caption">不设默认</text>
+      </view>
+      <view class="format-grid">
+        <view
+          class="format-card {{selectedFormat === item.key ? 'format-card--selected' : ''}} {{!allowed ? 'format-card--disabled' : ''}}"
+          wx:for="{{formats}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="selectFormat"
+        >
+          <view class="format-card__top">
+            <text class="format-card__label">{{item.label}}</text>
+            <text class="format-card__check" wx:if="{{selectedFormat === item.key}}">已选择</text>
+          </view>
+          <view class="format-card__desc">{{item.description}}</view>
+          <view class="format-card__note">{{item.note}}</view>
+        </view>
+      </view>
+      <view class="caption export-format-note">
+        每次导出都必须手动选择格式；切换格式只改变说明，不自动生成。未选择时“生成”按钮不可用。
+      </view>
+    </view>
+
+    <view class="card export-actions">
+      <button
+        class="btn btn--primary btn--block"
+        bindtap="handleGenerate"
+        disabled="{{!selectedFormat || state === 'generating' || !allowed}}"
+      >{{state === 'generating' ? '正在生成…' : '生成文件'}}</button>
+      <button class="btn btn--block" wx:if="{{!allowed}}" bindtap="goApply">申请账号后导出</button>
+    </view>
+
+    <view class="card export-progress" wx:if="{{state === 'generating'}}">
+      <view class="card__head">
+        <text class="card__title">正在生成</text>
+        <text class="caption">{{progress}}%</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-bar__fill" style="width: {{progress}}%;"></view>
+      </view>
+      <view class="caption export-progress__text">
+        已提交，等待服务端渲染；进度来自任务状态，不使用假动画。
+      </view>
+    </view>
+
+    <view class="card export-result" wx:if="{{state === 'ready' && job}}">
+      <view class="card__head">
+        <text class="card__title">导出完成</text>
+        <text class="badge badge--success">{{job.format}}</text>
+      </view>
+      <view class="kv"><text class="kv__key">导出编号</text><text class="kv__value">{{job.export_id}}</text></view>
+      <view class="kv"><text class="kv__key">文件大小</text><text class="kv__value">{{fileSizeLabel || '—'}}</text></view>
+      <view class="kv" wx:if="{{expiresAtLabel}}"><text class="kv__key">有效期至</text><text class="kv__value">{{expiresAtLabel}}</text></view>
+      <button class="btn btn--primary btn--block export-download" bindtap="handleDownload">下载 / 保存</button>
+      <view class="caption export-result__note">PNG 保存到相册；PDF/XLSX 用小程序打开；CSV 复制临时链接。</view>
+    </view>
+
+    <view class="banner banner--danger export-error" wx:if="{{state === 'failed'}}">
+      <view class="banner__title">导出失败</view>
+      <view class="banner__text">{{error}}</view>
+      <button class="btn btn--ghost btn--small" bindtap="handleRetry">重试</button>
+    </view>
+
+    <view class="card export-rules">
+      <view class="card__title">导出说明</view>
+      <view class="export-rules__item">文件包含标题、区域、指标、年份、来源、数据时点、生成时间与演示水印。</view>
+      <view class="export-rules__item">空值与不适用按规则保留，不写 0；导出使用答案快照，不重新取数。</view>
+      <view class="export-rules__item">小程序不在端上合成 PDF/XLSX，全部由服务端生成。</view>
+      <view class="export-rules__item">模板导出接口为建议补充契约，需与后端同步后再启用。</view>
+    </view>
+
+    <button class="btn btn--block export-back" bindtap="goBack">返回</button>
+  </block>
+</view>

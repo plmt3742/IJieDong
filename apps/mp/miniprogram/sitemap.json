@@ -1,0 +1,9 @@
+{
+  "desc": "i揭东 Demo v0 sitemap. Internal government demo; all pages are not indexed.",
+  "rules": [
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

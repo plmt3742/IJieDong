@@ -1,0 +1,145 @@
+<view class="page">
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能浏览指标详情，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:elif="{{state === 'loading'}}">
+    <view class="skeleton skeleton--title"></view>
+    <view class="skeleton skeleton--card" style="margin-top: 24rpx;"></view>
+    <view class="skeleton skeleton--card" style="margin-top: 24rpx;"></view>
+  </block>
+
+  <state-view
+    wx:elif="{{state === 'error'}}"
+    state="error"
+    description="{{error}}"
+    request-id="{{requestId}}"
+    action-text="重新加载"
+    bind:action="onRetry"
+  />
+
+  <state-view
+    wx:elif="{{state === 'not-applicable'}}"
+    state="not-applicable"
+    title="该指标不适用于此区域"
+    description="指标适用层级与区域类型不匹配，未绘制图表，也未以 0 代替。"
+    action-text="返回区域导航"
+    bind:action="goRegions"
+  />
+
+  <state-view
+    wx:elif="{{state === 'empty'}}"
+    state="empty"
+    title="当前没有该指标/年份数据"
+    description="{{regionName}} 在 {{periodYear}} 年没有已发布的{{indicatorName || '该指标'}}数据。可返回切换区域或年份。"
+    action-text="返回区域导航"
+    bind:action="goRegions"
+  />
+
+  <block wx:else>
+    <view class="indicator-hero">
+      <view class="indicator-hero__top">
+        <view class="grow">
+          <text class="indicator-hero__name">{{indicatorName}}</text>
+          <view class="indicator-hero__meta">
+            <text>{{regionName}}</text>
+            <text class="badge">{{regionLevelLabel}}</text>
+            <text class="caption">{{periodYear}} 年</text>
+          </view>
+        </view>
+        <view class="demo-watermark">
+          <view class="demo-watermark__dot"></view>
+          <text>演示数据</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card value-card">
+      <view class="value-card__label">{{indicatorName}}</view>
+      <view class="value-card__row" wx:if="{{!isText}}">
+        <text class="value-card__value">{{valueDisplay}}</text>
+        <text class="value-card__unit" wx:if="{{indicatorUnit}}">{{indicatorUnit}}</text>
+      </view>
+      <view class="value-card__text pre-wrap" wx:else>{{textValue || '暂无内容'}}</view>
+      <view class="value-card__badges">
+        <text class="badge badge--{{qualityToneName}}" wx:if="{{qualityText}}">{{qualityText}}</text>
+        <text class="badge badge--muted">{{periodYear}} 年</text>
+      </view>
+      <view class="divider"></view>
+      <view class="kv">
+        <text class="kv__key">数据来源</text>
+        <text class="kv__value">{{sourceLabel}}</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">数据时点</text>
+        <text class="kv__value">{{updatedAtLabel || '演示种子数据'}}</text>
+      </view>
+      <view class="kv">
+        <text class="kv__key">区域层级</text>
+        <text class="kv__value">{{regionLevelLabel}}</text>
+      </view>
+    </view>
+
+    <view class="banner banner--info indicator-guest" wx:if="{{identity && identity.isGuest}}">
+      <view class="banner__title">游客只读</view>
+      <view class="banner__text">可查看数据；导出需申请账号，通过后按角色开放。</view>
+    </view>
+
+    <view class="section" wx:if="{{!isText}}">
+      <view class="section__head">
+        <view class="section__title">数据图表</view>
+        <text class="caption">ChartSpec 渲染</text>
+      </view>
+      <chart wx:if="{{rankChart}}" spec="{{rankChart}}" height="{{230}}"></chart>
+      <view class="banner banner--warning" wx:if="{{rankNote}}">
+        <view class="banner__text">{{rankNote}}</view>
+      </view>
+    </view>
+
+    <view class="section" wx:if="{{canCompare}}">
+      <view class="section__head">
+        <view class="section__title">区域对比</view>
+        <text class="section__link" bindtap="loadCompare" wx:if="{{!compareLoading}}">
+          {{compareLoaded ? '重新对比' : '开始对比'}}
+        </text>
+      </view>
+      <view class="card" wx:if="{{!compareLoaded && !compareLoading && !compareNote}}">
+        <view class="caption">与同一上级区域下的其他区域对比当前指标，最多 4 个区域。</view>
+        <button class="btn btn--ghost btn--small compare-button" bindtap="loadCompare">选择同区域对比</button>
+      </view>
+      <view class="card" wx:if="{{compareLoading}}">
+        <view class="caption">正在加载对比数据…</view>
+      </view>
+      <view class="banner banner--warning" wx:if="{{compareNote}}">
+        <view class="banner__text">{{compareNote}}</view>
+      </view>
+      <chart wx:if="{{compareChart}}" spec="{{compareChart}}" height="{{220}}"></chart>
+      <view class="list compare-table" wx:if="{{compareRows.length}}">
+        <view class="list-row" wx:for="{{compareRows}}" wx:key="id">
+          <view class="list-row__main">
+            <view class="list-row__title">{{item.name}}</view>
+            <view class="list-row__meta" wx:if="{{item.diff}}">较首个区域 {{item.diff}}</view>
+          </view>
+          <text class="compare-table__value">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card indicator-actions">
+      <button class="btn btn--primary btn--block" bindtap="handleExport">
+        {{exportAllowed ? '导出当前指标' : '导出（申请账号后开放）'}}
+      </button>
+      <button class="btn btn--block" bindtap="handleAskAi">问 AI 这个指标</button>
+      <button class="btn btn--block" bindtap="goRegions">返回区域导航</button>
+    </view>
+
+    <view class="indicator-footer">
+      <text>空值不绘制为 0；图表仅渲染服务端 ChartSpec，不执行模型生成的代码。</text>
+    </view>
+  </block>
+</view>

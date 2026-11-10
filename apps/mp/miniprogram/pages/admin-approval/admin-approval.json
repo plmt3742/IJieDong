@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "管理",
+  "usingComponents": {
+    "state-view": "/components/state-view/state-view"
+  }
+}

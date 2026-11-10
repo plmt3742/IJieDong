@@ -1,0 +1,46 @@
+<view class="chart">
+  <view class="chart__head">
+    <view class="chart__titles">
+      <text class="chart__title">{{spec.title || '图表'}}</text>
+      <text class="chart__unit" wx:if="{{spec.unit}}">单位：{{spec.unit}}</text>
+    </view>
+    <view class="chart__toggle" wx:if="{{showToggle && !isTableOnly}}">
+      <text
+        class="chart__toggle-item {{mode === 'chart' ? 'chart__toggle-item--active' : ''}}"
+        data-mode="chart"
+        bindtap="switchMode"
+      >图表</text>
+      <text
+        class="chart__toggle-item {{mode === 'table' ? 'chart__toggle-item--active' : ''}}"
+        data-mode="table"
+        bindtap="switchMode"
+      >表格</text>
+    </view>
+  </view>
+
+  <view class="chart__body" wx:if="{{mode === 'chart'}}">
+    <canvas
+      type="2d"
+      id="chartCanvas"
+      canvas-id="chartCanvas"
+      class="chart__canvas"
+      style="height: {{canvasHeight}}px;"
+    ></canvas>
+  </view>
+
+  <view class="chart__table-wrap" wx:else>
+    <scroll-view scroll-x class="chart__table-scroll">
+      <view class="chart__table">
+        <view class="chart__tr chart__tr--head">
+          <view class="chart__th" wx:for="{{tableColumns}}" wx:key="*this">{{item}}</view>
+        </view>
+        <view class="chart__tr" wx:for="{{tableRows}}" wx:key="id" wx:for-item="row">
+          <view class="chart__td" wx:for="{{row.cells}}" wx:for-item="cell">{{cell}}</view>
+        </view>
+        <view class="chart__empty" wx:if="{{!tableRows.length}}">暂无可展示的数据</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="chart__hint" wx:if="{{fallbackNote}}">{{fallbackNote}}</view>
+</view>

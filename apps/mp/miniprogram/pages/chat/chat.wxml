@@ -1,0 +1,213 @@
+<view class="chat-page">
+  <view class="chat-topbar">
+    <view class="chat-topbar__left">
+      <text class="chat-topbar__title">数据助手</text>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+    <text class="caption" wx:if="{{identity && identity.isGuest}}">今日剩余 {{guestRemaining}} / {{guestLimit}} 次</text>
+  </view>
+
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能使用 AI 问答，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:else>
+    <scroll-view
+      class="chat-scroll"
+      scroll-y
+      scroll-with-animation
+      scroll-into-view="{{scrollIntoView}}"
+      enable-back-to-top
+    >
+      <view class="chat-list" wx:if="{{messages.length}}">
+        <block wx:for="{{messages}}" wx:key="id" wx:for-item="message">
+          <view id="msg-{{message.id}}" class="chat-item chat-item--{{message.role}}">
+            <view class="chat-bubble chat-bubble--user" wx:if="{{message.role === 'user'}}">
+              <text class="chat-bubble__text">{{message.text}}</text>
+              <text class="chat-bubble__time">{{message.time}}</text>
+            </view>
+
+            <view class="chat-answer" wx:else>
+              <view class="chat-answer__head">
+                <text class="chat-answer__role">数据助手</text>
+                <text class="badge badge--warning" wx:if="{{message.demo}}">演示回答</text>
+                <text class="chat-answer__time">{{message.time}}</text>
+              </view>
+
+              <view class="thinking" wx:if="{{message.state === 'thinking'}}">
+                <view class="thinking__dots">
+                  <view class="thinking__dot"></view>
+                  <view class="thinking__dot"></view>
+                  <view class="thinking__dot"></view>
+                </view>
+                <text>正在查询数据…</text>
+              </view>
+
+              <block wx:elif="{{message.state === 'error'}}">
+                <view class="banner banner--danger">
+                  <view class="banner__text">{{message.errorText || '回答失败，请稍后重试。'}}</view>
+                </view>
+                <button
+                  class="btn btn--ghost btn--small chat-retry"
+                  data-question="{{message.question}}"
+                  bindtap="handleRetry"
+                >重试</button>
+              </block>
+
+              <block wx:else>
+                <block wx:for="{{message.blocks}}" wx:key="key" wx:for-item="block">
+                  <view class="answer-block answer-summary" wx:if="{{block.type === 'summary'}}">
+                    <text class="pre-wrap">{{block.text}}</text>
+                  </view>
+
+                  <view class="banner banner--{{block.level || 'info'}} answer-block" wx:elif="{{block.type === 'notice'}}">
+                    <view class="banner__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <view class="banner__text">{{block.text}}</view>
+                  </view>
+
+                  <view class="answer-block" wx:elif="{{block.type === 'metric_grid'}}">
+                    <view class="answer-block__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <view class="answer-metric-grid">
+                      <view class="answer-metric" wx:for="{{block.metrics}}" wx:key="label" wx:for-item="metric">
+                        <text class="answer-metric__label">{{metric.label}}</text>
+                        <view class="answer-metric__value-row">
+                          <text class="answer-metric__value">{{metric.display}}</text>
+                          <text class="answer-metric__unit" wx:if="{{metric.unit}}">{{metric.unit}}</text>
+                        </view>
+                        <text class="answer-metric__meta" wx:if="{{metric.year}}">{{metric.year}} 年</text>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="answer-block" wx:elif="{{block.type === 'chart'}}">
+                    <chart wx:if="{{block.chart}}" spec="{{block.chart}}" height="{{220}}"></chart>
+                    <view class="caption" wx:else>图表数据缺失。</view>
+                  </view>
+
+                  <view class="answer-block" wx:elif="{{block.type === 'table'}}">
+                    <view class="answer-block__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <scroll-view scroll-x class="answer-table-scroll">
+                      <view class="answer-table">
+                        <view class="answer-table__tr answer-table__tr--head">
+                          <view class="answer-table__cell" wx:for="{{block.tableColumns}}" wx:key="*this">{{item}}</view>
+                        </view>
+                        <view class="answer-table__tr" wx:for="{{block.tableRows}}" wx:key="id" wx:for-item="row">
+                          <view class="answer-table__cell" wx:for="{{row.cells}}" wx:for-item="cell">{{cell}}</view>
+                        </view>
+                      </view>
+                    </scroll-view>
+                  </view>
+
+                  <view class="answer-block" wx:elif="{{block.type === 'ranking'}}">
+                    <view class="answer-block__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <view class="answer-ranking">
+                      <view class="answer-ranking__row" wx:for="{{block.rankingView}}" wx:key="rank" wx:for-item="entry">
+                        <text class="answer-ranking__rank">{{entry.rank}}</text>
+                        <text class="answer-ranking__name">{{entry.name}}</text>
+                        <text class="answer-ranking__value">{{entry.value}}</text>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="answer-block answer-source" wx:elif="{{block.type === 'source'}}">
+                    <view class="answer-block__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <text class="answer-source__text" wx:if="{{block.text}}">{{block.text}}</text>
+                    <view
+                      class="citation-row"
+                      wx:for="{{block.citations}}"
+                      wx:key="citation_id"
+                      wx:for-item="citation"
+                      data-citation="{{citation}}"
+                      bindtap="handleCitation"
+                    >
+                      <view class="citation-row__main">{{citation.indicator || citation.indicator_name || '引用'}}</view>
+                      <view class="citation-row__meta">
+                        {{citation.region_name || citation.region || citation.region_level || '区域'}} ·
+                        {{citation.period || '-'}} ·
+                        {{citation.source || '来源'}}
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="answer-block" wx:elif="{{block.type === 'actions'}}">
+                    <view class="answer-block__title" wx:if="{{block.title}}">{{block.title}}</view>
+                    <view class="pill-row">
+                      <button
+                        class="btn btn--ghost btn--small"
+                        wx:for="{{block.actions}}"
+                        wx:key="key"
+                        data-action="{{item}}"
+                        bindtap="handleAction"
+                      >{{item.label}}</button>
+                    </view>
+                  </view>
+                </block>
+
+                <view class="chat-citations" wx:if="{{message.citations.length && !message.hasSourceBlock}}">
+                  <view class="caption chat-citations__title">引用</view>
+                  <view
+                    class="citation-row"
+                    wx:for="{{message.citations}}"
+                    wx:key="citation_id"
+                    wx:for-item="citation"
+                    data-citation="{{citation}}"
+                    bindtap="handleCitation"
+                  >
+                    <view class="citation-row__main">{{citation.indicator || citation.indicator_name || '引用'}}</view>
+                    <view class="citation-row__meta">{{citation.period || '-'}} · {{citation.source || '来源'}}</view>
+                  </view>
+                </view>
+
+                <view class="chat-followups" wx:if="{{message.followUps.length}}">
+                  <text class="caption">追问建议：</text>
+                  <view class="pill-row">
+                    <text
+                      class="follow-chip"
+                      wx:for="{{message.followUps}}"
+                      wx:key="*this"
+                      data-question="{{item}}"
+                      bindtap="handleFollowUp"
+                    >{{item}}</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <view class="chat-empty" wx:else>
+        <view class="chat-empty__mark">问</view>
+        <view class="chat-empty__title">输入问题开始查询</view>
+        <view class="chat-empty__text">可问数值、排名、对比或区域画像。答案会附带引用与追问建议。</view>
+      </view>
+      <view class="chat-scroll__space"></view>
+    </scroll-view>
+
+    <view class="chat-composer safe-bottom">
+      <input
+        class="input chat-composer__input"
+        value="{{input}}"
+        placeholder="继续提问，例如：那排名前 3 是谁？"
+        placeholder-class="chat-composer__placeholder"
+        confirm-type="send"
+        maxlength="200"
+        bindinput="handleInput"
+        bindconfirm="handleSend"
+      />
+      <button
+        class="btn btn--primary chat-composer__send"
+        bindtap="handleSend"
+        disabled="{{sending || !input}}"
+      >{{sending ? '查询中' : '发送'}}</button>
+    </view>
+  </block>
+</view>

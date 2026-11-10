@@ -1,0 +1,17 @@
+<view
+  class="metric-card {{disabled ? 'metric-card--disabled' : ''}}"
+  hover-class="{{disabled ? 'none' : 'metric-card--hover'}}"
+  bindtap="handleTap"
+>
+  <view class="metric-card__label">{{label}}</view>
+  <view class="metric-card__value-row">
+    <text class="metric-card__value {{isEmpty ? 'metric-card__value--empty' : ''}}">{{display}}</text>
+    <text class="metric-card__unit" wx:if="{{showUnit}}">{{unit}}</text>
+  </view>
+  <view class="metric-card__meta">
+    <text wx:if="{{year}}">{{year}} 年</text>
+    <text class="metric-card__dot" wx:if="{{year && note}}">·</text>
+    <text class="badge badge--{{tone}}" wx:if="{{note}}">{{note}}</text>
+  </view>
+  <view class="metric-card__hint" wx:if="{{hint}}">{{hint}}</view>
+</view>

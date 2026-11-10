@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "区域画像",
+  "usingComponents": {
+    "metric-card": "/components/metric-card/metric-card",
+    "state-view": "/components/state-view/state-view"
+  }
+}

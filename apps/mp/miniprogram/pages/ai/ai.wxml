@@ -1,0 +1,88 @@
+<view class="page page--tab">
+  <view class="ai-head">
+    <view class="ai-head__top">
+      <view class="grow">
+        <text class="ai-head__title">数据问答</text>
+        <view class="ai-head__sub">用一句话查询揭东区、镇街、村居的指标、排名与对比。</view>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+  </view>
+
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能使用 AI 问答，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:else>
+    <view class="banner banner--warning ai-quota" wx:if="{{identity && identity.isGuest}}">
+      <view class="banner__title">游客配额</view>
+      <view class="banner__text">{{quotaText}}</view>
+      <view class="ai-quota__actions">
+        <button class="btn btn--ghost btn--small" bindtap="goApply">申请账号</button>
+      </view>
+    </view>
+
+    <view class="banner banner--danger ai-quota" wx:if="{{error}}">
+      <view class="banner__text">{{error}}</view>
+    </view>
+
+    <view class="section">
+      <view class="section__head">
+        <view class="section__title">试试这样问</view>
+        <text class="caption">点击填入</text>
+      </view>
+      <view class="example-list">
+        <view
+          class="example-card"
+          wx:for="{{examples}}"
+          wx:key="key"
+          data-index="{{index}}"
+          bindtap="handleExample"
+        >
+          <text class="badge">{{item.label}}</text>
+          <text class="example-card__question">{{item.question}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card ai-composer">
+      <view class="card__head">
+        <text class="card__title">输入问题</text>
+        <text class="card__extra">最多 200 字</text>
+      </view>
+      <textarea
+        class="textarea ai-composer__input"
+        value="{{question}}"
+        placeholder="例如：2025 年各镇街常住人口排名前 5 是哪些？"
+        placeholder-class="ai-composer__placeholder"
+        maxlength="200"
+        auto-height
+        bindinput="handleInput"
+      ></textarea>
+      <view class="ai-composer__footer">
+        <text class="caption">仅查询本区已发布数据，不编造数字。</text>
+        <button
+          class="btn btn--primary ai-composer__send"
+          bindtap="handleSend"
+          disabled="{{submitting || !question}}"
+        >{{submitting ? '正在打开会话…' : '提问'}}</button>
+      </view>
+    </view>
+
+    <view class="card ai-notes">
+      <view class="card__title">使用说明</view>
+      <view class="ai-notes__item">答案包含结论、图表或表格、引用与追问建议。</view>
+      <view class="ai-notes__item">图表只渲染服务端 ChartSpec，不执行模型生成的代码。</view>
+      <view class="ai-notes__item">无数据时会明确说明缺失项，不补 0、不推测排名。</view>
+      <view class="ai-notes__item">游客提问不保存会话历史；申请者暂不可使用。</view>
+    </view>
+  </block>
+</view>

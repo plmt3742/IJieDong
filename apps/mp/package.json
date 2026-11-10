@@ -1,0 +1,16 @@
+{
+  "name": "@ijiedong/mp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "i揭东 Demo v0 native WeChat mini program",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "tdesign-miniprogram": "^1.18.0"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^5.3.1",
+    "typescript": "^5.9.3"
+  }
+}

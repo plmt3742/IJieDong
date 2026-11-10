@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "区域导航",
+  "usingComponents": {
+    "state-view": "/components/state-view/state-view"
+  }
+}

@@ -1,0 +1,33 @@
+<view class="state-view {{compact ? 'state-view--compact' : ''}}">
+  <block wx:if="{{state === 'loading'}}">
+    <view class="state-view__spinner"></view>
+    <view class="state-view__heading">{{heading}}</view>
+    <view class="state-view__detail">{{detail}}</view>
+    <view class="state-view__skeleton">
+      <view class="skeleton skeleton--text"></view>
+      <view class="skeleton skeleton--text" style="width: 72%;"></view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="state-view__mark state-view__mark--{{state}}">
+      <view class="state-view__mark-line"></view>
+      <view class="state-view__mark-line state-view__mark-line--short"></view>
+    </view>
+    <view class="state-view__heading">{{heading}}</view>
+    <view class="state-view__detail">{{detail}}</view>
+    <view class="state-view__request" wx:if="{{requestId}}">请求编号：{{requestId}}</view>
+    <view class="state-view__actions">
+      <button
+        class="btn btn--ghost btn--small"
+        wx:if="{{actionText}}"
+        bindtap="handleAction"
+      >{{actionText}}</button>
+      <button
+        class="btn btn--small"
+        wx:if="{{secondaryText}}"
+        bindtap="handleSecondary"
+      >{{secondaryText}}</button>
+    </view>
+  </block>
+</view>

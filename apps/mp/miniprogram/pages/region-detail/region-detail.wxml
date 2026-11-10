@@ -1,0 +1,117 @@
+<view class="page">
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能浏览区域画像，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:elif="{{loading}}">
+    <view class="skeleton skeleton--title"></view>
+    <view class="skeleton skeleton--card" style="margin-top: 24rpx;"></view>
+    <view class="grid" style="margin-top: 24rpx;">
+      <view class="skeleton skeleton--card" wx:for="{{skeletons}}" wx:key="*this"></view>
+    </view>
+  </block>
+
+  <state-view
+    wx:elif="{{error}}"
+    state="error"
+    description="{{error}}"
+    request-id="{{requestId}}"
+    action-text="重新加载"
+    bind:action="onRetry"
+  />
+
+  <block wx:else>
+    <view class="region-hero">
+      <view class="region-hero__top">
+        <view class="grow">
+          <view class="region-hero__name-row">
+            <text class="region-hero__name">{{regionName}}</text>
+            <text class="badge">{{regionLevelLabel || '区域'}}</text>
+            <text class="tag tag--zone" wx:if="{{regionCategory === 'development_zone'}}">开发区/生态城</text>
+          </view>
+          <view class="region-hero__meta">
+            <text wx:if="{{parentName}}" class="link" bindtap="goParent">上级：{{parentName}}</text>
+            <text>数据时点：{{dataAsOfLabel}}</text>
+          </view>
+        </view>
+        <view class="demo-watermark">
+          <view class="demo-watermark__dot"></view>
+          <text>演示数据</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card region-text">
+      <view class="card__head">
+        <text class="card__title">地区简介</text>
+        <text class="card__extra">≤150 字</text>
+      </view>
+      <view
+        class="region-text__body pre-wrap {{introExpanded ? '' : 'clamp-3'}}"
+      >{{intro || '暂无简介'}}</view>
+      <text class="link region-text__toggle" wx:if="{{hasMoreIntro}}" bindtap="toggleIntro">
+        {{introExpanded ? '收起' : '展开'}}
+      </text>
+    </view>
+
+    <view class="card region-text">
+      <view class="card__head">
+        <text class="card__title">地区特色</text>
+        <text class="card__extra">≤300 字</text>
+      </view>
+      <view
+        class="region-text__body pre-wrap {{featureExpanded ? '' : 'clamp-3'}}"
+      >{{feature || '暂无特色介绍'}}</view>
+      <text class="link region-text__toggle" wx:if="{{hasMoreFeature}}" bindtap="toggleFeature">
+        {{featureExpanded ? '收起' : '展开'}}
+      </text>
+    </view>
+
+    <view class="section">
+      <view class="section__head">
+        <view class="section__title">适用指标</view>
+        <text class="caption">共 {{metricViews.length}} 项</text>
+      </view>
+
+      <view class="grid" wx:if="{{metricViews.length}}">
+        <metric-card
+          wx:for="{{metricViews}}"
+          wx:key="code"
+          code="{{item.code}}"
+          label="{{item.name}}"
+          value="{{item.value_number}}"
+          unit="{{item.unit}}"
+          year="{{item.period_year}}"
+          status="{{item.quality_status}}"
+          precision="{{item.precision}}"
+          bind:cardtap="handleMetricTap"
+        />
+      </view>
+
+      <state-view
+        wx:else
+        state="not-applicable"
+        title="暂无适用指标"
+        description="当前区域层级或类型下没有可展示的数值指标。"
+        compact
+      />
+    </view>
+
+    <view class="card region-actions">
+      <button class="btn btn--primary btn--block" bindtap="handleExport">
+        {{exportAllowed ? '导出区域汇报卡' : '导出（申请账号后开放）'}}
+      </button>
+      <button class="btn btn--block" bindtap="goRegions">返回区域导航</button>
+    </view>
+
+    <view class="region-footer">
+      <text>数据来源：{{sourceLabel}}</text>
+      <text>缺失值显示“暂无数据”，不适用显示“不适用”，均不以 0 代替。</text>
+    </view>
+  </block>
+</view>

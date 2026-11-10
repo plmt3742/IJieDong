@@ -1,0 +1,112 @@
+<view class="page page--tab">
+  <view class="tab-strip regions-tabs">
+    <view
+      class="tab-strip__item {{level === item.key ? 'tab-strip__item--active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-level="{{item.key}}"
+      bindtap="switchTab"
+    >{{item.label}}</view>
+  </view>
+
+  <view class="search-bar">
+    <input
+      class="input search-bar__input"
+      value="{{q}}"
+      placeholder="{{level === 'village' && !villageParent ? '先选择镇街' : '输入区域名称搜索'}}"
+      placeholder-class="search-bar__placeholder"
+      disabled="{{level === 'village' && !villageParent}}"
+      confirm-type="search"
+      bindinput="handleSearchInput"
+      bindconfirm="handleSearchConfirm"
+    />
+    <button class="btn btn--small search-bar__btn" bindtap="handleSearchConfirm">搜索</button>
+    <button class="btn btn--small search-bar__clear" wx:if="{{q}}" bindtap="clearSearch">清空</button>
+  </view>
+
+  <view class="village-bar" wx:if="{{level === 'village' && villageParent}}">
+    <view class="row">
+      <text class="strong">{{villageParent.name}}</text>
+      <text class="tag tag--zone" wx:if="{{villageParent.category === 'development_zone'}}">开发区/生态城</text>
+    </view>
+    <text class="link" bindtap="changeVillageParent">切换镇街</text>
+  </view>
+
+  <view class="regions-heading" wx:if="{{level === 'village' && showVillagePicker}}">
+    <text class="regions-heading__title">选择镇街</text>
+    <text class="caption">开发区/生态城不设村居</text>
+  </view>
+
+  <state-view
+    wx:if="{{locked}}"
+    state="locked"
+    title="申请审核中"
+    description="审核通过前不能浏览区域数据，只能查看申请状态。"
+    action-text="查看申请状态"
+    bind:action="goApply"
+  />
+
+  <block wx:elif="{{state === 'loading'}}">
+    <view class="skeleton skeleton--card regions-skeleton" wx:for="{{skeletons}}" wx:key="*this"></view>
+  </block>
+
+  <state-view
+    wx:elif="{{state === 'error'}}"
+    state="error"
+    description="{{error}}"
+    request-id="{{requestId}}"
+    action-text="重新加载"
+    bind:action="onRetry"
+  />
+
+  <state-view
+    wx:elif="{{state === 'empty' && q}}"
+    state="empty"
+    title="暂无结果"
+    description="{{emptyText}}"
+    action-text="清空搜索"
+    bind:action="clearSearch"
+  />
+
+  <state-view
+    wx:elif="{{state === 'empty'}}"
+    state="empty"
+    title="暂无结果"
+    description="{{emptyText}}"
+    action-text="重新加载"
+    bind:action="onRetry"
+  />
+
+  <block wx:else>
+    <view class="list regions-list">
+      <view
+        class="list-row"
+        wx:for="{{level === 'village' && showVillagePicker ? towns : items}}"
+        wx:key="id"
+        data-index="{{index}}"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+        bindtap="handleRowTap"
+      >
+        <view class="list-row__main">
+          <view class="list-row__title">
+            <text>{{item.name}}</text>
+            <text class="tag tag--zone" wx:if="{{item.category === 'development_zone'}}">开发区/生态城</text>
+          </view>
+          <view class="list-row__meta">
+            <text wx:if="{{level === 'district'}}">区级 · 根节点</text>
+            <text wx:elif="{{level === 'town'}}">镇街 · {{item.category === 'development_zone' ? '开发区/生态城' : '行政区'}}</text>
+            <text wx:else>{{villageParent ? '村居' : '镇街'}} · {{item.code}}</text>
+          </view>
+        </view>
+        <view class="list-row__arrow"></view>
+      </view>
+    </view>
+
+    <view class="regions-summary" wx:if="{{level !== 'village' || !showVillagePicker}}">
+      <text wx:if="{{total}}">共 {{total}} 条</text>
+      <text wx:if="{{loading && items.length}}">正在加载更多…</text>
+      <text wx:if="{{!hasNext && items.length}}">已显示全部</text>
+    </view>
+  </block>
+</view>

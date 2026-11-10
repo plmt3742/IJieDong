@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "指标详情",
+  "usingComponents": {
+    "chart": "/components/chart/chart",
+    "state-view": "/components/state-view/state-view"
+  }
+}

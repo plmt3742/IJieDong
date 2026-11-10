@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/regions/regions",
+    "pages/region-detail/region-detail",
+    "pages/indicator-detail/indicator-detail",
+    "pages/ai/ai",
+    "pages/chat/chat",
+    "pages/profile/profile",
+    "pages/apply/apply",
+    "pages/admin-approval/admin-approval",
+    "pages/export/export"
+  ],
+  "window": {
+    "navigationBarTitleText": "i揭东",
+    "navigationBarBackgroundColor": "#1f4e79",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f6f8",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#5b6573",
+    "selectedColor": "#1f4e79",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/regions/regions",
+        "text": "区域"
+      },
+      {
+        "pagePath": "pages/ai/ai",
+        "text": "问答"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

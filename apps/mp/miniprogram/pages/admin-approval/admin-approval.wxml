@@ -1,0 +1,229 @@
+<view class="page">
+  <view class="admin-head">
+    <view class="admin-head__top">
+      <view class="grow">
+        <text class="admin-head__title">移动端管理</text>
+        <view class="admin-head__sub">待审批、用户启停与审计摘要；角色配置与导入请回 Web 后台。</view>
+      </view>
+      <view class="demo-watermark">
+        <view class="demo-watermark__dot"></view>
+        <text>演示数据</text>
+      </view>
+    </view>
+  </view>
+
+  <state-view
+    wx:if="{{!allowed}}"
+    state="no-permission"
+    title="无管理权限"
+    description="仅管理员与审批者可进入。若角色已变更，请返回“我的”重新登录。"
+    action-text="返回我的"
+    bind:action="goProfile"
+  />
+
+  <block wx:else>
+    <view class="tab-strip admin-tabs">
+      <view
+        class="tab-strip__item {{tab === 'pending' ? 'tab-strip__item--active' : ''}}"
+        data-tab="pending"
+        bindtap="switchTab"
+      >待审批</view>
+      <view
+        class="tab-strip__item {{tab === 'users' ? 'tab-strip__item--active' : ''}}"
+        data-tab="users"
+        bindtap="switchTab"
+      >用户状态</view>
+      <view
+        class="tab-strip__item {{tab === 'audit' ? 'tab-strip__item--active' : ''}}"
+        data-tab="audit"
+        bindtap="switchTab"
+      >审计摘要</view>
+    </view>
+
+    <view class="banner banner--warning admin-notice" wx:if="{{notice}}">
+      <view class="banner__text">{{notice}}</view>
+    </view>
+
+    <block wx:if="{{tab === 'pending'}}">
+      <state-view wx:if="{{pendingState === 'loading'}}" state="loading" compact />
+      <state-view
+        wx:elif="{{pendingState === 'error'}}"
+        state="error"
+        description="{{error}}"
+        request-id="{{requestId}}"
+        action-text="重新加载"
+        bind:action="onRetry"
+      />
+      <state-view
+        wx:elif="{{pendingState === 'empty'}}"
+        state="empty"
+        title="暂无待审批申请"
+        description="新申请提交后会出现在这里。"
+        action-text="刷新"
+        bind:action="onRetry"
+      />
+
+      <view class="admin-list" wx:else>
+        <view
+          class="card admin-app"
+          wx:for="{{pending}}"
+          wx:key="id"
+          data-index="{{index}}"
+          bindtap="openApplication"
+        >
+          <view class="admin-app__head">
+            <view class="grow">
+              <view class="admin-app__name">
+                <text>{{item.display_name}}</text>
+                <text class="badge badge--warning">{{item.statusLabel}}</text>
+                <text class="badge badge--muted" wx:if="{{item.resubmit_count}}">重提 {{item.resubmit_count}} 次</text>
+              </view>
+              <view class="admin-app__meta">{{item.unit}} · {{item.phoneDisplay}}</view>
+            </view>
+            <view class="list-row__arrow"></view>
+          </view>
+          <view class="admin-app__meta">提交于 {{item.submittedAtLabel || '—'}}</view>
+        </view>
+      </view>
+
+      <view class="card admin-detail" wx:if="{{selected}}">
+        <view class="card__head">
+          <text class="card__title">申请详情</text>
+          <text class="section__link" bindtap="closeDetail">关闭</text>
+        </view>
+        <view class="kv"><text class="kv__key">申请编号</text><text class="kv__value">{{selected.application_no}}</text></view>
+        <view class="kv"><text class="kv__key">姓名</text><text class="kv__value">{{selected.display_name}}</text></view>
+        <view class="kv"><text class="kv__key">单位</text><text class="kv__value">{{selected.unit}}</text></view>
+        <view class="kv"><text class="kv__key">手机号</text><text class="kv__value">{{selected.phoneFull || selected.phoneDisplay}}</text></view>
+        <view class="kv"><text class="kv__key">提交时间</text><text class="kv__value">{{selected.submittedAtLabel || '—'}}</text></view>
+        <view class="kv"><text class="kv__key">重提次数</text><text class="kv__value">{{selected.resubmit_count || 0}}</text></view>
+        <view class="kv" wx:if="{{selected.privacy_version}}"><text class="kv__key">隐私告知版本</text><text class="kv__value">{{selected.privacy_version}}</text></view>
+        <view class="admin-detail__reason">
+          <view class="caption">申请说明</view>
+          <view class="pre-wrap">{{selected.reason || '未填写'}}</view>
+        </view>
+
+        <view class="banner banner--danger" wx:if="{{selected.selfApproval}}">
+          <view class="banner__text">不能审批本人申请，按钮已禁用。</view>
+        </view>
+
+        <view class="admin-detail__section" wx:if="{{!selected.selfApproval}}">
+          <view class="card__title">批准角色</view>
+          <view class="pill-row admin-roles">
+            <view
+              class="role-chip {{selectedRole === item.key ? 'role-chip--active' : ''}}"
+              wx:for="{{roleOptions}}"
+              wx:key="key"
+              data-role="{{item.key}}"
+              bindtap="selectRole"
+            >{{item.label}}</view>
+          </view>
+          <view class="caption admin-detail__hint">默认 viewer；approver 只能批准 viewer。</view>
+          <button
+            class="btn btn--primary btn--block admin-detail__button"
+            bindtap="approve"
+            disabled="{{submitting}}"
+          >{{submitting ? '处理中…' : '批准申请'}}</button>
+
+          <view class="field">
+            <view class="field__label">驳回原因（5 至 200 字）</view>
+            <textarea
+              class="textarea"
+              value="{{rejectReason}}"
+              placeholder="请说明驳回原因，申请者可查看"
+              maxlength="200"
+              bindinput="handleRejectInput"
+            ></textarea>
+          </view>
+          <button
+            class="btn btn--danger btn--block admin-detail__button"
+            bindtap="reject"
+            disabled="{{submitting}}"
+          >驳回申请</button>
+        </view>
+      </view>
+    </block>
+
+    <block wx:elif="{{tab === 'users'}}">
+      <view class="search-bar admin-search">
+        <input
+          class="input search-bar__input"
+          value="{{userQuery}}"
+          placeholder="搜索姓名、单位或用户名"
+          confirm-type="search"
+          bindinput="handleUserQuery"
+          bindconfirm="searchUsers"
+        />
+        <button class="btn btn--small search-bar__btn" bindtap="searchUsers">搜索</button>
+      </view>
+
+      <state-view wx:if="{{usersState === 'loading'}}" state="loading" compact />
+      <state-view
+        wx:elif="{{usersState === 'error'}}"
+        state="error"
+        description="{{error}}"
+        request-id="{{requestId}}"
+        action-text="重新加载"
+        bind:action="onRetry"
+      />
+      <state-view
+        wx:elif="{{usersState === 'empty'}}"
+        state="empty"
+        title="暂无用户"
+        description="没有匹配的用户，或用户接口尚未就绪。"
+        action-text="刷新"
+        bind:action="onRetry"
+      />
+
+      <view class="list admin-users" wx:else>
+        <view class="list-row" wx:for="{{users}}" wx:key="id">
+          <view class="list-row__main">
+            <view class="list-row__title">
+              <text>{{item.display_name}}</text>
+              <text class="badge">{{item.roleLabel}}</text>
+              <text class="badge badge--{{item.statusTone}}">{{item.statusLabel}}</text>
+            </view>
+            <view class="list-row__meta">{{item.unit}}<text wx:if="{{item.phoneDisplay}}"> · {{item.phoneDisplay}}</text></view>
+          </view>
+          <button
+            class="btn btn--small {{item.status === 'active' ? 'btn--danger' : 'btn--ghost'}}"
+            data-index="{{index}}"
+            bindtap="toggleUserStatus"
+          >{{item.status === 'active' ? '禁用' : '启用'}}</button>
+        </view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <state-view wx:if="{{auditState === 'loading'}}" state="loading" compact />
+      <state-view
+        wx:elif="{{auditState === 'error'}}"
+        state="error"
+        description="{{error}}"
+        request-id="{{requestId}}"
+        action-text="重新加载"
+        bind:action="onRetry"
+      />
+      <state-view
+        wx:elif="{{auditState === 'empty'}}"
+        state="empty"
+        title="暂无审计记录"
+        description="最近 10 条申请相关事件将显示在这里；不支持导出。"
+        action-text="刷新"
+        bind:action="onRetry"
+      />
+
+      <view class="list admin-audit" wx:else>
+        <view class="list-row" wx:for="{{audit}}" wx:key="id">
+          <view class="list-row__main">
+            <view class="list-row__title">{{item.actionLabel}}</view>
+            <view class="list-row__meta">{{item.actorLabel}} · {{item.timeLabel || '—'}}</view>
+          </view>
+          <text class="badge badge--muted">{{item.result || '—'}}</text>
+        </view>
+      </view>
+    </block>
+
+    <button class="btn btn--block admin-back" bindtap="goProfile">返回我的</button>
+  </block>
+</view>
