@@ -10,6 +10,8 @@ export const WATERMARK_TEXT = '演示数据·内部资料';
 
 /** Empty by default in release builds; configure per environment. */
 const DEVELOPMENT_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+/** Local-server LAN address used by real devices; update if the host IP changes. */
+const LAN_BASE_URL = 'http://10.62.172.85:8000/api/v1';
 const RELEASE_BASE_URL = '';
 
 /** Fill locally before device tests. Never commit a real personal number. */
@@ -48,7 +50,13 @@ export function getApiBaseUrl(): string {
     const account = wx.getAccountInfoSync();
     const envVersion = account.miniProgram.envVersion;
     if (envVersion === 'develop') {
-      return DEVELOPMENT_BASE_URL;
+      let platform = '';
+      try {
+        platform = wx.getSystemInfoSync().platform || '';
+      } catch (error) {
+        console.warn('[config] platform unavailable', error);
+      }
+      return platform === 'devtools' ? DEVELOPMENT_BASE_URL : LAN_BASE_URL;
     }
   } catch (error) {
     console.warn('[config] account info unavailable', error);
