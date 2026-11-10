@@ -52,7 +52,7 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | 技术栈决策 | ACCEPTED | 原生小程序 ADR-005；后端/后台/数据库 ADR-001；LLM 见 14 |
 | 数据模型决策 | PROPOSED（v2 草案） | ADR-002 基线；v2 见 `21`；Demo v0 子集见 `21` §3.2 |
 | Agent 架构决策 | PROPOSED（v2 草案） | ADR-003 基线；AnswerBlocks 见 `24` |
-| 部署/合规策略 | ACCEPTED（方向） | 11.12 小服务器 + 小程序实测；Web 后台可视化；粤政易等程序完成后再接 |
+| 部署/合规策略 | ACCEPTED（方向） | 11.12 本机 Windows 工作站（局域网）+ 小程序实测；Web 后台可视化；粤政易等程序完成后再接 |
 | 文档体系 | DONE | `docs/` 三层 + 批次记录 + 11.12 计划/成本/对接文案 + 费用调研/工作流/页面地图 |
 | 契约冻结 | DONE（2026-11-10） | `21`~`25`、`product/06`、`product/07` 完成；DOC-029~032 DONE |
 | B00 后端脚手架 | DONE（2026-11-10） | FastAPI + SQLite session + `/health`/`/ready`；commit `b943aa8` |
@@ -63,7 +63,7 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | B06 Web 后台 | DONE（2026-11-10） | Vue3 + Vite + TS + Element Plus；登录/总览/数据/导入/申请/用户/审计；`pnpm build` 通过 |
 | B07 原生小程序 | DONE（2026-11-10，DevTools 待验证） | 10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 通过 |
 | B08 AI/导出 | DONE（2026-11-10） | `/ai/chat` + AnswerBlocks + 10 工具；PNG/PDF/XLSX/CSV 导出；119 tests；migration 0003；OpenAPI 35 paths |
-| B09 部署/CI | DONE（资产） | Compose/Nginx/Dockerfile/CI；实际小服务器部署待 AppID/域名/服务器 |
+| B09 部署/CI | DONE（本机） | 本机 API/Web 监听 `0.0.0.0`，局域网可访问；Compose/Nginx/Dockerfile/CI 保留为云方案 |
 | 六步推进 | DONE | 契约收口 → 认证/后台 → 小程序 → AI/导出 → 种子/部署 → 文档同步；119 tests / 35 paths |
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |

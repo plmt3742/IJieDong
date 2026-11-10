@@ -26,10 +26,10 @@ i揭东是面向揭东区公职人员的政府数据门户，目标是将区、�
 - 已完成云资源、DeepSeek、小程序认证、域名、SSL、合规测评的费用调研。
 - 已完成 `apps/`、`services/`、`packages/` 等目录骨架。
 - 已完成 18 页低保真线框、可缩放页面结构地图和 29 条页面跳转。
-- 2026-11-10 完成 11.12 决策冻结与契约草案：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出；Demo v0 将部署到小服务器并用微信小程序实测。
+- 2026-11-10 完成 11.12 决策冻结与契约草案：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出；Demo v0 部署到本机工作站并通过局域网/微信小程序实测。
 - 后端已落地 B00~B05 + B08：FastAPI/SQLite、12 张表与迁移、227/15/1608 合成种子、只读查询 API、JWT 认证/申请审批/用户/审计/Excel 导入、AI 问答、PNG/PDF/XLSX/CSV 导出；119 tests，OpenAPI 35 paths。
 - Web 后台与原生小程序已落地：登录/总览/数据/导入/申请/用户/审计；小程序 10 页 + ChartSpec Canvas 2D。小程序 DevTools/真机待验证。
-- 部署资产、CI、根 pnpm workspace 已建立；实际小服务器部署待 AppID/域名/服务器到位。
+- 部署资产、CI、根 pnpm workspace 已建立；本机服务器已可局域网访问，云服务器/Docker 保留为后续方案。
 
 当前分支为 `main`，最新提交见 `git log`。
 
@@ -70,7 +70,7 @@ i揭东是面向揭东区公职人员的政府数据门户，目标是将区、�
 | 数据库 | SQLite（11.12 演示）/ PostgreSQL 16（生产） | 同一套 SQLAlchemy 模型 |
 | LLM | DeepSeek API（OpenAI 兼容）+ 适配层 | 生产可切换政务云或私有化模型 |
 | 图表 | ECharts 5 + 平台无关 ChartSpec | LLM 不生成 SQL、JavaScript 或 ECharts option |
-| 部署 | 11.12 小服务器 + 本地开发；生产 Docker Compose + Nginx | 预留 ARM64 与政务外网 |
+| 部署 | 11.12 本机 Windows 工作站（局域网）；生产 Docker Compose + Nginx | 预留 ARM64 与政务外网 |
 
 技术决策依据见 `docs/adr/`。
 

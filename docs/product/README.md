@@ -27,6 +27,6 @@
 ## 状态
 
 - 当前为 **M0.5（11.12 Demo v0）** 初稿，未经过需求方评审。
-- 已确认：公职人员、原生微信小程序、粤政易后置、Excel/接口/手工、DeepSeek API；11.12 可在小服务器部署并实测，后台必须可视化；游客不可导出，导出支持 PNG/PDF/XLSX/CSV 且不设默认。
+- 已确认：公职人员、原生微信小程序、粤政易后置、Excel/接口/手工、DeepSeek API；11.12 可在本机部署并实测，后台必须可视化；游客不可导出，导出支持 PNG/PDF/XLSX/CSV 且不设默认。
 - 仍需确认的问题与对外话术：`docs/agent/12-open-questions.md`、`docs/agent/17-outreach-copy.md`。
 - 11.12 范围/排期：`docs/agent/15-demo-plan-1112.md`。

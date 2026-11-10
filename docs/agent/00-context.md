@@ -34,11 +34,11 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 已完成：原始材料分析、数据模板拆解、技术栈/数据模型/Agent/部署决策、agent 文档体系、批次记录模板、文档内链检查。
 - 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
 - 已完成（2026-11-10 契约冻结）：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出共 7 份契约草案（`21`~`25`、`product/06`、`product/07`）。
-- 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 可运行 Demo v0，小服务器 + 小程序实测，Web 后台可视化；游客不可导出，导出 PNG/PDF/XLSX/CSV 且不设默认。
+- 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 可运行 Demo v0，本机工作站（局域网）+ 小程序实测，Web 后台可视化；游客不可导出，导出 PNG/PDF/XLSX/CSV 且不设默认。
 - 后端已完成：B00 脚手架 + B01 数据模型/迁移 + B02 合成种子 + B04 只读查询 API + B05 认证/申请/审批/导入 + B08 AI/导出；119 tests；OpenAPI 35 paths。
 - 前端已完成：Web 后台（登录/总览/数据/导入/申请/用户/审计）与原生小程序（10 页/ChartSpec Canvas 2D）；小程序 DevTools/真机待验证。
 - Git：分支 `feat/b002-demo-v0`；文档/契约/后端/前端改动未提交；`main` 在 `3e37611`。
-- 当前批次：`B-002 11.12 demo 冲刺`（六步推进 Step 1~6 已完成；实际小服务器部署、微信 DevTools/真机、真实数据/Key/AppID 待外部输入）。
+- 当前批次：`B-002 11.12 demo 冲刺`（六步推进 Step 1~6 已完成；本机服务器已可局域网访问；微信 DevTools/真机、真实数据待收口）。
 
 ## 技术栈（已确认方向，B-002 验证）
 
@@ -105,7 +105,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 1. 主路径联调：登录 → 总览 → 数据 → 导入 → 申请审批 → AI 问答 → 四格式导出。
 2. 复跑：后端 pytest/compileall/Alembic、Web `pnpm build`、小程序 `tsc --noEmit`、文档链接/无 emoji。
 3. 补齐：AI 50 题评测、回答缓存、`/admin/data-values` 写接口、审计日期筛选；真实 LLM Key 已本地联调。
-4. 部署：AppID/域名/服务器到位后上小服务器 + 微信真机。
+4. 部署：本机服务器已监听 `0.0.0.0`，局域网 Web/API 可用；微信真机、外网访问按需补域名/HTTPS。
 5. 11.12 前产出可运行 Demo v0、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
 
 ## 文档入口

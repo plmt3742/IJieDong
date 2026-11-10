@@ -1,6 +1,30 @@
 # deploy · 部署
 
-> 状态：Demo v0 部署资产已建立；实际服务器部署待 AppID/域名/服务器确认。
+> 状态：2026-11-10 决策变更——Demo v0 先以**本机 Windows 工作站作为服务器**，局域网访问；云服务器/Docker 方案保留但不作为 11.12 前置。
+
+## 本机作为服务器（当前决策）
+
+- 后端监听 `0.0.0.0:8000`，Web 后台监听 `0.0.0.0:5173`。
+- 局域网地址：`http://10.62.172.85:5173/`；API 文档 `http://10.62.172.85:8000/docs`。
+- Windows 防火墙只对 `LocalSubnet` 放行 TCP 8000、5173；不开放 5432/6379。
+- Web 后台用 `/api/v1` 相对路径 + Vite 代理，其他设备访问不需要 CORS。
+- 小程序开发者工具模拟器用 `127.0.0.1`；真机预览用 `apps/mp/miniprogram/services/config.ts` 的 `LAN_BASE_URL`。
+
+```powershell
+# 后端
+cd services/api
+python -m alembic -c alembic.ini upgrade head
+python scripts/seed_demo.py
+python scripts/create_admin.py --username admin
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+# Web 后台（另开终端）
+cd <repo-root>
+pnpm install
+pnpm --filter @ijd/admin dev:lan
+```
+
+本机服务器需要保持不休眠；建议设置 DHCP 保留，避免 `10.62.172.85` 变化。
 
 ## 职责
 

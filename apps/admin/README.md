@@ -23,7 +23,14 @@ pnpm install
 pnpm --filter @ijd/admin dev
 ```
 
-开发地址：`http://127.0.0.1:5173`。后端默认 `http://127.0.0.1:8000`。
+本机服务器/局域网访问：
+
+```bash
+# 本机 .env.local: VITE_API_BASE_URL=/api/v1
+pnpm --filter @ijd/admin dev:lan
+```
+
+局域网地址：`http://10.62.172.85:5173/`。其他设备通过 Vite 的 `/api` 代理访问后端，不需要额外 CORS；后端需监听 `0.0.0.0:8000`，Windows 防火墙对 `LocalSubnet` 放行 5173。
 
 构建与本地预览：
 

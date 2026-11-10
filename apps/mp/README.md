@@ -65,14 +65,15 @@ apps/mp/
 
 ## 运行
 
-1. 启动后端（`services/api`），默认地址 `http://127.0.0.1:8000`：
+1. 启动后端（`services/api`）：
    ```bash
    cd services/api
    python -m pip install -r requirements.txt
    python -m alembic -c alembic.ini upgrade head
    python scripts/seed_demo.py
-   python -m uvicorn app.main:app --reload
+   python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
    ```
+   开发者工具模拟器用 `http://127.0.0.1:8000`；真机用本机局域网地址。
 2. 安装小程序依赖并做类型检查：
    ```bash
    cd apps/mp
@@ -81,8 +82,17 @@ apps/mp/
    ```
 3. 用微信开发者工具打开 `apps/mp` 目录：
    - 当前 AppID 已写入 `project.config.json`；如更换主体或测试号，替换该文件的 `appid` 后重新导入。
-   - 本地开发需在“详情 -> 本地设置”勾选“不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书”，否则 `http://127.0.0.1:8000` 会被拦截。
+   - 本地开发需在“详情 -> 本地设置”勾选“不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书”，否则本地 HTTP 请求会被拦截。
    - 项目使用 TypeScript 编译插件（`setting.useCompilerPlugins`）；修改 `.ts` 后由开发者工具编译，不产出 `dist/`。
+
+### 本机服务器（局域网）
+
+当前 Demo v0 以本机 Windows 工作站作为服务器：
+
+- 后端监听 `0.0.0.0:8000`，Windows 防火墙对 `LocalSubnet` 放行 TCP 8000。
+- 开发者工具模拟器使用 `127.0.0.1`；真机预览使用 `services/config.ts` 的 `LAN_BASE_URL`（当前 `http://10.62.172.85:8000/api/v1`）。
+- 如果电脑局域网 IP 变化，修改 `LAN_BASE_URL` 后重新生成 Preview 二维码。
+- 手机与电脑必须在同一局域网；公共网络/手机流量无法访问该地址。
 4. 非 `develop` 环境没有默认 API 域名。首次打开后在开发者工具 Console 执行：
    ```js
    wx.setStorageSync('ijd:api_base_url', 'https://your-demo-host.example/api/v1')

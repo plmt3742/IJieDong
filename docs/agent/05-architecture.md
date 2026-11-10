@@ -68,7 +68,7 @@ flowchart TB
 | 图表 | ECharts 5 + `ChartSpec` | 主版本 | 小程序用 echarts-for-weixin；后台用 echarts |
 | 包管理 | pnpm（Node）+ Python venv/uv | — | 当前机器 uv 未安装；可先用 venv/pip |
 | 质量 | ruff + pytest；ESLint + Prettier + tsc | — | CI 必须通过 |
-| 部署 | 11.12 小服务器 + 本地开发；生产 Docker Compose + Nginx；GitHub Actions | — | 预留 ARM64 多架构镜像 |
+| 部署 | 11.12 本机 Windows 工作站 + 局域网；生产 Docker Compose + Nginx；GitHub Actions | — | 预留 ARM64 多架构镜像 |
 
 **不引入**（MVP）：LangChain/LlamaIndex、Redis、Celery、Kafka、Elasticsearch、图数据库、微服务网关。理由：单人维护成本高，当前数据量与并发不需要。
 
@@ -633,7 +633,7 @@ System prompt 必须包含：
 
 ## 11. 部署拓扑
 
-### 11.1 11.12 开发/演示（本地开发 + 小服务器）
+### 11.1 11.12 开发/演示（本机工作站 + 局域网）
 
 ```text
 本地进程（不强制 Docker）
@@ -643,7 +643,7 @@ System prompt 必须包含：
         └── request → http://127.0.0.1:8000（开发期需关闭域名校验/用测试号）
 ```
 
-> 11.12 Demo v0：在用户小服务器上部署 FastAPI + SQLite + Web 后台静态文件，Nginx/Caddy 终止 HTTPS；小程序配置合法域名后实测。本地进程仍用于日常开发。
+> 11.12 Demo v0：在本机 Windows 工作站上运行 FastAPI + SQLite + Web 后台，局域网访问；微信开发者工具可直接联调，真机如需 HTTP 需关闭域名校验，正式发布再补 HTTPS 域名。Docker/云服务器保留为后续方案。
 > Docker/PostgreSQL 生产部署在 11.12 之后做（当前机器未安装 Docker）。
 
 ### 11.2 生产（后期）

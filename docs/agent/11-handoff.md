@@ -27,8 +27,8 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 技术栈 | **原生微信小程序 + Vue3 后台 + FastAPI + SQLite(demo)/PostgreSQL(prod) + DeepSeek API + ECharts/ChartSpec** |
 | 数据模型 | ADR-002 基线 + v2 契约（periods/dimensions/derived/quality/answer_blocks/component_registry/export_jobs）；Demo v0 已建 12 张表，AI/导出字段已由 0003 补齐 |
 | Agent | 只读工具 + AnswerBlocks；保留 ChartSpec 兼容；见 ADR-003、`24`；LLM 见 14 |
-| 部署 | 11.12 部署到用户小服务器并用微信小程序实测；Compose/Nginx/Dockerfile/CI 已备；实际服务器/AppID/域名待提供 |
-| 下一步 | 六步推进已完成；实际小服务器部署、微信 DevTools/真机、真实 Key/AppID/数据待外部输入 |
+| 部署 | 11.12 以本机 Windows 工作站作为服务器，局域网 `http://10.62.172.85:5173/`；微信小程序实测；Compose/Nginx/Dockerfile/CI 保留为云方案 |
+| 下一步 | 六步推进已完成；本机服务器已可局域网访问；微信真机/真实数据/外网域名待收口 |
 | 最大风险 | 质量优先下的范围控制、小程序 DevTools/真机未验证、真实数据/Key/AppID 未到、AI 准确性与导出字体/渲染 |
 
 ## 0.1 本轮上下文保护快照（2026-11-10）
@@ -39,7 +39,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 - 未开始：C01/C02 认证/申请/后台、D01~D05 小程序、E01~E03 AI/组件、F 部署联调。
 - 新会话先读：本文件、`04-tasks.md`、`21`~`25`、`product/06`、`product/07`。
 - 验证命令：`cd services/api && python -m pytest -q`；`python -m alembic -c alembic.ini upgrade head`；`python scripts/seed_demo.py --check`。
-- 已知边界：OpenAPI 仅 B04 查询端点；认证/AI/管理端待补；尚未部署小服务器。
+- 已知边界：OpenAPI 仅 B04 查询端点；认证/AI/管理端待补；尚未做云服务器部署（当前切本机服务器）。
 
 ## 0.2 六步推进快照（2026-11-10）
 
@@ -49,7 +49,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 2 认证/后台 | DONE | 16 个认证/申请/审批/用户/审计/导入端点；migration 0002；80 tests；Web 后台 build 通过 |
 | 3 小程序 | DONE（DevTools 待验证） | 10 页 + 3 组件 + ChartSpec Canvas 2D；`tsc --noEmit` 与 JSON/WXML 校验通过 |
 | 4 AI/导出 | DONE | `/ai/chat` + AnswerBlocks + 10 工具 + 引用；PNG/PDF/XLSX/CSV 导出；migration 0003 |
-| 5 种子/部署 | DONE（资产） | 数据库已播种 227/15/1608/42；SQLite FK/WAL；Compose/Nginx/Dockerfile/CI；根 pnpm workspace |
+| 5 种子/部署 | DONE（本机） | 数据库已播种 227/15/1608/42；SQLite FK/WAL；本机 API/Web 监听 `0.0.0.0`；Compose/Nginx 保留为云方案 |
 | 6 文档收口 | DONE | 00/01/03/04/05/06/07/09/11/12/15/18/20/21/22/23/24/25/批次记录与 OpenAPI 已同步 |
 
 - 当前测试：后端 119 passed；Web `pnpm build` 通过；小程序 `tsc --noEmit` 通过；`check-links` 49 个 Markdown 通过；`check-no-emoji` 57 个 Markdown 通过（已排除 node_modules）。

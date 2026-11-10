@@ -97,10 +97,10 @@ python -m pip install -r requirements.txt
 python -m alembic -c alembic.ini upgrade head
 python scripts/seed_demo.py
 python scripts/create_admin.py --username admin
-python -m uvicorn app.main:app --reload
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-默认地址：`http://127.0.0.1:8000`。
+默认地址：`http://127.0.0.1:8000`；本机服务器模式下监听 `0.0.0.0:8000`，局域网设备访问 `http://10.62.172.85:8000`。
 
 数据库迁移：`python -m alembic -c alembic.ini upgrade head`；回滚：`python -m alembic -c alembic.ini downgrade base`。
 
@@ -165,5 +165,5 @@ python -m ruff check .
 
 1. 真实 LLM Key 联调 + 50 题评测；回答缓存。
 2. `/admin/data-values` 写接口、审计日期筛选。
-3. AppID/域名/服务器到位后部署小服务器 + 小程序真机。
+3. 本机服务器已可局域网访问；微信真机/外网域名按需补充。
 4. Step 6 文档收口与主路径联调。
