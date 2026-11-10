@@ -80,7 +80,7 @@ apps/mp/
    npm run typecheck
    ```
 3. 用微信开发者工具打开 `apps/mp` 目录：
-   - AppID 使用 `touristappid` 占位；真实 AppID 到位后替换 `project.config.json`。
+   - 当前 AppID 已写入 `project.config.json`；如更换主体或测试号，替换该文件的 `appid` 后重新导入。
    - 本地开发需在“详情 -> 本地设置”勾选“不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书”，否则 `http://127.0.0.1:8000` 会被拦截。
    - 项目使用 TypeScript 编译插件（`setting.useCompilerPlugins`）；修改 `.ts` 后由开发者工具编译，不产出 `dist/`。
 4. 非 `develop` 环境没有默认 API 域名。首次打开后在开发者工具 Console 执行：
