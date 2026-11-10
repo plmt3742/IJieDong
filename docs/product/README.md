@@ -11,10 +11,10 @@
 | [03-page-specs.md](03-page-specs.md) | 页面规范模板 + 核心页面清单 | 模板/部分 |
 | [04-data-catalog.md](04-data-catalog.md) | 数据模板分析：区域、指标、质量、导入规则 | 初稿 |
 | [05-page-structure.md](05-page-structure.md) | 页面清单、跳转/数据传递、页面详情 | 初稿 |
-| [06-page-design-v2.md](06-page-design-v2.md) | 页面设计 v2：MP/AD 页面、状态、数据映射、申请/导出/管理 | 草案 |
+| [06-page-design-v2.md](06-page-design-v2.md) | 页面设计 v2：MP/AD 页面、状态、数据映射、申请/导出/管理 | 已用于实现；MP16 登录待实现 |
 | [07-component-library-spec.md](07-component-library-spec.md) | 组件库规范：注册表、manifest、AI 调用协议、静态渲染边界 | 草案 |
-| [ue/page-map.html](ue/page-map.html) | 18 页低保真线框 + 可缩放/可点击页面地图 | 可验证 |
-| [ue/wireframes.html](ue/wireframes.html) | 18 页灰度线框总览 | 可验证 |
+| [ue/page-map.html](ue/page-map.html) | 页面地图 v1：18 页低保真线框 + 可缩放/可点击；v2 待更新 | 已过时，待 UI-001 |
+| [ue/wireframes.html](ue/wireframes.html) | 18 页灰度线框总览 | 已过时，待 UI-001 |
 
 ## 产品原则
 

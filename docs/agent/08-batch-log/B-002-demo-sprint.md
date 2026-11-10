@@ -7,10 +7,10 @@
 | 批次 ID | B-002 |
 | 日期 | 2026-11-06 ~ 2026-11-12 |
 | 操作者 | 人 + agent |
-| 状态 | DOING |
-| 关联任务 | DOC-017~032、SH-001、BE-001/002、DATA-001~007、MP-001~004、FE-001~003、AI-001~006、QA-001 |
+| 状态 | DONE |
+| 关联任务 | DOC-017~032、SH-001、BE-001~006、DATA-001~009、MP-001~004、FE-001~005、AI-001~008、QA-001 |
 | 关联 ADR | ADR-001、ADR-002、ADR-003、ADR-005 |
-| 分支/PR | `main` 已推送（初始 `01e22ec`；最新提交见 `git log`） |
+| 分支/PR | `feat/b002-demo-v0` 已推送；最新提交见 `git log` |
 
 ## 2. 目标
 
@@ -192,3 +192,8 @@
 - 00/01/03/04/05/06/07/09/11/12/15/18/20/21/22/23/24/25 与批次记录已同步。
 - `contracts/openapi.json` 已重新导出为 35 paths / 83 schemas；`contracts/README.md`、根 README、服务 README、后台/小程序 README 已同步。
 - 全量复跑：pytest 119 passed、compileall、Alembic、Web build、小程序 typecheck、docs checks 全部通过。
+
+## 13. 后续批次
+
+- B-002 已收口。下一批为 [B-003 小程序登录与双端视觉对齐](B-003-ui-auth-alignment.md)：MP16 登录入口、页面地图 v2、MP/Web 视觉与按钮秩序。
+- 云服务器部署不作为 11.12 前置；当前以本机工作站 + 局域网运行。

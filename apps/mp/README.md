@@ -186,7 +186,7 @@ node validate-mp.js   # 临时校验脚本，检查 JSON、页面/组件文件�
 ## 已知缺口 / 主 agent 需接入
 
 1. 替换 `appid`，配置真实 API 域名与微信 request 合法域名。
-2. 认证页/令牌获取：当前无登录页，需接入 C01/C02 或测试登录流程写入 `ijd:token`。
+2. 认证页（MP16）：B-003/MP-009~011 待实现；当前无登录页，临时用测试脚本写入 `ijd:token`；已批准申请者/电脑端建号用户需要登录入口。
 3. 导出契约：`source_type='report'` 与 `source` 描述已由 B08 实现；下载端点返回相对 `download_url`。
 4. `PATCH /admin/users/{id}`：微信 `wx.request` 官方类型不含 PATCH，代码保留 PATCH 调用并注明需真机验证；若基础库不支持，需后端提供兼容入口或改用 Web 后台。
 5. CSV：小程序不支持预览，当前下载后复制临时链接；需产品确认是否隐藏 CSV 或改为仅 Web 导出。

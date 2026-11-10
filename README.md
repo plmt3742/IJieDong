@@ -30,6 +30,7 @@ i揭东是面向揭东区公职人员的政府数据门户，目标是将区、�
 - 后端已落地 B00~B05 + B08：FastAPI/SQLite、12 张表与迁移、227/15/1608 合成种子、只读查询 API、JWT 认证/申请审批/用户/审计/Excel 导入、AI 问答、PNG/PDF/XLSX/CSV 导出；119 tests，OpenAPI 35 paths。
 - Web 后台与原生小程序已落地：登录/总览/数据/导入/申请/用户/审计；小程序 10 页 + ChartSpec Canvas 2D。小程序 DevTools/真机待验证。
 - 部署资产、CI、根 pnpm workspace 已建立；本机服务器已可局域网访问，云服务器/Docker 保留为后续方案。
+- 当前批次 `B-003`：小程序登录（MP16）、页面地图 v2、小程序页面优化与 Web/MP 视觉/按钮对齐。
 
 当前分支为 `main`，最新提交见 `git log`。
 
