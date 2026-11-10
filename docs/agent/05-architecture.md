@@ -329,6 +329,8 @@ id、user_id、action、resource_type、resource_id、detail（JSON，含 before
 ### 6.1 约定
 
 > v2 新增认证申请、组件、导出端点（见 [21](21-technical-architecture-v2.md)/[23](23-auth-and-application-spec.md)/[25](25-export-spec.md)）；在合并到本节并生成 OpenAPI 前，以下端点表仍为 v0 基线。
+>
+> 2026-11-10 实现状态：B04 已实现区域/指标/数据值/排名/对比/总览端点，并生成 `contracts/openapi.json`（14 paths）；认证/AI/管理端端点待补。
 
 - Base：`/api/v1`
 - 认证：`Authorization: Bearer <JWT>`；公开浏览接口可匿名（按需求确认）。

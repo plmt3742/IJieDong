@@ -100,12 +100,12 @@
 
 | 风险 | 缓解 |
 |---|---|
-| 6 天太紧 | 按 `15-demo-plan-1112.md` §7 砍范围 |
+| 范围失控/质量问题 | 按 `15-demo-plan-1112.md` §11 的 Demo v0 范围与原子任务推进；未完成功能隐藏 |
 | 原生小程序图表包体/兼容 | echarts-for-weixin 自定义构建；表格降级 |
 | 真实数据/Key/AppID 未到 | 演示数据 + mock/预生成答案 + 测试号 |
 | 需求临时加范围 | 记录到 `12-open-questions.md`，不纳入 11.12 |
 
-## 10. 验证证据（文档/设计阶段）
+## 10. 验证证据（文档 + 后端阶段）
 
 | 验证项 | 命令/方式 | 结果 |
 |---|---|---|
@@ -115,7 +115,8 @@
 | 本地目录 ignore | `git check-ignore -v Resource learning tools .obsidian .omo` | 均命中 `.gitignore` |
 | 目录骨架 | `dir /s /b apps services packages` | 40 个 `.gitkeep` 占位；与 `06-file-tree.md` 一致 |
 | 费用来源 | `19-cost-research.md` | 官方/政府采购/云厂商/转载来源已标注；价格有日期/地区 |
-| 待代码验证 | 后端/小程序/数据库/DeepSeek | 尚未开始，不能标记 DONE |
+| 后端 B00~B04 | `pytest`、Alembic、seed、API smoke | `pytest` 36 passed；迁移升级/回滚/`check` 通过；种子 227/15/1608；OpenAPI 14 paths |
+| 小程序/DeepSeek 真机 | 微信开发者工具/真实 Key 调用 | 尚未开始，不能标记 DONE |
 
 ## 11. 下一步
 

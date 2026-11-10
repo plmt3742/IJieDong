@@ -60,8 +60,8 @@ read_when: 每次开工/收工；需要判断“现在到哪、下一步做什�
 | 仓库骨架 | DONE（目录） | `apps/services/packages/...` 目录与 `.gitkeep` 已建；B-002 填代码 |
 | 页面结构地图 | DONE（初稿） | 18 页低保真线框 + 29 条跳转；`docs/product/ue/page-map.html`、`wireframes.html` |
 | 页面设计 v2 | DONE（草案） | `product/06-page-design-v2.md`：MP01~MP15、AD01~AD13、状态/数据映射/导出/管理 |
-| B-002 子代理工作包 | DONE（计划） | `20-b002-delegation-plan.md`：WP-BE1/DATA1/MP1/ADMIN1/AI1/INT1 |
-| 业务代码 | TODO | 11.12 冲刺开始 |
+| B-002 子代理工作包 | DONE（部分实现） | `20-b002-delegation-plan.md`：B00~B04 已落地；C/D/E 待续 |
+| 业务代码 | DOING（后端） | B00~B04 已完成；小程序/Web 后台/AI 待续 |
 | 真实数据 | 部分确认 | 来源支持 Excel/接口/手工；样例数据待提供 |
 | 粤政易测试账号 | 后置 | 等程序搭建完再申请/接入 |
 

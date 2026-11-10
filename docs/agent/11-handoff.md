@@ -16,7 +16,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 | 阶段 | M0 → **M0.5 11.12 初步 demo** |
 | 仓库 | https://github.com/plmt3742/IJieDong（main 分支已推送；最新提交见 git log） |
 | 代码 | B00~B04 已完成：FastAPI + SQLite + 12 张表 + 迁移 + 227/15/1608 合成种子 + 只读查询 API（`b943aa8`、`111914a`、`52d0adb`、`29dfe61`）；C/D/E 页面与 AI 待做 |
-| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；2026-11-10 决策已记录（`12` §0.3、`15` §11）；契约文档 21~25、06/07 已完成初稿并通过主 agent 一致性审查，A05 契约冻结完成 |
+| 文档 | `docs/agent`、`docs/product`、`docs/adr` 已建；B-001 已记录；2026-11-10 决策已记录（`12` §0.3、`15` §11）；契约文档 21~25、06/07 已完成；`contracts/openapi.json` 已生成 B04 查询端点（14 paths） |
 | 页面地图 | `docs/product/ue/page-map.html`：18 页线框/29 跳转/可缩放点击/导出 PNG；验证 0 console errors |
 | 线框总览 | `docs/product/ue/wireframes.html`：18 张灰度线框/18 个地图链接 |
 | 目录 | `apps/services/packages/...` 目录与 `.gitkeep` 已建；业务代码未开始 |
@@ -33,7 +33,7 @@ read_when: 切换会话、换 agent、让新 agent 接手任务时
 
 ## 0.1 本轮上下文保护快照（2026-11-10）
 
-- 分支：`feat/b002-demo-v0`；B04 代码 `29dfe61`，B04 文档 `e3a8a45`。
+- 分支：`feat/b002-demo-v0`；B04 代码 `29dfe61`，B04 文档 `e3a8a45`，上下文收口 `1ae4438`。
 - 已完成：B00 脚手架、B01 模型/迁移、B02 合成种子、B04 只读查询 API。
 - 验证：`pytest` 36 passed；`alembic upgrade/downgrade/check` 通过；OpenAPI 14 paths。
 - 未开始：C01/C02 认证/申请/后台、D01~D05 小程序、E01~E03 AI/组件、F 部署联调。

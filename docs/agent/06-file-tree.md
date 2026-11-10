@@ -84,12 +84,12 @@ IJieDong/
 │   ├── admin/README.md             # B-002 脚手架占位
 │   └── mp/README.md                # B-002 脚手架占位
 ├── services/
-│   └── api/README.md               # B-002 脚手架占位
+│   └── api/README.md               # B00~B04 可运行后端
 ├── packages/
 │   ├── contracts/README.md         # B-002 占位
 │   └── chart-spec/README.md        # B-002 占位
 ├── contracts/
-│   └── README.md                   # OpenAPI 契约占位
+│   └── README.md                   # OpenAPI 已生成 B04 查询端点
 ├── deploy/
 │   └── README.md                   # 部署占位
 ├── scripts/
@@ -101,7 +101,7 @@ IJieDong/
 
 > `Resource/`、`learning/`、`tools/`、`.obsidian/`、`.omo/` 不进 Git；不要在这些目录里写产品代码。
 
-### 1.1 B-002 已创建的目录骨架（2026-11-06）
+### 1.1 B-002 已创建的目录骨架（2026-11-10）
 
 以下目录已实际创建（空目录用 `.gitkeep` 占位），后续按任务填内容：
 

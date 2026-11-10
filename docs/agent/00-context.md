@@ -35,7 +35,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 - 已完成（双线工程）：① 有来源的费用调研（`19-cost-research.md`）；② 用户/开发/系统三类工作流（`18-workflows.md`）；③ 目录骨架与 `.gitkeep`；④ 18 页低保真线框、线框总览（`wireframes.html`）与可缩放/可点击页面地图（`page-map.html`）；⑤ B-002 子代理委派计划（`20-b002-delegation-plan.md`）。
 - 已完成（2026-11-10 契约冻结）：数据/API、认证/申请、页面设计 v2、AI/AnswerBlocks、组件库、导出共 7 份契约草案（`21`~`25`、`product/06`、`product/07`）。
 - 已确认：公职人员使用；原生微信小程序；后续接粤政易；数据来源 Excel/API/手工；DeepSeek API；11.12 可运行 Demo v0，小服务器 + 小程序实测，Web 后台可视化；游客不可导出，导出 PNG/PDF/XLSX/CSV 且不设默认。
-- 已开始：B00 后端脚手架 + B01 数据模型/迁移 + B02 合成种子 + B04 只读查询 API（`b943aa8`、`111914a`、`52d0adb`、`29dfe61`）；C/D/E 页面与 AI 待做。
+- 后端已完成：B00 脚手架 + B01 数据模型/迁移 + B02 合成种子 + B04 只读查询 API（`b943aa8`、`111914a`、`52d0adb`、`29dfe61`）；C/D/E 页面与 AI 待做。
 - Git：分支 `feat/b002-demo-v0`；`1f8ef15` 文档/契约、`b943aa8` B00、`111914a` B01、`52d0adb` B02、`29dfe61` B04；未 push。
 - 当前批次：`B-002 11.12 demo 冲刺`（决策/契约/B00/B01/B02/B04 已完成；下一步 C/D/E）。
 
@@ -101,7 +101,7 @@ AI 问答：自然语言 → 受控工具查询 → 答案 + 图表 + 数据依�
 
 ## 下一步（11.12 冲刺）
 
-1. 按原子任务依赖推进：B01 数据模型/迁移 → B02 合成种子 → B04 查询 API；C/D/E 在契约冻结后并行。
+1. 后端 B00~B04 已完成；下一步按 C01/C02 认证申请与 Web 后台 → D01~D05 小程序 → E01~E03 AI/组件 → F 部署联调推进。
 2. 按 [21-technical-architecture-v2.md](21-technical-architecture-v2.md) 的 Demo v0 子集和 [15-demo-plan-1112.md](15-demo-plan-1112.md) §11 验收。
 3. 页面设计以 [product/06-page-design-v2.md](../product/06-page-design-v2.md) 为准；旧结构图见 [05-page-structure.md](../product/05-page-structure.md) / [ue/page-map.html](../product/ue/page-map.html)；数据流见 [18-workflows.md](18-workflows.md)。
 4. 11.12 前产出可运行 Demo v0、技术文档、[16-cost-estimate.md](16-cost-estimate.md)、[17-outreach-copy.md](17-outreach-copy.md)。
