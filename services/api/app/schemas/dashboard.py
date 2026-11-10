@@ -24,6 +24,15 @@ class DashboardOverviewOut(BaseModel):
 
     period_year: int = Field(..., description="Data period year.")
     town_count: int = Field(..., ge=0, description="Number of enabled town-level regions.")
+    coverage: float | None = Field(
+        None,
+        ge=0,
+        le=100,
+        description=(
+            "Percentage of applicable district numeric indicators that have a "
+            "published, non-missing value in the period."
+        ),
+    )
     data_as_of: datetime | None = Field(
         None,
         description="Latest data update or successful import time.",

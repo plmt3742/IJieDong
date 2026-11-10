@@ -1,0 +1,110 @@
+[
+  {
+    "id": "eval-001",
+    "question": "2025 年云路镇常住人口",
+    "expected_intent": "lookup",
+    "expected_status": "done",
+    "expected_block_types": ["metric_grid", "source"],
+    "min_citations": 1,
+    "note": "单区域单指标查询；数值必须来自 data_values"
+  },
+  {
+    "id": "eval-002",
+    "question": "2025 年各镇街常住人口排名前 5",
+    "expected_intent": "rank",
+    "expected_status": "done",
+    "expected_block_types": ["ranking", "table", "chart", "source"],
+    "min_citations": 1,
+    "note": "排名口径为行政镇街，排除缺失值"
+  },
+  {
+    "id": "eval-003",
+    "question": "比较曲溪街道和云路镇常住人口",
+    "expected_intent": "compare",
+    "expected_status": "done",
+    "expected_block_types": ["table", "chart", "source"],
+    "min_citations": 2,
+    "note": "两区域同指标同期；空值保留"
+  },
+  {
+    "id": "eval-004",
+    "question": "介绍玉湖镇",
+    "expected_intent": "profile",
+    "expected_status": "done",
+    "expected_block_types": ["summary", "metric_grid", "source"],
+    "min_citations": 1,
+    "note": "区域画像文本与关键指标"
+  },
+  {
+    "id": "eval-005",
+    "question": "2025 年揭东区地区生产总值",
+    "expected_intent": "lookup",
+    "expected_status": "done",
+    "expected_block_types": ["metric_grid", "source"],
+    "min_citations": 1,
+    "note": "区级 GDP"
+  },
+  {
+    "id": "eval-006",
+    "question": "2025 年各镇街区域面积排名前 10",
+    "expected_intent": "rank",
+    "expected_status": "done",
+    "expected_block_types": ["ranking", "table", "chart"],
+    "min_citations": 1,
+    "note": "排名上限 10"
+  },
+  {
+    "id": "eval-007",
+    "question": "比较玉湖镇和新亨镇耕地面积",
+    "expected_intent": "compare",
+    "expected_status": "done",
+    "expected_block_types": ["table", "chart"],
+    "min_citations": 2,
+    "note": "小数指标保留精度"
+  },
+  {
+    "id": "eval-008",
+    "question": "2025 年曲溪街道常住人口",
+    "expected_intent": "lookup",
+    "expected_status": "no_data",
+    "expected_block_types": ["notice"],
+    "min_citations": 0,
+    "note": "合成种子将该值标记为 missing；不得补零"
+  },
+  {
+    "id": "eval-009",
+    "question": "火星基地常住人口",
+    "expected_intent": "clarify",
+    "expected_status": "no_data",
+    "expected_block_types": ["notice"],
+    "min_citations": 0,
+    "note": "未知区域不得猜测"
+  },
+  {
+    "id": "eval-010",
+    "question": "2024 年云路镇常住人口",
+    "expected_intent": "lookup",
+    "expected_status": "no_data",
+    "expected_block_types": ["notice"],
+    "min_citations": 0,
+    "note": "Demo v0 只有 2025 期"
+  },
+  {
+    "id": "eval-011",
+    "question": "预测明年揭东区 GDP",
+    "expected_intent": "refuse",
+    "expected_status": "refused",
+    "expected_block_types": ["notice"],
+    "min_citations": 0,
+    "note": "不做预测"
+  },
+  {
+    "id": "eval-012",
+    "question": "人口和 GDP 有关系吗",
+    "expected_intent": "refuse",
+    "expected_status": "refused",
+    "expected_block_types": ["notice"],
+    "min_citations": 0,
+    "note": "Demo v0 不做相关性/因果"
+  }
+]

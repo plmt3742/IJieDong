@@ -24,7 +24,8 @@ router = APIRouter(prefix="/dashboard", tags=["dashboard"])
     summary="Get dashboard overview",
     description=(
         "District-level core metrics for one period. Null values stay null with a "
-        "quality_status; town_count counts enabled town-level regions."
+        "quality_status; town_count counts enabled town-level regions; coverage "
+        "reports published non-missing numeric indicator coverage."
     ),
 )
 async def get_dashboard_overview_endpoint(

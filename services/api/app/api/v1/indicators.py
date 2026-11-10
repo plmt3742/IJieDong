@@ -36,12 +36,17 @@ async def list_indicators_endpoint(
         str | None,
         Query(max_length=32, description="Indicator category filter."),
     ] = None,
+    value_type: Annotated[
+        str | None,
+        Query(max_length=16, description="Indicator value type filter."),
+    ] = None,
     enabled: Annotated[bool, Query(description="Filter by enabled state.")] = True,
 ) -> ListEnvelope[IndicatorOut]:
     items = await query_service.list_indicators(
         session,
         level=level,
         category=category,
+        value_type=value_type,
         enabled=enabled,
     )
     return ListEnvelope(data=items, meta=Meta(request_id=get_request_id(request)))

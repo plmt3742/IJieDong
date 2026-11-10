@@ -48,6 +48,12 @@ DEVELOPMENT_ZONE_NAMES = {
     "揭东中德金属生态城",
 }
 
+# Development-zone codes are semantic (Z) and stable regardless of template order.
+DEVELOPMENT_ZONE_CODES = {
+    "揭东经济开发区": "JD-Z-01",
+    "揭东中德金属生态城": "JD-Z-02",
+}
+
 # 模板村居使用非标准前缀，统一为标准镇名后通过 region_aliases 兼容导入。
 NAME_REPLACEMENTS = {
     "玉窖镇": "玉滘镇",
@@ -120,8 +126,13 @@ def build_regions(
     ]
 
     town_codes: dict[str, str] = {}
+    administrative_index = 0
     for index, town_name in enumerate(town_names, start=1):
-        code = f"JD-T-{index:02d}"
+        if town_name in DEVELOPMENT_ZONE_NAMES:
+            code = DEVELOPMENT_ZONE_CODES[town_name]
+        else:
+            administrative_index += 1
+            code = f"JD-T-{administrative_index:02d}"
         town_codes[town_name] = code
         regions.append(
             {

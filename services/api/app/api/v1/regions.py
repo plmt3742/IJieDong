@@ -26,13 +26,14 @@ from app.services import query_service
 router = APIRouter(prefix="/regions", tags=["regions"])
 
 RegionLevel = Literal["district", "town", "village"]
+RegionCategory = Literal["administrative", "development_zone"]
 
 
 @router.get(
     "",
     response_model=PageEnvelope[RegionOut],
     summary="List regions",
-    description="Paginated region list filtered by level, parent, name, and enabled state.",
+    description="Paginated region list filtered by level, parent, name, category, and enabled state.",
 )
 async def list_regions_endpoint(
     request: Request,
@@ -47,9 +48,13 @@ async def list_regions_endpoint(
         str | None,
         Query(min_length=1, max_length=128, description="Name contains filter."),
     ] = None,
+    category: Annotated[
+        RegionCategory | None,
+        Query(description="Region category filter."),
+    ] = None,
     enabled: Annotated[bool, Query(description="Filter by enabled state.")] = True,
     page: Annotated[int, Query(ge=1, description="1-based page number.")] = 1,
-    page_size: Annotated[int, Query(ge=1, le=100, description="Items per page.")] = 50,
+    page_size: Annotated[int, Query(ge=1, le=100, description="Items per page.")] = 20,
 ) -> PageEnvelope[RegionOut]:
     items, total = await query_service.list_regions(
         session,
@@ -57,6 +62,7 @@ async def list_regions_endpoint(
         parent_id=parent_id,
         parent_code=parent_code,
         q=q,
+        category=category,
         enabled=enabled,
         page=page,
         page_size=page_size,

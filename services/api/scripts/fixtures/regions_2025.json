@@ -140,7 +140,7 @@
     "enabled": true
   },
   {
-    "code": "JD-T-14",
+    "code": "JD-Z-01",
     "name": "揭东经济开发区",
     "level": "town",
     "category": "development_zone",
@@ -150,7 +150,7 @@
     "enabled": true
   },
   {
-    "code": "JD-T-15",
+    "code": "JD-Z-02",
     "name": "揭东中德金属生态城",
     "level": "town",
     "category": "development_zone",

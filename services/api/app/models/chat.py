@@ -54,6 +54,7 @@ class ChatMessage(Base):
             "session_id",
             "created_at",
         ),
+        Index("uq_chat_messages_answer_id", "answer_id", unique=True),
     )
 
     id: Mapped[int] = mapped_column(bigint_pk_type(), primary_key=True)
@@ -64,6 +65,7 @@ class ChatMessage(Base):
     )
     role: Mapped[str] = mapped_column(String(16), nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    answer_id: Mapped[str | None] = mapped_column(String(32), nullable=True)
     tool_calls: Mapped[list[dict] | None] = mapped_column(JSON, nullable=True)
     chart_spec: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     blocks: Mapped[list[dict] | None] = mapped_column(JSON, nullable=True)

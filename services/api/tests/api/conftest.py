@@ -43,6 +43,10 @@ def seeded_client(tmp_path: Path) -> Iterator[TestClient]:
         settings=Settings(
             app_env="test",
             database_url=f"sqlite+aiosqlite:///{database_path.as_posix()}",
+            llm_provider=None,
+            llm_api_key=None,
+            llm_base_url=None,
+            llm_model=None,
         )
     )
     with TestClient(app) as client:

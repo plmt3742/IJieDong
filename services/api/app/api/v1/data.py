@@ -30,7 +30,15 @@ router = APIRouter(prefix="/data-values", tags=["data-values"])
 
 RegionLevel = Literal["district", "town", "village"]
 SortOrder = Literal["asc", "desc"]
-PublishStatus = Literal["draft", "published", "archived"]
+PublishStatus = Literal["published"]
+QualityStatus = Literal[
+    "missing",
+    "not_applicable",
+    "suppressed",
+    "estimated",
+    "provisional",
+    "verified",
+]
 
 
 @router.get(
@@ -155,8 +163,12 @@ async def list_data_values_endpoint(
     ] = None,
     period_year: Annotated[int, Query(ge=2000, le=2100, description="Data period year.")] = 2025,
     status: Annotated[PublishStatus, Query(description="Publication status filter.")] = "published",
+    quality_status: Annotated[
+        QualityStatus | None,
+        Query(description="Data quality status filter."),
+    ] = None,
     page: Annotated[int, Query(ge=1, description="1-based page number.")] = 1,
-    page_size: Annotated[int, Query(ge=1, le=200, description="Items per page.")] = 50,
+    page_size: Annotated[int, Query(ge=1, le=100, description="Items per page.")] = 20,
 ) -> PageEnvelope[DataValueOut]:
     items, total = await query_service.list_data_values(
         session,
@@ -166,6 +178,7 @@ async def list_data_values_endpoint(
         indicator_code=indicator_code,
         period_year=period_year,
         status=status,
+        quality_status=quality_status,
         page=page,
         page_size=page_size,
     )

@@ -173,9 +173,10 @@ async def list_regions(
     parent_id: int | None = None,
     parent_code: str | None = None,
     q: str | None = None,
+    category: str | None = None,
     enabled: bool = True,
     page: int = 1,
-    page_size: int = 50,
+    page_size: int = 20,
 ) -> tuple[list[RegionOut], int]:
     """Return one page of regions plus the total row count."""
     conditions: list[ColumnElement[bool]] = [Region.enabled.is_(enabled)]
@@ -188,6 +189,8 @@ async def list_regions(
         conditions.append(Region.parent_id.in_(parent_ids))
     if q:
         conditions.append(Region.name.contains(q))
+    if category is not None:
+        conditions.append(Region.category == category)
 
     total = int(
         (
@@ -339,12 +342,15 @@ async def list_indicators(
     *,
     level: str | None = None,
     category: str | None = None,
+    value_type: str | None = None,
     enabled: bool = True,
 ) -> list[IndicatorOut]:
     """Return indicator metadata ordered by display order."""
     conditions: list[ColumnElement[bool]] = [Indicator.enabled.is_(enabled)]
     if category is not None:
         conditions.append(Indicator.category == category)
+    if value_type is not None:
+        conditions.append(Indicator.value_type == value_type)
     rows = (
         await session.execute(
             select(Indicator).where(*conditions).order_by(Indicator.sort_order, Indicator.id)
@@ -372,14 +378,17 @@ async def list_data_values(
     indicator_code: str | None = None,
     period_year: int = DEFAULT_PERIOD_YEAR,
     status: str = "published",
+    quality_status: str | None = None,
     page: int = 1,
-    page_size: int = 50,
+    page_size: int = 20,
 ) -> tuple[list[DataValueOut], int]:
     """Return one page of observations joined with region and indicator fields."""
     conditions: list[ColumnElement[bool]] = [
         DataValue.period_year == period_year,
         DataValue.status == status,
     ]
+    if quality_status is not None:
+        conditions.append(DataValue.quality_status == quality_status)
     if region_id is not None:
         conditions.append(DataValue.region_id == region_id)
     if region_code:
@@ -703,9 +712,40 @@ async def get_dashboard_overview(
         ).scalar_one()
     )
 
+    district_indicators = (
+        await session.execute(select(Indicator).where(Indicator.enabled.is_(True)))
+    ).scalars().all()
+    coverage_codes = [
+        indicator.code
+        for indicator in district_indicators
+        if indicator.value_type != "long_text"
+        and "district" in (indicator.applicable_levels or [])
+    ]
+    coverage: float | None = None
+    if coverage_codes:
+        covered_count = int(
+            (
+                await session.execute(
+                    select(func.count(func.distinct(DataValue.indicator_id)))
+                    .select_from(DataValue)
+                    .join(Indicator, DataValue.indicator_id == Indicator.id)
+                    .where(
+                        DataValue.region_id == district.id,
+                        DataValue.period_year == period_year,
+                        DataValue.status == "published",
+                        DataValue.value_number.is_not(None),
+                        DataValue.quality_status.notin_(NON_NUMERIC_EXCLUDED_QUALITY),
+                        Indicator.code.in_(coverage_codes),
+                    )
+                )
+            ).scalar_one()
+        )
+        coverage = round(covered_count / len(coverage_codes) * 100, 1)
+
     return DashboardOverviewOut(
         period_year=period_year,
         town_count=town_count,
+        coverage=coverage,
         data_as_of=await _latest_data_as_of(session, region_id=district.id),
         metrics=metrics,
     )

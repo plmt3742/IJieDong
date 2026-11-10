@@ -31,6 +31,7 @@ class User(TimestampMixin, Base):
             name="ck_users_status",
         ),
         UniqueConstraint("username", name="uq_users_username"),
+        UniqueConstraint("phone", name="uq_users_phone"),
         UniqueConstraint("wechat_openid", name="uq_users_wechat_openid"),
     )
 
@@ -57,4 +58,9 @@ class User(TimestampMixin, Base):
     last_login_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
+    )
+    token_version: Mapped[int] = mapped_column(
+        nullable=False,
+        default=1,
+        server_default="1",
     )

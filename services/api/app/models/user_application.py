@@ -4,6 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 
 from sqlalchemy import (
+    Boolean,
     CheckConstraint,
     DateTime,
     ForeignKey,
@@ -11,6 +12,7 @@ from sqlalchemy import (
     String,
     Text,
     UniqueConstraint,
+    false,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -71,3 +73,17 @@ class UserApplication(TimestampMixin, Base):
         default=0,
         server_default="0",
     )
+    privacy_consent: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+        server_default=false(),
+    )
+    privacy_notice_version: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    created_user_id: Mapped[int | None] = mapped_column(
+        bigint_pk_type(),
+        ForeignKey("users.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+    submitted_ip: Mapped[str | None] = mapped_column(String(45), nullable=True)
+    submitted_user_agent: Mapped[str | None] = mapped_column(String(512), nullable=True)

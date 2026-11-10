@@ -24,6 +24,7 @@ _SAFE_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 def create_app(settings: Settings | None = None) -> FastAPI:
     """Build and configure a FastAPI application instance."""
     resolved_settings = settings or get_settings()
+    resolved_settings.validate_security()
     configure_logging(resolved_settings.log_level)
 
     engine, sessionmaker = create_engine_and_sessionmaker(resolved_settings.database_url)

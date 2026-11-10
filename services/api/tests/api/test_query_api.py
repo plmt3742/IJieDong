@@ -171,7 +171,7 @@ def test_data_values_empty_for_development_zone_village_count(
     response = seeded_client.get(
         "/api/v1/data-values",
         params={
-            "region_code": "JD-T-14",
+            "region_code": "JD-Z-01",
             "indicator_code": "admin_village_count",
             "period_year": 2025,
         },
@@ -334,3 +334,54 @@ def test_missing_value_is_null_not_zero(seeded_client: TestClient) -> None:
     assert len(rows) == 1
     assert rows[0]["value_number"] is None
     assert rows[0]["quality_status"] == "missing"
+
+
+def test_public_list_defaults_and_quality_filter(seeded_client: TestClient) -> None:
+    response = seeded_client.get("/api/v1/data-values")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["meta"]["page_size"] == 20
+    assert len(body["data"]) == 20
+
+    filtered = seeded_client.get(
+        "/api/v1/data-values",
+        params={"quality_status": "missing", "page_size": 100},
+    )
+
+    assert filtered.status_code == 200
+    filtered_body = filtered.json()
+    assert filtered_body["meta"]["total"] == 42
+    assert all(row["quality_status"] == "missing" for row in filtered_body["data"])
+
+
+def test_region_category_filter_returns_development_zones(seeded_client: TestClient) -> None:
+    response = seeded_client.get(
+        "/api/v1/regions",
+        params={"level": "town", "category": "development_zone", "page_size": 100},
+    )
+
+    assert response.status_code == 200
+    rows = response.json()["data"]
+    assert len(rows) == 2
+    assert all(row["category"] == "development_zone" for row in rows)
+    assert {row["code"] for row in rows} >= {"JD-Z-01", "JD-Z-02"}
+
+
+def test_indicator_value_type_filter_returns_text_indicators(seeded_client: TestClient) -> None:
+    response = seeded_client.get("/api/v1/indicators", params={"value_type": "long_text"})
+
+    assert response.status_code == 200
+    rows = response.json()["data"]
+    assert len(rows) == 2
+    assert {row["code"] for row in rows} == {"region_intro", "region_feature"}
+
+
+def test_dashboard_overview_reports_full_numeric_coverage(seeded_client: TestClient) -> None:
+    response = seeded_client.get("/api/v1/dashboard/overview", params={"period_year": 2025})
+
+    assert response.status_code == 200
+    body = response.json()["data"]
+    assert body["town_count"] == 15
+    assert body["coverage"] == 100.0
+    assert len(body["metrics"]) == 6

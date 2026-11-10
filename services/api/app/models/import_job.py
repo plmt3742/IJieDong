@@ -75,6 +75,11 @@ class ImportJob(Base):
     )
     error_report_path: Mapped[str | None] = mapped_column(String(255), nullable=True)
     errors: Mapped[list[dict] | None] = mapped_column(JSON, nullable=True)
+    source_id: Mapped[int | None] = mapped_column(
+        bigint_pk_type(),
+        ForeignKey("data_sources.id", ondelete="SET NULL"),
+        nullable=True,
+    )
     created_by: Mapped[int | None] = mapped_column(
         bigint_pk_type(),
         ForeignKey("users.id", ondelete="SET NULL"),

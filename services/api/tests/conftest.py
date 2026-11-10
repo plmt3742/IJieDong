@@ -15,7 +15,14 @@ from app.main import create_app
 def build_settings(tmp_path: Path) -> Settings:
     """Settings pointing at a throwaway SQLite database."""
     database_url = f"sqlite+aiosqlite:///{(tmp_path / 'test.db').as_posix()}"
-    return Settings(app_env="test", database_url=database_url)
+    return Settings(
+        app_env="test",
+        database_url=database_url,
+        llm_provider=None,
+        llm_api_key=None,
+        llm_base_url=None,
+        llm_model=None,
+    )
 
 
 @pytest.fixture()

@@ -1,6 +1,6 @@
 # services/api · FastAPI 后端
 
-> 状态：B00 + B01 + B02 + B04 可运行只读 API（B-002）。服务可启动、可测试；12 张表、迁移、合成种子、区域/指标/数据/排名/对比/总览接口已完成；认证/申请、AI、管理端待后续批次。
+> 状态：B00 + B01 + B02 + B04 + B05 + B08 可运行 Demo v0 API（B-002）。服务可启动、可测试；12 张表、迁移 0001/0002/0003、合成种子、区域/指标/数据/排名/对比/总览、认证/申请/审批/导入、AI 问答与四格式导出已完成；119 tests；OpenAPI 35 paths。
 
 ## 职责
 
@@ -49,7 +49,19 @@
 | GET | `/api/v1/data-values/compare` | 2–20 区域对比 + 差异 |
 | GET | `/api/v1/dashboard/overview` | 区级核心指标 + 镇街数 + 数据时效 |
 
-`contracts/openapi.json` 已由 FastAPI 生成，包含 14 个路径；认证/申请、AI、管理端端点待补。
+`contracts/openapi.json` 已由 FastAPI 生成，包含 35 个路径；认证/申请/审批/用户/审计/导入、AI、导出端点已补齐。
+
+## 当前能力（B05）
+
+- JWT 登录/me/改密/退出；小程序申请/状态；管理员申请列表/批准/驳回；用户列表/更新；审计列表。
+- Excel 导入：上传/批次/错误报告；atomic/partial；空值为 missing，不写 0。
+- Web 后台：登录/总览/数据/导入/申请/用户/审计；`apps/admin`。
+
+## 当前能力（B08）
+
+- `POST /api/v1/ai/chat`：确定性规则 Agent（无 Key）+ OpenAI 兼容 LLM 通道（有 Key）；AnswerBlocks/引用/无数据拒答/会话落库。
+- 10 个只读工具；五层校验；限流 10/min/用户、5/day/游客 IP。
+- PNG/PDF/XLSX/CSV 导出；`export_jobs` 快照、下载端点、7 天过期字段。
 
 ## 技术栈
 
@@ -84,6 +96,7 @@ cd services/api
 python -m pip install -r requirements.txt
 python -m alembic -c alembic.ini upgrade head
 python scripts/seed_demo.py
+python scripts/create_admin.py --username admin
 python -m uvicorn app.main:app --reload
 ```
 
@@ -146,10 +159,11 @@ python -m ruff check .
 - LLM 只调用白名单工具；不生成 SQL/JS。
 - API/数据模型以 `docs/agent/05-architecture.md` 与 `docs/agent/21-technical-architecture-v2.md` 为准。
 - 迁移必须可升级/回滚。
-- 本批次不包含领域模型、Alembic、种子数据与业务端点。
+- 本批次已包含领域模型、Alembic、种子数据与业务端点；B05/B08 已追加认证/管理/导入/AI/导出。
 
 ## 下一步
 
-1. C01/C02：认证/申请审批 API + Web 后台可视化。
-2. D01~D05：小程序壳、首页/区域/指标、AI 问答、申请/审批页。
-3. E01~E03：AI 工具、AnswerBlocks、组件注册表；F01~F04 集成/部署/彩排。
+1. 真实 LLM Key 联调 + 50 题评测；回答缓存。
+2. `/admin/data-values` 写接口、审计日期筛选。
+3. AppID/域名/服务器到位后部署小服务器 + 小程序真机。
+4. Step 6 文档收口与主路径联调。
