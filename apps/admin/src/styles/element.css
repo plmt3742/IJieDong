@@ -1,0 +1,59 @@
+/* Element Plus variable bridge. Imported after element-plus/dist/index.css so
+   the component library reads the same tokens as our own surfaces. */
+
+:root {
+  --el-color-primary: var(--gov-primary);
+  --el-color-primary-light-3: #4a76a8;
+  --el-color-primary-light-5: #7b9dc2;
+  --el-color-primary-light-7: #adc4da;
+  --el-color-primary-light-8: #c6d6e6;
+  --el-color-primary-light-9: var(--gov-primary-soft);
+  --el-color-primary-dark-2: var(--gov-primary-hover);
+
+  --el-color-success: var(--gov-success);
+  --el-color-warning: var(--gov-warning);
+  --el-color-danger: var(--gov-danger);
+  --el-color-error: var(--gov-danger);
+  --el-color-info: var(--gov-info);
+
+  --el-text-color-primary: var(--gov-text);
+  --el-text-color-regular: var(--gov-text-secondary);
+  --el-text-color-secondary: var(--gov-text-muted);
+  --el-text-color-placeholder: var(--gov-text-muted);
+
+  --el-border-color: var(--gov-border);
+  --el-border-color-light: var(--gov-border);
+  --el-border-color-lighter: var(--gov-border);
+  --el-border-color-extra-light: var(--gov-border);
+
+  --el-fill-color-blank: var(--gov-surface);
+  --el-fill-color-light: var(--gov-surface-muted);
+  --el-fill-color-lighter: var(--gov-surface-muted);
+  --el-bg-color: var(--gov-surface);
+  --el-bg-color-page: var(--gov-bg);
+
+  --el-border-radius-base: var(--gov-radius-sm);
+  --el-border-radius-small: var(--gov-radius-sm);
+  --el-font-family: var(--gov-font);
+  --el-font-size-base: var(--gov-text-base);
+}
+
+.el-table {
+  --el-table-header-bg-color: var(--gov-surface-sunken);
+  --el-table-header-text-color: var(--gov-text-secondary);
+  --el-table-row-hover-bg-color: var(--gov-surface-muted);
+  --el-table-border-color: var(--gov-border);
+}
+
+.el-tag {
+  --el-tag-font-size: var(--gov-text-xs);
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--gov-primary);
+  --el-button-border-color: var(--gov-primary);
+  --el-button-hover-bg-color: var(--gov-primary-hover);
+  --el-button-hover-border-color: var(--gov-primary-hover);
+  --el-button-active-bg-color: var(--gov-primary-active);
+  --el-button-active-border-color: var(--gov-primary-active);
+}

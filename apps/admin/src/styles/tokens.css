@@ -1,0 +1,75 @@
+/* Design tokens: neutral government baseline.
+   Every visual value used by the app resolves to a token here or to the
+   Element Plus variable bridge in element.css. */
+
+:root {
+  /* Surfaces */
+  --gov-bg: #f4f6f8;
+  --gov-surface: #ffffff;
+  --gov-surface-muted: #f8fafb;
+  --gov-surface-sunken: #eef2f6;
+
+  /* Text */
+  --gov-text: #1c2733;
+  --gov-text-secondary: #55636f;
+  --gov-text-muted: #7d8a97;
+  --gov-text-inverse: #ffffff;
+
+  /* Lines */
+  --gov-border: #dfe5eb;
+  --gov-border-strong: #c6d1dc;
+
+  /* Accent (single restrained official blue) */
+  --gov-primary: #1b4f8a;
+  --gov-primary-hover: #163f6e;
+  --gov-primary-active: #123356;
+  --gov-primary-soft: #eaf0f7;
+
+  /* Semantic */
+  --gov-success: #2f7a52;
+  --gov-success-soft: #e9f3ed;
+  --gov-warning: #9a6415;
+  --gov-warning-soft: #fbf2e2;
+  --gov-danger: #ab3630;
+  --gov-danger-soft: #fbeceb;
+  --gov-info: #26658f;
+  --gov-info-soft: #e9f1f6;
+
+  /* Spacing scale */
+  --gov-space-1: 4px;
+  --gov-space-2: 8px;
+  --gov-space-3: 12px;
+  --gov-space-4: 16px;
+  --gov-space-5: 20px;
+  --gov-space-6: 24px;
+  --gov-space-8: 32px;
+
+  /* Radius */
+  --gov-radius-sm: 4px;
+  --gov-radius-md: 6px;
+
+  /* Elevation */
+  --gov-shadow-card: 0 1px 2px rgba(28, 39, 51, 0.06);
+  --gov-shadow-raised: 0 4px 12px rgba(28, 39, 51, 0.1);
+
+  /* Typography */
+  --gov-font: "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC",
+    "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+  --gov-font-mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+
+  --gov-text-xs: 12px;
+  --gov-text-sm: 13px;
+  --gov-text-base: 14px;
+  --gov-text-lg: 16px;
+  --gov-text-xl: 20px;
+  --gov-text-2xl: 24px;
+
+  --gov-line-tight: 1.35;
+  --gov-line-base: 1.6;
+
+  /* Layout */
+  --gov-sidebar-width: 224px;
+  --gov-sidebar-collapsed: 64px;
+  --gov-header-height: 56px;
+  --gov-content-max: 1440px;
+}
