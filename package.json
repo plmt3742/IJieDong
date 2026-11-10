@@ -1,0 +1,12 @@
+{
+  "name": "ijiedong",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "build:admin": "pnpm --filter @ijd/admin build",
+    "typecheck:admin": "pnpm --filter @ijd/admin typecheck",
+    "build:chart-spec": "pnpm --filter @ijiedong/chart-spec build",
+    "typecheck:mp": "npm --prefix apps/mp run typecheck"
+  }
+}
