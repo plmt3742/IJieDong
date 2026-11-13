@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>i揭东 · 最新演示入口</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+        background: #f4f7fb;
+        color: #152436;
+      }
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(47, 127, 209, 0.14), transparent 35%),
+          radial-gradient(circle at 85% 85%, rgba(95, 191, 138, 0.12), transparent 32%),
+          #f4f7fb;
+      }
+      main {
+        width: min(560px, 100%);
+        padding: 34px 34px 28px;
+        border: 1px solid #dbe5ef;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 24px 70px rgba(28, 55, 86, 0.12);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #2f7fd1;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+      }
+      h1 { margin: 0 0 10px; font-size: 28px; letter-spacing: -0.02em; }
+      p { margin: 0 0 18px; color: #5d7086; font-size: 14px; line-height: 1.8; }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 42px;
+        padding: 11px 13px;
+        border: 1px solid #dbe5ef;
+        border-radius: 10px;
+        background: #f8fafc;
+        color: #3d5168;
+        font-size: 13px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: #5fbf8a;
+        box-shadow: 0 0 0 4px rgba(95, 191, 138, 0.14);
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      .primary, .secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .primary { background: #2f7fd1; color: #fff; }
+      .primary:hover { background: #2469ae; }
+      .secondary {
+        border: 1px solid #cbd9e7;
+        background: #fff;
+        color: #35516c;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .secondary:hover { border-color: #7da7ce; }
+      .meta { margin: 18px 0 0; font-size: 11px; color: #8192a4; }
+      code { color: #35516c; }
+      .error .dot { background: #e06b60; box-shadow: 0 0 0 4px rgba(224, 107, 96, 0.12); }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">I JIE DONG · LIVE DEMO</p>
+      <h1>最新体验入口</h1>
+      <p>这个地址保持不变；页面会自动读取维护者发布的最新演示地址。</p>
+      <div id="status" class="status">
+        <span class="dot"></span>
+        <span id="status-text">正在读取最新体验地址...</span>
+      </div>
+      <div class="actions">
+        <a id="go" class="primary" href="#" hidden>立即进入</a>
+        <button id="refresh" class="secondary" type="button">重新读取</button>
+      </div>
+      <p class="meta">
+        固定入口：<code>https://plmt3742.github.io/IJieDong/</code><br />
+        最新地址更新时间：<span id="updated">—</span>
+      </p>
+    </main>
+    <script>
+      const statusBox = document.getElementById('status');
+      const statusText = document.getElementById('status-text');
+      const go = document.getElementById('go');
+      const updated = document.getElementById('updated');
+      const refresh = document.getElementById('refresh');
+
+      function isAllowed(value) {
+        try {
+          const parsed = new URL(value);
+          return (
+            parsed.protocol === 'https:' &&
+            /^([a-z0-9-]+\.)*trycloudflare\.com$/i.test(parsed.hostname)
+          );
+        } catch {
+          return false;
+        }
+      }
+
+      async function loadLatest() {
+        statusBox.classList.remove('error');
+        statusText.textContent = '正在读取最新体验地址...';
+        go.hidden = true;
+        try {
+          const response = await fetch(`./latest.json?ts=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          if (!data.url || !isAllowed(data.url)) {
+            throw new Error('latest.json 中没有有效的 trycloudflare 地址');
+          }
+          const target = data.url.replace(/\/$/, '');
+          statusText.textContent = '已找到最新体验地址，正在进入...';
+          go.href = target;
+          go.hidden = false;
+          updated.textContent = data.updated_at ? new Date(data.updated_at).toLocaleString('zh-CN') : '—';
+          window.setTimeout(() => window.location.replace(target), 700);
+        } catch (error) {
+          statusBox.classList.add('error');
+          statusText.textContent = '暂未发布最新体验地址，请稍后重试或联系维护人。';
+          updated.textContent = '—';
+          console.warn('latest demo URL unavailable:', error);
+        }
+      }
+
+      refresh.addEventListener('click', loadLatest);
+      loadLatest();
+    </script>
+  </body>
+</html>
